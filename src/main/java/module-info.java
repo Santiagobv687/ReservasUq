@@ -4,13 +4,13 @@ module co.edu.uniquindio.banco.bancouq {
     requires org.controlsfx.controls;
     requires org.mapstruct;
 
-    opens co.edu.uniquindio.banco.bancouq to javafx.fxml;
-    exports co.edu.uniquindio.banco.bancouq;
-    exports co.edu.uniquindio.banco.bancouq.viewController;
-    opens co.edu.uniquindio.banco.bancouq.viewController to javafx.fxml;
-    exports co.edu.uniquindio.banco.bancouq.controller;
-    exports co.edu.uniquindio.banco.bancouq.mapping.dto;
-    exports co.edu.uniquindio.banco.bancouq.mapping.mappers;
-    exports co.edu.uniquindio.banco.bancouq.model;
-    opens co.edu.uniquindio.banco.bancouq.controller to javafx.fxml;
+    opens co.edu.uniquindio.reserva.reservasuq to javafx.fxml;
+    exports co.edu.uniquindio.reserva.reservasuq;
+    exports co.edu.uniquindio.reserva.reservasuq.viewController;
+    opens co.edu.uniquindio.reserva.reservasuq.viewController to javafx.fxml;
+    exports co.edu.uniquindio.reserva.reservasuq.controller;
+    exports co.edu.uniquindio.reserva.reservasuq.mapping.dto;
+    exports co.edu.uniquindio.reserva.reservasuq.mapping.mappers;
+    exports co.edu.uniquindio.reserva.reservasuq.model;
+    opens co.edu.uniquindio.reserva.reservasuq.controller to javafx.fxml;
 }
