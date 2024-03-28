@@ -45,7 +45,7 @@
                   </Button>
                   <Separator layoutX="13.0" layoutY="217.0" prefHeight="2.0" prefWidth="711.0" />
                   <TextField fx:id="txtContraseña" layoutX="98.0" layoutY="183.0" prefHeight="25.0" prefWidth="295.0" />
-                  <Label layoutX="98.0" layoutY="14.0" prefHeight="30.0" prefWidth="133.0" text="Empleados">
+                  <Label layoutX="98.0" layoutY="14.0" prefHeight="30.0" prefWidth="107.0" text="Usuarios">
                      <font>
                         <Font name="Microsoft YaHei UI Bold" size="23.0" />
                      </font>
