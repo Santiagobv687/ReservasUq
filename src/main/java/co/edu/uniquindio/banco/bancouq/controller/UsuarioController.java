@@ -1,9 +1,9 @@
 package co.edu.uniquindio.banco.bancouq.controller;
 
-public class TransaccionControler {
+public class UsuarioController {
     ModelFactoryController modelFactoryController;
 
-    public TransaccionControler(){
+    public UsuarioController(){
         System.out.println("Llamando al singleton desde EmpleadoServiceController");
         modelFactoryController = ModelFactoryController.getInstance();
     }

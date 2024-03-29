@@ -7,11 +7,10 @@ import co.edu.uniquindio.banco.bancouq.exceptions.*;
 import co.edu.uniquindio.banco.bancouq.controller.service.IModelFactoryService;
 import co.edu.uniquindio.banco.bancouq.utils.BancoUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ModelFactoryController implements IModelFactoryService {
-    Banco banco;
+    Gestion gestion;
     BancoMapper mapper = BancoMapper.INSTANCE;
 
     //------------------------------  Singleton ------------------------------------------------
@@ -31,27 +30,27 @@ public class ModelFactoryController implements IModelFactoryService {
     }
 
     private void cargarDatosBase() {
-        banco = BancoUtils.inicializarDatos();
+        gestion = BancoUtils.inicializarDatos();
     }
 
-    public Banco getBanco() {
-        return banco;
+    public Gestion getBanco() {
+        return gestion;
     }
 
-    public void setBanco(Banco banco) {
-        this.banco = banco;
+    public void setBanco(Gestion gestion) {
+        this.gestion = gestion;
     }
 
 
     @Override
     public List<EmpleadoDto> obtenerEmpleados() {
-       return  mapper.getEmpleadosDto(banco.getListaEmpleados());
+       return  mapper.getEmpleadosDto(gestion.getListaEmpleados());
     }
 
     @Override
     public boolean agregarEmpleado(EmpleadoDto empleadoDto) {
         try{
-            if(!banco.verificarEmpleadoExistente(empleadoDto.cedula())) {
+            if(!gestion.verificarEmpleadoExistente(empleadoDto.cedula())) {
                 Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
                 getBanco().agregarEmpleado(empleado);
             }

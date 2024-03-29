@@ -1,13 +1,13 @@
 package co.edu.uniquindio.banco.bancouq.utils;
 
-import co.edu.uniquindio.banco.bancouq.model.Banco;
+import co.edu.uniquindio.banco.bancouq.model.Gestion;
 import co.edu.uniquindio.banco.bancouq.model.Cliente;
 import co.edu.uniquindio.banco.bancouq.model.Empleado;
 
 public class BancoUtils {
 
-    public static Banco inicializarDatos() {
-        Banco banco = new Banco();
+    public static Gestion inicializarDatos() {
+        Gestion gestion = new Gestion();
 
         Cliente cliente = new Cliente();
         cliente.setNombre("juan");
@@ -17,7 +17,7 @@ public class BancoUtils {
         cliente.setCorreo("uni1@");
         cliente.setFechaNacimiento("12454");
         cliente.setTelefono("125444");
-        banco.getListaClientes().add(cliente);
+        gestion.getListaClientes().add(cliente);
 
         cliente = new Cliente();
         cliente.setNombre("Pedro");
@@ -27,7 +27,7 @@ public class BancoUtils {
         cliente.setCorreo("uni2@");
         cliente.setFechaNacimiento("12454");
         cliente.setTelefono("125444");
-        banco.getListaClientes().add(cliente);
+        gestion.getListaClientes().add(cliente);
 
         cliente = new Cliente();
         cliente.setNombre("Alberto");
@@ -37,7 +37,7 @@ public class BancoUtils {
         cliente.setCorreo("uni3@");
         cliente.setFechaNacimiento("12454");
         cliente.setTelefono("125444");
-        banco.getListaClientes().add(cliente);
+        gestion.getListaClientes().add(cliente);
 
 
         Empleado empleado = new Empleado();
@@ -50,7 +50,7 @@ public class BancoUtils {
         empleado.setFechaNacimiento("13-08-2000");
         empleado.setSalario(500000.0);
         empleado.setCodigo("123");
-        banco.getListaEmpleados().add(empleado);
+        gestion.getListaEmpleados().add(empleado);
 
         empleado = new Empleado();
         empleado.setNombre("Ana");
@@ -62,7 +62,7 @@ public class BancoUtils {
         empleado.setFechaNacimiento("21-08-2000");
         empleado.setSalario(600000.0);
         empleado.setCodigo("123");
-        banco.getListaEmpleados().add(empleado);
+        gestion.getListaEmpleados().add(empleado);
 
         empleado = new Empleado();
         empleado.setNombre("Pedro");
@@ -74,8 +74,8 @@ public class BancoUtils {
         empleado.setFechaNacimiento("01-08-2000");
         empleado.setSalario(700000.0);
         empleado.setCodigo("123");
-        banco.getListaEmpleados().add(empleado);
-        System.out.println("Información del banco creada");
-        return banco;
+        gestion.getListaEmpleados().add(empleado);
+        System.out.println("Información del gestion creada");
+        return gestion;
     }
 }

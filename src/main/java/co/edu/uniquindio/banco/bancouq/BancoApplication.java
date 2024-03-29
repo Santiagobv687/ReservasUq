@@ -1,6 +1,6 @@
 package co.edu.uniquindio.banco.bancouq;
 
-import co.edu.uniquindio.banco.bancouq.viewController.BancoViewController;
+import co.edu.uniquindio.banco.bancouq.viewController.GestionViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,17 +17,17 @@ public class BancoApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.primaryStage = stage;
-        this.primaryStage.setTitle("Banco UQ");
+        this.primaryStage.setTitle("Gestion UQ");
         mostrarVentanaPrincipal();
     }
 
     public void mostrarVentanaPrincipal() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(BancoApplication.class.getResource("BancoView.fxml"));
+            loader.setLocation(BancoApplication.class.getResource("GestionView.fxml"));
             AnchorPane rootLayout = (AnchorPane) loader.load();
-            BancoViewController bancoViewController = loader.getController();
-//            bancoViewController.setAplicacion(this);
+            GestionViewController gestionViewController = loader.getController();
+//            gestionViewController.setAplicacion(this);
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             //scene.getStylesheets().add(getClass().getResource("estilos.css").toExternalForm());
