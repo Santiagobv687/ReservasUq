@@ -5,38 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d144cbfe-e8cf-4e39-926d-76b5f5200f53" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_3_2024_06_35__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_3_2024_06_35__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/BancoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/BancoApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/controller/BancoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/controller/GestionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/controller/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/controller/UsuarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/controller/ModelFactoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/controller/ModelFactoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/controller/TransaccionControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/controller/ReservaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Banco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Gestion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Cajero.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Cliente.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/ConsultaSaldo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Cuenta.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/CuentaAhorro.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/CuentaCorriente.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Deposito.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Empleado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Empleado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Gerente.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Persona.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Retiro.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Transaccion.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Usuario.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/utils/BancoUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/utils/BancoUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/viewController/BancoViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/viewController/GestionViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/viewController/ClienteViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/viewController/UsuarioViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/viewController/TransaccionViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/viewController/ReservaViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/co/edu/uniquindio/banco/bancouq/BancoView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/co/edu/uniquindio/banco/bancouq/GestionView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/co/edu/uniquindio/banco/bancouq/ClienteView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/co/edu/uniquindio/banco/bancouq/EmpleadoView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/co/edu/uniquindio/banco/bancouq/EmpleadoView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/co/edu/uniquindio/banco/bancouq/Transacciones.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/co/edu/uniquindio/banco/bancouq/ReservaView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/co/edu/uniquindio/banco/bancouq/UsuariosView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/co/edu/uniquindio/banco/bancouq/UsuarioView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/EstadoReserva.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Evento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Persona.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/banco/bancouq/model/Reserva.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +42,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Santiago"
+    "git-widget-placeholder": "main"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
