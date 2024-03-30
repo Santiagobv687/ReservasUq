@@ -72,7 +72,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>co.edu.uniquindio.banco.bancouq/co.edu.uniquindio.banco.bancouq.BancoApplication</mainClass>
+                            <mainClass>co.edu.uniquindio.gestion.bancouq/co.edu.uniquindio.gestion.bancouq.BancoApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
