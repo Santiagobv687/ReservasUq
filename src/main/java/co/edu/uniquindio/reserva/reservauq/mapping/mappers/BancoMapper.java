@@ -20,8 +20,4 @@ public interface BancoMapper {
     @IterableMapping(qualifiedByName = "empleadoToEmpleadoDto")
     List<EmpleadoDto> getEmpleadosDto(List<Empleado> listaEmpleados);
 
-//    @Named("mappingToEmpeladoDto")
-//    EmpleadoDto mappingToEmpeladoDto(Empleado empleado);
-
-
 }
