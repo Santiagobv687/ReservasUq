@@ -50,7 +50,7 @@ public class ModelFactoryController implements IModelFactoryService {
     @Override
     public boolean agregarEmpleado(EmpleadoDto empleadoDto) {
         try{
-            if(!gestion.verificarEmpleadoExistente(empleadoDto.cedula())) {
+            if(!gestion.verificarEmpleadoExistente(empleadoDto.ID())) {
                 Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
                 getBanco().agregarEmpleado(empleado);
             }
@@ -62,10 +62,10 @@ public class ModelFactoryController implements IModelFactoryService {
     }
 
     @Override
-    public boolean eliminarEmpleado(String cedula) {
+    public boolean eliminarEmpleado(String ID) {
         boolean flagExiste = false;
         try {
-            flagExiste = getBanco().eliminarEmpleado(cedula);
+            flagExiste = getBanco().eliminarEmpleado(ID);
         } catch (EmpleadoException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -74,10 +74,10 @@ public class ModelFactoryController implements IModelFactoryService {
     }
 
     @Override
-    public boolean actualizarEmpleado(String cedulaActual, EmpleadoDto empleadoDto) {
+    public boolean actualizarEmpleado(String IDActual, EmpleadoDto empleadoDto) {
         try {
             Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
-            getBanco().actualizarEmpleado(cedulaActual, empleado);
+            getBanco().actualizarEmpleado(IDActual, empleado);
             return true;
         } catch (EmpleadoException e) {
             e.printStackTrace();

@@ -8,21 +8,19 @@ import java.util.ArrayList;
 
 public class Gestion implements IBancoService {
 	private static final long serialVersionUID = 1L;
-	ArrayList<Cliente> listaClientes = new ArrayList<>();
+	ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 	ArrayList<Empleado> listaEmpleados = new ArrayList<>();
-	ArrayList<Cuenta> listaCuentas = new ArrayList<>();
-	ArrayList<Transaccion> listaTransaccionesAsociadas = new ArrayList<Transaccion>();
+
 
 	public Gestion() {
-
 	}
 
-	public ArrayList<Cliente> getListaClientes() {
-		return listaClientes;
+	public ArrayList<Usuario> getListaClientes() {
+		return listaUsuarios;
 	}
 
-	public void setListaClientes(ArrayList<Cliente> listaClientes) {
-		this.listaClientes = listaClientes;
+	public void setListaClientes(ArrayList<Usuario> listaUsuarios) {
+		this.listaUsuarios = listaUsuarios;
 	}
 
 	public ArrayList<Empleado> getListaEmpleados() {
@@ -33,38 +31,20 @@ public class Gestion implements IBancoService {
 		this.listaEmpleados = listaEmpleados;
 	}
 
-	public ArrayList<Cuenta> getListaCuentas() {
-		return listaCuentas;
-	}
 
-
-	public void setListaCuentas(ArrayList<Cuenta> listaCuentas) {
-		this.listaCuentas = listaCuentas;
-	}
-
-
-	public ArrayList<Transaccion> getListaTransaccionesAsociadas() {
-		return listaTransaccionesAsociadas;
-	}
-
-
-	public void setListaTransaccionesAsociadas(ArrayList<Transaccion> listaTransaccionesAsociadas) {
-		this.listaTransaccionesAsociadas = listaTransaccionesAsociadas;
-	}
 
 	@Override
-	public Empleado crearEmpleado(String nombre, String apellido, String cedula, String fechaNacimiento) throws EmpleadoException{
+	public Empleado crearEmpleado(String ID, String nombre, String correo, ArrayList<Evento> listaEventos) throws EmpleadoException{
 		Empleado nuevoEmpleado = null;
-		boolean empleadoExiste = verificarEmpleadoExistente(cedula);
+		boolean empleadoExiste = verificarEmpleadoExistente(ID);
 		if(empleadoExiste){
-			throw new EmpleadoException("El empleado con cedula: "+cedula+" ya existe");
+			throw new EmpleadoException("El empleado con cedula: "+ID+" ya existe");
 		}else{
 			nuevoEmpleado = new Empleado();
 			nuevoEmpleado.setNombre(nombre);
-			nuevoEmpleado.setApellido(apellido);
-			nuevoEmpleado.setCedula(cedula);
-			nuevoEmpleado.setFechaNacimiento(fechaNacimiento);
-			getListaEmpleados().add(nuevoEmpleado);
+			nuevoEmpleado.setID(ID);
+			nuevoEmpleado.setCorreo(correo);
+			nuevoEmpleado.setListaEventos(listaEventos);
 		}
 		return nuevoEmpleado;
 	}
@@ -80,13 +60,8 @@ public class Gestion implements IBancoService {
 			throw new EmpleadoException("El empleado a actualizar no existe");
 		else{
 			empleadoActual.setNombre(empleado.getNombre());
-			empleadoActual.setApellido(empleado.getApellido());
-			empleadoActual.setCedula(empleado.getCedula());
-			empleadoActual.setTelefono(empleado.getTelefono());
+			empleadoActual.setID(empleado.getID());
 			empleadoActual.setCorreo(empleado.getCorreo());
-			empleadoActual.setFechaNacimiento(empleado.getFechaNacimiento());
-			empleadoActual.setSalario(empleado.getSalario());
-			empleadoActual.setCodigo(empleado.getCodigo());
 			return true;
 		}
 	}
@@ -106,9 +81,9 @@ public class Gestion implements IBancoService {
 	}
 
 	@Override
-	public boolean verificarEmpleadoExistente(String cedula) throws EmpleadoException {
-		if(empleadoExiste(cedula)){
-			throw new EmpleadoException("El empleado con cedula: "+cedula+" ya existe");
+	public boolean verificarEmpleadoExistente(String ID) throws EmpleadoException {
+		if(empleadoExiste(ID)){
+			throw new EmpleadoException("El empleado con ID: "+ID+" ya existe");
 		}else{
 			return false;
 		}
@@ -116,10 +91,10 @@ public class Gestion implements IBancoService {
 
 
 	@Override
-	public Empleado obtenerEmpleado(String cedula) {
+	public Empleado obtenerEmpleado(String ID) {
 		Empleado empleadoEncontrado = null;
 		for (Empleado empleado : getListaEmpleados()) {
-			if(empleado.getCedula().equalsIgnoreCase(cedula)){
+			if(empleado.getID().equalsIgnoreCase(ID)){
 				empleadoEncontrado = empleado;
 				break;
 			}
@@ -133,10 +108,10 @@ public class Gestion implements IBancoService {
 		return getListaEmpleados();
 	}
 
-	public boolean empleadoExiste(String cedula) {
+	public boolean empleadoExiste(String ID) {
 		boolean empleadoEncontrado = false;
 		for (Empleado empleado : getListaEmpleados()) {
-			if(empleado.getCedula().equalsIgnoreCase(cedula)){
+			if(empleado.getID().equalsIgnoreCase(ID)){
 				empleadoEncontrado = true;
 				break;
 			}

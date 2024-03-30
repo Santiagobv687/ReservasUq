@@ -1,13 +1,10 @@
 package co.edu.uniquindio.banco.bancouq.mapping.dto;
 
+import co.edu.uniquindio.banco.bancouq.model.Evento;
+
 public record EmpleadoDto(
+        String ID,
         String nombre,
-        String apellido,
-        String cedula,
-        String telefono,
-        String direccion,
-        String correo,
-        String fechaNacimiento,
-        Double salario,
-        String codigo) {
+        String correo
+        ) {
 }
