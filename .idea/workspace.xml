@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="d144cbfe-e8cf-4e39-926d-76b5f5200f53" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/mapping/dto/EmpleadoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/mapping/dto/EmpleadoDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/mapping/mappers/BancoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/mapping/mappers/BancoMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/viewController/EmpleadoViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/viewController/EmpleadoViewController.java" afterDir="false" />
     </list>
+=======
+    <list default="true" id="d144cbfe-e8cf-4e39-926d-76b5f5200f53" name="Changes" comment="" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
