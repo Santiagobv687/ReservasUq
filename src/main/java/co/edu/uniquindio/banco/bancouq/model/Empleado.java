@@ -1,4 +1,6 @@
 package co.edu.uniquindio.banco.bancouq.model;
 
-public class Empleado {
+public class Empleado extends Persona {
+    private Evento evento;
+
 }

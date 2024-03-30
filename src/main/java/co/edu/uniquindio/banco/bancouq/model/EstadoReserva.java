@@ -1,4 +1,7 @@
 package co.edu.uniquindio.banco.bancouq.model;
 
-public class EstadoReserva {
+public enum EstadoReserva {
+    PENDIENTE,
+    APROBADA,
+    RECHAZADA
 }
