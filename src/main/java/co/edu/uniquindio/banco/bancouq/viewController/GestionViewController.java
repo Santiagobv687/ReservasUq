@@ -1,11 +1,11 @@
 package co.edu.uniquindio.banco.bancouq.viewController;
 
 import co.edu.uniquindio.banco.bancouq.controller.GestionController;
-import co.edu.uniquindio.banco.bancouq.controller.service.IBancoControllerService;
+import co.edu.uniquindio.banco.bancouq.controller.service.IGestionControllerService;
 import javafx.fxml.FXML;
 
 public class GestionViewController {
-    IBancoControllerService bancoControllerService;
+    IGestionControllerService bancoControllerService;
 
     @FXML
     void initialize() {

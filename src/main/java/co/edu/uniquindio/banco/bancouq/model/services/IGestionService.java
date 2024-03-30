@@ -7,7 +7,7 @@ import co.edu.uniquindio.banco.bancouq.model.Evento;
 import java.util.ArrayList;
 
 
-public interface IBancoService {
+public interface IGestionService {
 	public Empleado crearEmpleado(String ID, String nombre, String correo, ArrayList<Evento> listaEventos) throws EmpleadoException;
 	public Boolean eliminarEmpleado(String ID)throws EmpleadoException;
 	boolean actualizarEmpleado(String IDActual, Empleado empleado) throws EmpleadoException;

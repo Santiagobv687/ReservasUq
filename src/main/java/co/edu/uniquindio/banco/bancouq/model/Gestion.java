@@ -1,13 +1,12 @@
 package co.edu.uniquindio.banco.bancouq.model;
 
 import co.edu.uniquindio.banco.bancouq.exceptions.EmpleadoException;
-import co.edu.uniquindio.banco.bancouq.model.services.IBancoService;
+import co.edu.uniquindio.banco.bancouq.model.services.IGestionService;
 
 import java.util.ArrayList;
 
 
-public class Gestion implements IBancoService {
-	private static final long serialVersionUID = 1L;
+public class Gestion implements IGestionService {
 	ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 	ArrayList<Empleado> listaEmpleados = new ArrayList<>();
 
