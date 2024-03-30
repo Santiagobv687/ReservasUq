@@ -7,6 +7,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -18,19 +20,19 @@
                <children>
                   <Label layoutX="14.0" layoutY="99.0" text="Nombres:">
                      <font>
-                        <Font name="Lucida Fax Regular" size="12.0" />
+                        <Font name="Lucida Fax Demibold" size="12.0" />
                      </font>
                   </Label>
                   <Label layoutX="14.0" layoutY="143.0" prefHeight="17.0" prefWidth="59.0" text="Correo:">
                      <font>
-                        <Font name="Lucida Fax Regular" size="12.0" />
+                        <Font name="Lucida Fax Demibold" size="12.0" />
                      </font>
                   </Label>
                   <TextField fx:id="txtCorreo" layoutX="98.0" layoutY="139.0" prefHeight="25.0" prefWidth="295.0" />
                   <TextField fx:id="txtNombre" layoutX="98.0" layoutY="94.0" prefHeight="25.0" prefWidth="295.0" />
                   <Label layoutX="12.0" layoutY="187.0" text="Contraseña:">
                      <font>
-                        <Font name="Lucida Fax Regular" size="12.0" />
+                        <Font name="Lucida Fax Demibold" size="12.0" />
                      </font>
                   </Label>
                   <Button fx:id="btnActualizar" layoutX="535.0" layoutY="247.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: #5FDBD7;" text="Actualizar" textFill="WHITE">
@@ -52,10 +54,15 @@
                   </Label>
                   <Label layoutX="14.0" layoutY="61.0" text="ID:">
                      <font>
-                        <Font name="Lucida Fax Regular" size="12.0" />
+                        <Font name="Bell MT Bold" size="12.0" />
                      </font>
                   </Label>
                   <TextField fx:id="txtID" layoutX="98.0" layoutY="56.0" prefHeight="25.0" prefWidth="295.0" />
+                  <ImageView fitHeight="160.0" fitWidth="158.0" layoutX="506.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../Imagenes/LogoUQ.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="301.0" prefWidth="735.0">
