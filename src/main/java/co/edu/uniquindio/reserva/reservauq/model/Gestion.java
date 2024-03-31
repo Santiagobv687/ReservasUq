@@ -1,5 +1,6 @@
 package co.edu.uniquindio.reserva.reservauq.model;
 
+import co.edu.uniquindio.reserva.reservauq.exceptions.CampoVacioException;
 import co.edu.uniquindio.reserva.reservauq.exceptions.EmpleadoException;
 import co.edu.uniquindio.reserva.reservauq.model.services.IGestionService;
 
@@ -116,5 +117,23 @@ public class Gestion implements IGestionService {
 			}
 		}
 		return empleadoEncontrado;
+	}
+
+	//Metodos relacionados con los usuarios
+
+	@Override
+
+	public void registrarUsuario(String nobmre,String ID,) throws CampoVacioException {
+		validarCampoVacio(ID,"El usuario debe tener una ID");
+		validarCampoVacio();
+	}
+
+	@Override
+
+	public void validarCampoVacio(String cualquiera,String msg) throws CampoVacioException {
+		if(cualquiera.isEmpty()||cualquiera==null)
+		{
+			throw new CampoVacioException(msg);
+		}
 	}
 }

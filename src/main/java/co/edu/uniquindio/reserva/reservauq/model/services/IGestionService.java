@@ -1,5 +1,6 @@
 package co.edu.uniquindio.reserva.reservauq.model.services;
 
+import co.edu.uniquindio.reserva.reservauq.exceptions.CampoVacioException;
 import co.edu.uniquindio.reserva.reservauq.exceptions.EmpleadoException;
 import co.edu.uniquindio.reserva.reservauq.model.Empleado;
 import co.edu.uniquindio.reserva.reservauq.model.Evento;
@@ -14,6 +15,10 @@ public interface IGestionService {
 	public boolean  verificarEmpleadoExistente(String ID) throws EmpleadoException;
 	public Empleado obtenerEmpleado(String ID);
 	public ArrayList<Empleado> obtenerEmpleados();
+
+	public void registrarUsuario(String ID) throws CampoVacioException;
+
+	public void validarCampoVacio(String cualquiera,String msg) throws CampoVacioException;
 
 
 }
