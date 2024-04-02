@@ -34,11 +34,11 @@ public class ModelFactoryController implements IModelFactoryService {
         gestion = BancoUtils.inicializarDatos();
     }
 
-    public Gestion getBanco() {
+    public Gestion getGestion() {
         return gestion;
     }
 
-    public void setBanco(Gestion gestion) {
+    public void setGestion(Gestion gestion) {
         this.gestion = gestion;
     }
 
@@ -53,7 +53,7 @@ public class ModelFactoryController implements IModelFactoryService {
         try{
             if(!gestion.verificarEmpleadoExistente(empleadoDto.ID())) {
                 Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
-                getBanco().agregarEmpleado(empleado);
+                getGestion().agregarEmpleado(empleado);
             }
             return true;
         }catch (EmpleadoException e){
@@ -66,7 +66,7 @@ public class ModelFactoryController implements IModelFactoryService {
     public boolean eliminarEmpleado(String ID) {
         boolean flagExiste = false;
         try {
-            flagExiste = getBanco().eliminarEmpleado(ID);
+            flagExiste = getGestion().eliminarEmpleado(ID);
         } catch (EmpleadoException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -78,7 +78,7 @@ public class ModelFactoryController implements IModelFactoryService {
     public boolean actualizarEmpleado(String IDActual, EmpleadoDto empleadoDto) {
         try {
             Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
-            getBanco().actualizarEmpleado(IDActual, empleado);
+            getGestion().actualizarEmpleado(IDActual, empleado);
             return true;
         } catch (EmpleadoException e) {
             e.printStackTrace();

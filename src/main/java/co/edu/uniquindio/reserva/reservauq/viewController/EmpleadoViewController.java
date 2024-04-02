@@ -155,20 +155,19 @@ public class EmpleadoViewController {
                     listaEmpleadosDto.remove(empleadoSeleccionado);
                     listaEmpleadosDto.add(empleadoDto);
                     tableEmpleados.refresh();
-                    mostrarMensaje("Notificación empleado", "Empleado actualizado", "El empleado se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                    mostrarMensaje("Notificación", "Empleado actualizado", "El empleado se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
                     limpiarCamposEmpleado();
                 }else{
-                    mostrarMensaje("Notificación empleado", "Empleado no actualizado", "El empleado no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                    mostrarMensaje("Notificación", "Empleado no actualizado", "No se ha podido actualizar al empleado.", Alert.AlertType.INFORMATION);
                 }
             }else{
-                mostrarMensaje("Notificación empleado", "Empleado no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+                mostrarMensaje("Notificación", "Empleado no creado", "Los datos ingresados no son validos", Alert.AlertType.ERROR);
             }
 
         }
     }
 
     private EmpleadoDto construirEmpleadoDto() {
-        ArrayList<Evento> listaEventos=new ArrayList<>();
         return new EmpleadoDto(
                 txtID.getText(),
                 txtNombre.getText(),

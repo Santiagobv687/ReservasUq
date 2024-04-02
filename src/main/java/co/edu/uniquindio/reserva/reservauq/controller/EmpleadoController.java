@@ -22,12 +22,12 @@ public class EmpleadoController implements IEmpleadoControllerService {
     }
 
     @Override
-    public boolean eliminarEmpleado(String cedula) {
-        return modelFactoryController.eliminarEmpleado(cedula);
+    public boolean eliminarEmpleado(String ID) {
+        return modelFactoryController.eliminarEmpleado(ID);
     }
 
     @Override
-    public boolean actualizarEmpleado(String cedulaActual, EmpleadoDto empleadoDto) {
-        return modelFactoryController.actualizarEmpleado(cedulaActual, empleadoDto);
+    public boolean actualizarEmpleado(String IDActual, EmpleadoDto empleadoDto) {
+        return modelFactoryController.actualizarEmpleado(IDActual, empleadoDto);
     }
 }

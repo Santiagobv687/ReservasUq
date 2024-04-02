@@ -14,11 +14,11 @@ public class Gestion implements IGestionService {
 	public Gestion() {
 	}
 
-	public ArrayList<Usuario> getListaClientes() {
+	public ArrayList<Usuario> getListaUsuarios() {
 		return listaUsuarios;
 	}
 
-	public void setListaClientes(ArrayList<Usuario> listaUsuarios) {
+	public void setListaUsuarios(ArrayList<Usuario> listaUsuarios) {
 		this.listaUsuarios = listaUsuarios;
 	}
 
@@ -37,7 +37,7 @@ public class Gestion implements IGestionService {
 		Empleado nuevoEmpleado = null;
 		boolean empleadoExiste = verificarEmpleadoExistente(ID);
 		if(empleadoExiste){
-			throw new EmpleadoException("El empleado con cedula: "+ID+" ya existe");
+			throw new EmpleadoException("El empleado con ID: "+ID+" ya existe");
 		}else{
 			nuevoEmpleado = new Empleado();
 			nuevoEmpleado.setNombre(nombre);
@@ -49,7 +49,7 @@ public class Gestion implements IGestionService {
 	}
 
 	public void agregarEmpleado(Empleado nuevoEmpleado) throws EmpleadoException{
-		getListaEmpleados().add(nuevoEmpleado);
+		listaEmpleados.add(nuevoEmpleado);
 	}
 
 	@Override

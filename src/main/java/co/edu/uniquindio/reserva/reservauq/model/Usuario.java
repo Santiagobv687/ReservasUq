@@ -11,4 +11,20 @@ public class Usuario extends Persona{
         this.contrasenia=contrasenia;
         this.listaReservas.addAll(listaReservas);
     }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public ArrayList<Reserva> getListaReservas() {
+        return listaReservas;
+    }
+
+    public void setListaReservas(ArrayList<Reserva> listaReservas) {
+        this.listaReservas = listaReservas;
+    }
 }
