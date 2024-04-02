@@ -1,7 +1,7 @@
 package co.edu.uniquindio.reserva.reservauq.controller;
 
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
-import co.edu.uniquindio.reserva.reservauq.mapping.mappers.BancoMapper;
+import co.edu.uniquindio.reserva.reservauq.mapping.mappers.GestionMapper;
 import co.edu.uniquindio.reserva.reservauq.controller.service.IModelFactoryService;
 import co.edu.uniquindio.reserva.reservauq.utils.BancoUtils;
 import co.edu.uniquindio.reserva.reservauq.exceptions.EmpleadoException;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ModelFactoryController implements IModelFactoryService {
     Gestion gestion;
-    BancoMapper mapper = BancoMapper.INSTANCE;
+    GestionMapper mapper = GestionMapper.INSTANCE;
 
     //------------------------------  Singleton ------------------------------------------------
     // Clase estatica oculta. Tan solo se instanciara el singleton una vez

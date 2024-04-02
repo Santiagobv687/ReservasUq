@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class BancoApplication extends Application {
+public class ReservaApplication extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
 
@@ -24,7 +24,7 @@ public class BancoApplication extends Application {
     public void mostrarVentanaPrincipal() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(BancoApplication.class.getResource("GestionView.fxml"));
+            loader.setLocation(ReservaApplication.class.getResource("GestionView.fxml"));
             AnchorPane rootLayout = (AnchorPane) loader.load();
             GestionViewController gestionViewController = loader.getController();
 //            gestionViewController.setAplicacion(this);

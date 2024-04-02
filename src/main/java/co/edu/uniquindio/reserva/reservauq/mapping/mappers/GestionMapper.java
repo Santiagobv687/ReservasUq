@@ -9,8 +9,8 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper
-public interface BancoMapper {
-    BancoMapper INSTANCE = Mappers.getMapper(BancoMapper.class);
+public interface GestionMapper {
+    GestionMapper INSTANCE = Mappers.getMapper(GestionMapper.class);
 
     @Named("empleadoToEmpleadoDto")
     EmpleadoDto empleadoToEmpleadoDto(Empleado empleado);
