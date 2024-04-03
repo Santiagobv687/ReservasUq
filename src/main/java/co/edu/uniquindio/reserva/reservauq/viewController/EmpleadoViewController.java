@@ -107,7 +107,7 @@ public class EmpleadoViewController {
         //1. Capturar los datos
         EmpleadoDto empleadoDto = construirEmpleadoDto();
         //2. Validar la información
-        if(datosValidos(empleadoDto)){
+        if(esValido(empleadoDto)){
             if(empleadoControllerService.agregarEmpleado(empleadoDto)){
                 listaEmpleadosDto.add(empleadoDto);
                 mostrarMensaje("Notificación empleado", "Empleado creado", "El empleado se ha creado con éxito", Alert.AlertType.INFORMATION);
@@ -115,10 +115,7 @@ public class EmpleadoViewController {
             }else{
                 mostrarMensaje("Notificación empleado", "Empleado no creado", "El empleado no se ha creado con éxito", Alert.AlertType.ERROR);
             }
-        }else{
-            mostrarMensaje("Notificación empleado", "Empleado no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
         }
-
     }
 
     private void eliminarEmpleado() {
@@ -149,7 +146,7 @@ public class EmpleadoViewController {
         //2. verificar el empleado seleccionado
         if(empleadoSeleccionado != null){
             //3. Validar la información
-            if(datosValidos(empleadoSeleccionado)){
+            if(esValido(empleadoDto)){
                 clienteActualizado = empleadoControllerService.actualizarEmpleado(IDActual,empleadoDto);
                 if(clienteActualizado){
                     listaEmpleadosDto.remove(empleadoSeleccionado);
@@ -160,10 +157,7 @@ public class EmpleadoViewController {
                 }else{
                     mostrarMensaje("Notificación", "Empleado no actualizado", "No se ha podido actualizar al empleado.", Alert.AlertType.INFORMATION);
                 }
-            }else{
-                mostrarMensaje("Notificación", "Empleado no creado", "Los datos ingresados no son validos", Alert.AlertType.ERROR);
             }
-
         }
     }
 
@@ -181,14 +175,14 @@ public class EmpleadoViewController {
         txtCorreo.setText("");
     }
 
-    private boolean datosValidos(EmpleadoDto empleadoDto) {
+    private boolean esValido(EmpleadoDto empleadoDto) {
         String mensaje = "";
         if(empleadoDto.nombre() == null || empleadoDto.nombre().equals(""))
-            mensaje += "El nombre es invalido \n" ;
+            mensaje += "Debe de completar el campo de Nombre \n" ;
         if(empleadoDto.ID() == null || empleadoDto.ID().equals(""))
-            mensaje += "El ID es invalido \n" ;
+            mensaje += "Debe completar el campo de ID\n" ;
         if(empleadoDto.correo() == null || empleadoDto.correo().equals(""))
-            mensaje += "El correo es invalido \n" ;
+            mensaje += "Debe completar el campo de correo \n" ;
         if(mensaje.equals("")){
             return true;
         }else{

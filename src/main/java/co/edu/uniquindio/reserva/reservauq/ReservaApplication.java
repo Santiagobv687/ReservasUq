@@ -17,7 +17,7 @@ public class ReservaApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.primaryStage = stage;
-        this.primaryStage.setTitle("Gestion UQ");
+        this.primaryStage.setTitle("Gestion de Reservas UQ");
         mostrarVentanaPrincipal();
     }
 
