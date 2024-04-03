@@ -141,10 +141,11 @@ public class EmpleadoViewController {
     private void actualizarEmpleado() {
         boolean clienteActualizado = false;
         //1. Capturar los datos
-        String IDActual = empleadoSeleccionado.ID();
-        EmpleadoDto empleadoDto = construirEmpleadoDto();
+
         //2. verificar el empleado seleccionado
         if(empleadoSeleccionado != null){
+            String IDActual = empleadoSeleccionado.ID();
+            EmpleadoDto empleadoDto = construirEmpleadoDto();
             //3. Validar la información
             if(esValido(empleadoDto)){
                 clienteActualizado = empleadoControllerService.actualizarEmpleado(IDActual,empleadoDto);
@@ -158,6 +159,9 @@ public class EmpleadoViewController {
                     mostrarMensaje("Notificación", "Empleado no actualizado", "No se ha podido actualizar al empleado.", Alert.AlertType.INFORMATION);
                 }
             }
+        }
+        else{
+            mostrarMensaje("Notificación empleado", "Empleado no seleccionado", "Seleccionado un empleado de la lista", Alert.AlertType.WARNING);
         }
     }
 
