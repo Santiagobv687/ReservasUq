@@ -6,7 +6,7 @@ import co.edu.uniquindio.reserva.reservauq.model.Empleado;
 
 import java.util.ArrayList;
 
-public class BancoUtils {
+public class GestionUtils {
 
     public static Gestion inicializarDatos() {
         Gestion gestion = new Gestion();

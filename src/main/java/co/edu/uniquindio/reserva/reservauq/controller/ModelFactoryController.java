@@ -3,7 +3,7 @@ package co.edu.uniquindio.reserva.reservauq.controller;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.mappers.GestionMapper;
 import co.edu.uniquindio.reserva.reservauq.controller.service.IModelFactoryService;
-import co.edu.uniquindio.reserva.reservauq.utils.BancoUtils;
+import co.edu.uniquindio.reserva.reservauq.utils.GestionUtils;
 import co.edu.uniquindio.reserva.reservauq.exceptions.PersonaException;
 import co.edu.uniquindio.reserva.reservauq.model.Empleado;
 import co.edu.uniquindio.reserva.reservauq.model.Gestion;
@@ -31,7 +31,7 @@ public class ModelFactoryController implements IModelFactoryService {
     }
 
     private void cargarDatosBase() {
-        gestion = BancoUtils.inicializarDatos();
+        gestion = GestionUtils.inicializarDatos();
     }
 
     public Gestion getGestion() {
