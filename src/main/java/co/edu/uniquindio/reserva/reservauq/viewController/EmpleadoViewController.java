@@ -113,7 +113,7 @@ public class EmpleadoViewController {
                 mostrarMensaje("Notificación empleado", "Empleado creado", "El empleado se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposEmpleado();
             }else{
-                mostrarMensaje("Notificación empleado", "Empleado no creado", "El empleado no se ha creado con éxito", Alert.AlertType.ERROR);
+                mostrarMensaje("Notificación empleado", "Empleado no creado", "No se ha podido crear al empleado. Revise los campos de información.", Alert.AlertType.ERROR);
             }
         }
     }
@@ -121,7 +121,7 @@ public class EmpleadoViewController {
     private void eliminarEmpleado() {
         boolean empleadoEliminado = false;
         if(empleadoSeleccionado != null){
-            if(mostrarMensajeConfirmacion("¿Estas seguro de elmininar al empleado?")){
+            if(mostrarMensajeConfirmacion("¿Estas seguro de eliminar al empleado?")){
                 empleadoEliminado = empleadoControllerService.eliminarEmpleado(empleadoSeleccionado.ID());
                 if(empleadoEliminado == true){
                     listaEmpleadosDto.remove(empleadoSeleccionado);

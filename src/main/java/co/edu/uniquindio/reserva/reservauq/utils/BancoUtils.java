@@ -11,9 +11,6 @@ public class BancoUtils {
     public static Gestion inicializarDatos() {
         Gestion gestion = new Gestion();
 
-
-
-
         Empleado empleado = new Empleado();
         empleado.setNombre("juan");
         empleado.setID("1234");
@@ -37,7 +34,7 @@ public class BancoUtils {
         ArrayList<Evento> listaEventos3=new ArrayList<>();
         empleado.setListaEventos(listaEventos3);
         gestion.getListaEmpleados().add(empleado);
-        System.out.println("Información del gestion creada");
+
         return gestion;
     }
 }
