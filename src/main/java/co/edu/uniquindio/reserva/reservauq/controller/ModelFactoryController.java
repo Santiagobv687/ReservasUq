@@ -4,7 +4,7 @@ import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.mappers.GestionMapper;
 import co.edu.uniquindio.reserva.reservauq.controller.service.IModelFactoryService;
 import co.edu.uniquindio.reserva.reservauq.utils.GestionUtils;
-import co.edu.uniquindio.reserva.reservauq.exceptions.PersonaException;
+import co.edu.uniquindio.reserva.reservauq.exceptions.EmpleadoException;
 import co.edu.uniquindio.reserva.reservauq.model.Empleado;
 import co.edu.uniquindio.reserva.reservauq.model.Gestion;
 
@@ -56,7 +56,7 @@ public class ModelFactoryController implements IModelFactoryService {
                 getGestion().agregarEmpleado(empleado);
             }
             return true;
-        }catch (PersonaException e){
+        }catch (EmpleadoException e){
             e.getMessage();
             return false;
         }
@@ -67,7 +67,7 @@ public class ModelFactoryController implements IModelFactoryService {
         boolean flagExiste = false;
         try {
             flagExiste = getGestion().eliminarEmpleado(ID);
-        } catch (PersonaException e) {
+        } catch (EmpleadoException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -80,7 +80,7 @@ public class ModelFactoryController implements IModelFactoryService {
             Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
             getGestion().actualizarEmpleado(IDActual, empleado);
             return true;
-        } catch (PersonaException e) {
+        } catch (EmpleadoException e) {
             e.printStackTrace();
             return false;
         }

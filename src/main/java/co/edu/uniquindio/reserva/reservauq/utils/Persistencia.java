@@ -1,6 +1,5 @@
 package co.edu.uniquindio.reserva.reservauq.utils;
 
-import co.edu.uniquindio.reserva.reservauq.exceptions.PersonaException;
 import co.edu.uniquindio.reserva.reservauq.model.Empleado;
 import co.edu.uniquindio.reserva.reservauq.model.Gestion;
 import co.edu.uniquindio.reserva.reservauq.model.RolEmpleado;
@@ -132,12 +131,12 @@ public class Persistencia {
     }
 
 /*
-    public static boolean iniciarSesion(String usuario, String contrasenia) throws FileNotFoundException, IOException, PersonaException {
+    public static boolean iniciarSesion(String usuario, String contrasenia) throws FileNotFoundException, IOException, EmpleadoException {
 
         if(validarUsuario(usuario,contrasenia)) {
             return true;
         }else {
-            throw new PersonaException("Usuario no existe");
+            throw new EmpleadoException("Usuario no existe");
         }
 
     }

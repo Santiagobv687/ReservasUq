@@ -1,6 +1,6 @@
 package co.edu.uniquindio.reserva.reservauq.model;
 
-import co.edu.uniquindio.reserva.reservauq.exceptions.PersonaException;
+import co.edu.uniquindio.reserva.reservauq.exceptions.EmpleadoException;
 import co.edu.uniquindio.reserva.reservauq.model.services.IGestionService;
 
 import java.util.ArrayList;
@@ -35,11 +35,11 @@ public class Gestion implements IGestionService {
 
 
 	@Override
-	public Empleado crearEmpleado(String ID, String nombre, String correo, ArrayList<Evento> listaEventos) throws PersonaException {
+	public Empleado crearEmpleado(String ID, String nombre, String correo, ArrayList<Evento> listaEventos) throws EmpleadoException {
 		Empleado nuevoEmpleado = null;
 		boolean empleadoExiste = verificarEmpleadoExistente(ID);
 		if(empleadoExiste){
-			throw new PersonaException("El empleado con ID: "+ID+" ya existe");
+			throw new EmpleadoException("El empleado con ID: "+ID+" ya existe");
 		}else{
 			nuevoEmpleado = new Empleado();
 			nuevoEmpleado.setNombre(nombre);
@@ -50,15 +50,15 @@ public class Gestion implements IGestionService {
 		return nuevoEmpleado;
 	}
 
-	public void agregarEmpleado(Empleado nuevoEmpleado) throws PersonaException {
+	public void agregarEmpleado(Empleado nuevoEmpleado) throws EmpleadoException {
 		listaEmpleados.add(nuevoEmpleado);
 	}
 
 	@Override
-	public boolean actualizarEmpleado(String IDActual, Empleado empleado) throws PersonaException {
+	public boolean actualizarEmpleado(String IDActual, Empleado empleado) throws EmpleadoException {
 		Empleado empleadoActual = obtenerEmpleado(IDActual);
 		if(empleadoActual == null)
-			throw new PersonaException("El empleado a actualizar no existe");
+			throw new EmpleadoException("El empleado a actualizar no existe");
 		else{
 			empleadoActual.setNombre(empleado.getNombre());
 			empleadoActual.setID(empleado.getID());
@@ -68,12 +68,12 @@ public class Gestion implements IGestionService {
 	}
 
 	@Override
-	public Boolean eliminarEmpleado(String cedula) throws PersonaException {
+	public Boolean eliminarEmpleado(String cedula) throws EmpleadoException {
 		Empleado empleado = null;
 		boolean flagExiste = false;
 		empleado = obtenerEmpleado(cedula);
 		if(empleado == null)
-			throw new PersonaException("El empleado a eliminar no existe");
+			throw new EmpleadoException("El empleado a eliminar no existe");
 		else{
 			getListaEmpleados().remove(empleado);
 			flagExiste = true;
@@ -82,9 +82,9 @@ public class Gestion implements IGestionService {
 	}
 
 	@Override
-	public boolean verificarEmpleadoExistente(String ID) throws PersonaException {
+	public boolean verificarEmpleadoExistente(String ID) throws EmpleadoException {
 		if(empleadoExiste(ID)){
-			throw new PersonaException("El empleado con ID: "+ID+" ya existe");
+			throw new EmpleadoException("El empleado con ID: "+ID+" ya existe");
 		}else{
 			return false;
 		}
