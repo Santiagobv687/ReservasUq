@@ -164,7 +164,7 @@ public class Gestion implements IGestionService {
 	@Override
 
 	public void agregarUsuario(Usuario usuario) {
-		getListaClientes().add(usuario);
+		getListaUsuarios().add(usuario);
 	}
 
 	@Override

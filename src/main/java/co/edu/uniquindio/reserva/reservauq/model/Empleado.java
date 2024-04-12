@@ -7,8 +7,8 @@ public class Empleado extends Persona {
 
     private RolEmpleado rolEmpleado;
 
-    public Empleado(String ID, String nombre, String correo, RolEmpleado rolEmpleado, ArrayList<Evento> listaEventos) {
-        super(ID, nombre, correo);
+    public Empleado(String ID, String nombre, String correo, String contrasenia, RolEmpleado rolEmpleado, ArrayList<Evento> listaEventos) {
+        super(ID, nombre, correo, contrasenia);
         this.rolEmpleado=rolEmpleado;
         this.listaEventos.addAll(listaEventos);
     }
