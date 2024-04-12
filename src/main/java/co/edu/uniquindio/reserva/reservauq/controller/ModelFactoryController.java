@@ -1,18 +1,22 @@
 package co.edu.uniquindio.reserva.reservauq.controller;
 
+import co.edu.uniquindio.reserva.reservauq.exceptions.*;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
-import co.edu.uniquindio.reserva.reservauq.mapping.mappers.GestionMapper;
+import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
+import co.edu.uniquindio.reserva.reservauq.mapping.mappers.BancoMapper;
 import co.edu.uniquindio.reserva.reservauq.controller.service.IModelFactoryService;
-import co.edu.uniquindio.reserva.reservauq.utils.GestionUtils;
-import co.edu.uniquindio.reserva.reservauq.exceptions.EmpleadoException;
+import co.edu.uniquindio.reserva.reservauq.model.Reserva;
+import co.edu.uniquindio.reserva.reservauq.model.Usuario;
+import co.edu.uniquindio.reserva.reservauq.utils.BancoUtils;
 import co.edu.uniquindio.reserva.reservauq.model.Empleado;
 import co.edu.uniquindio.reserva.reservauq.model.Gestion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModelFactoryController implements IModelFactoryService {
     Gestion gestion;
-    GestionMapper mapper = GestionMapper.INSTANCE;
+    BancoMapper mapper = BancoMapper.INSTANCE;
 
     //------------------------------  Singleton ------------------------------------------------
     // Clase estatica oculta. Tan solo se instanciara el singleton una vez
@@ -26,19 +30,19 @@ public class ModelFactoryController implements IModelFactoryService {
     }
 
     public ModelFactoryController() {
-        System.out.println("Se invoca al Singleton");
+        System.out.println("invocación clase singleton");
         cargarDatosBase();
     }
 
     private void cargarDatosBase() {
-        gestion = GestionUtils.inicializarDatos();
+        gestion = BancoUtils.inicializarDatos();
     }
 
-    public Gestion getGestion() {
+    public Gestion getBanco() {
         return gestion;
     }
 
-    public void setGestion(Gestion gestion) {
+    public void setBanco(Gestion gestion) {
         this.gestion = gestion;
     }
 
@@ -53,7 +57,7 @@ public class ModelFactoryController implements IModelFactoryService {
         try{
             if(!gestion.verificarEmpleadoExistente(empleadoDto.ID())) {
                 Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
-                getGestion().agregarEmpleado(empleado);
+                getBanco().agregarEmpleado(empleado);
             }
             return true;
         }catch (EmpleadoException e){
@@ -66,7 +70,7 @@ public class ModelFactoryController implements IModelFactoryService {
     public boolean eliminarEmpleado(String ID) {
         boolean flagExiste = false;
         try {
-            flagExiste = getGestion().eliminarEmpleado(ID);
+            flagExiste = getBanco().eliminarEmpleado(ID);
         } catch (EmpleadoException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -78,11 +82,39 @@ public class ModelFactoryController implements IModelFactoryService {
     public boolean actualizarEmpleado(String IDActual, EmpleadoDto empleadoDto) {
         try {
             Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
-            getGestion().actualizarEmpleado(IDActual, empleado);
+            getBanco().actualizarEmpleado(IDActual, empleado);
             return true;
         } catch (EmpleadoException e) {
             e.printStackTrace();
             return false;
         }
+    }
+
+    //Metodos usuarios
+
+    @Override
+     public List<UsuarioDto> obtenerUsuario() {
+        return mapper.getUsuariosDto(gestion.getListaClientes());
+    }
+
+    @Override
+    public void registraUsuario(UsuarioDto usuarioDto) throws UsuarioExistenteException, CampoVacioException {
+        Usuario usuario=mapper.usuarioDtoToUsuario(usuarioDto);
+        gestion.registrarUsuario(usuario);
+    }
+
+    @Override
+
+    public Object iniciarSesion(String ID,String contrasenia) throws UsuarioNoRegistradoException, CampoVacioException, ContraseñaIncorrectaException {
+        Object queEs=gestion.iniciarSesion(ID,contrasenia);
+        Usuario usuarioIniciado;
+        Empleado empleadoIniciado;
+        if(queEs instanceof Usuario)
+        {
+            usuarioIniciado=(Usuario) queEs;
+            return mapper.usuarioToUsuarioDto(usuarioIniciado);
+        }
+        empleadoIniciado=(Empleado)queEs;
+        return mapper.empleadoToEmpleadoDto(empleadoIniciado);
     }
 }
