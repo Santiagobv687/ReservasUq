@@ -24,10 +24,12 @@ public interface IGestionService {
 
 	public void agregarUsuario(Usuario usuario);
 
-	public boolean iniciarSesion(Usuario usuario) throws UsuarioNoRegistradoException, CampoVacioException, ContraseñaIncorrectaException;
+	/*public boolean iniciarSesion(Usuario usuario) throws UsuarioNoRegistradoException, CampoVacioException, ContraseñaIncorrectaException;
 
 	public boolean validarContrasenia(String contrasenia,int indice,int estado);
 
 	public boolean buscarUsuarioNoRegistrado(Usuario usuario,int indice) throws UsuarioNoRegistradoException;
+
+	 */
 	}
 

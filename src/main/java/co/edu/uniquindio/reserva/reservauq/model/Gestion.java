@@ -165,7 +165,7 @@ public class Gestion implements IGestionService {
 		getListaClientes().add(usuario);
 	}
 
-	@Override
+	/*@Override
 
 	public boolean iniciarSesion(String ID,String contrasenia) throws CampoVacioException, ContraseñaIncorrectaException, UsuarioNoRegistradoException {
 		validarCampoVacio(ID,"El usuario debe tener una ID");
@@ -186,7 +186,7 @@ public class Gestion implements IGestionService {
 		}
 	}
 
-	@Override
+	/*@Override
 	public boolean validarContrasenia(,int indice,int estado) {
 		
 	}
@@ -230,4 +230,6 @@ public class Gestion implements IGestionService {
 			}
 		}
 	}
+
+	 */
 }
