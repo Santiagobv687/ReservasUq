@@ -1,7 +1,6 @@
 package co.edu.uniquindio.reserva.reservauq.controller;
 
-import co.edu.uniquindio.reserva.reservauq.exceptions.CampoVacioException;
-import co.edu.uniquindio.reserva.reservauq.exceptions.UsuarioExistenteException;
+import co.edu.uniquindio.reserva.reservauq.exceptions.*;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.mappers.BancoMapper;
@@ -9,7 +8,6 @@ import co.edu.uniquindio.reserva.reservauq.controller.service.IModelFactoryServi
 import co.edu.uniquindio.reserva.reservauq.model.Reserva;
 import co.edu.uniquindio.reserva.reservauq.model.Usuario;
 import co.edu.uniquindio.reserva.reservauq.utils.BancoUtils;
-import co.edu.uniquindio.reserva.reservauq.exceptions.EmpleadoException;
 import co.edu.uniquindio.reserva.reservauq.model.Empleado;
 import co.edu.uniquindio.reserva.reservauq.model.Gestion;
 
@@ -103,8 +101,20 @@ public class ModelFactoryController implements IModelFactoryService {
     public void registraUsuario(UsuarioDto usuarioDto) throws UsuarioExistenteException, CampoVacioException {
         Usuario usuario=mapper.usuarioDtoToUsuario(usuarioDto);
         gestion.registrarUsuario(usuario);
-
     }
 
+    @Override
 
+    public Object iniciarSesion(String ID,String contrasenia) throws UsuarioNoRegistradoException, CampoVacioException, ContraseñaIncorrectaException {
+        Object queEs=gestion.iniciarSesion(ID,contrasenia);
+        Usuario usuarioIniciado;
+        Empleado empleadoIniciado;
+        if(queEs instanceof Usuario)
+        {
+            usuarioIniciado=(Usuario) queEs;
+            return mapper.usuarioToUsuarioDto(usuarioIniciado);
+        }
+        empleadoIniciado=(Empleado)queEs;
+        return mapper.empleadoToEmpleadoDto(empleadoIniciado);
+    }
 }

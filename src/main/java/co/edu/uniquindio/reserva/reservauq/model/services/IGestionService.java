@@ -3,6 +3,7 @@ package co.edu.uniquindio.reserva.reservauq.model.services;
 import co.edu.uniquindio.reserva.reservauq.exceptions.*;
 import co.edu.uniquindio.reserva.reservauq.model.Empleado;
 import co.edu.uniquindio.reserva.reservauq.model.Evento;
+import co.edu.uniquindio.reserva.reservauq.model.Persona;
 import co.edu.uniquindio.reserva.reservauq.model.Usuario;
 
 import java.util.ArrayList;
@@ -24,12 +25,14 @@ public interface IGestionService {
 
 	public void agregarUsuario(Usuario usuario);
 
-	/*public boolean iniciarSesion(Usuario usuario) throws UsuarioNoRegistradoException, CampoVacioException, ContraseñaIncorrectaException;
+	public Object iniciarSesion(String ID,String contrasenia) throws UsuarioNoRegistradoException, CampoVacioException, ContraseñaIncorrectaException;
 
-	public boolean validarContrasenia(String contrasenia,int indice,int estado);
+	public void validarContrasenia(String contrasenia, int indice, Persona persona) throws ContraseñaIncorrectaException;
 
-	public boolean buscarUsuarioNoRegistrado(Usuario usuario,int indice) throws UsuarioNoRegistradoException;
+	public Usuario buscarUsuario(String ID,int indice) throws UsuarioNoRegistradoException;
 
-	 */
+	public Empleado buscarEmpleado(String ID,int indice) throws UsuarioNoRegistradoException;
+
+
 	}
 

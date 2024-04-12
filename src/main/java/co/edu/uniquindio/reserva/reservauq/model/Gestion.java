@@ -165,71 +165,73 @@ public class Gestion implements IGestionService {
 		getListaClientes().add(usuario);
 	}
 
-	/*@Override
+	@Override
 
-	public boolean iniciarSesion(String ID,String contrasenia) throws CampoVacioException, ContraseñaIncorrectaException, UsuarioNoRegistradoException {
+	public Object iniciarSesion(String ID,String contrasenia) throws CampoVacioException, ContraseñaIncorrectaException, UsuarioNoRegistradoException {
 		validarCampoVacio(ID,"El usuario debe tener una ID");
 		validarCampoVacio(contrasenia,"Debe indicar su contraseña");
-		String usuarioNoRegistrado=buscarUsuarioNoRegistrado(ID,0,1);
-
-
-		if(usuarioNoRegistrado==null)
+		Usuario isUsuario=buscarUsuario(ID,0);
+		Empleado isEmpleado;
+		if(isUsuario==null)
 		{
-			throw new UsuarioNoRegistradoException();
-		}
-		else
-		{
-			if(validarContrasenia(contrasenia,0,1)==false)
+			isEmpleado=buscarEmpleado(ID,0);
+			if(isEmpleado==null)
 			{
-				throw new ContraseñaIncorrectaException();
+				throw new UsuarioNoRegistradoException();
 			}
-		}
-	}
+			validarContrasenia(contrasenia,0,isEmpleado);
 
-	/*@Override
-	public boolean validarContrasenia(,int indice,int estado) {
-		
+			return isEmpleado;
+		}
+		validarContrasenia(contrasenia,0,isUsuario);
+
+		return isUsuario;
 	}
 
 	@Override
-	public boolean buscarUsuarioNoRegistrado(String ID, int indice,int estado)  {
-		if(estado==1)
+	public void validarContrasenia(String contrasenia,int indice,Persona persona) throws ContraseñaIncorrectaException {
+		if(!contrasenia.equals(persona.getContrasenia()))
 		{
-			if(indice==listaUsuarios.size())
-			{
-				buscarUsuarioNoRegistrado(ID,indice=0,estado=2);
-			}
-			else
-			{
-				if(listaUsuarios.get(indice).getID().equals(ID))
-				{
+			throw new ContraseñaIncorrectaException();
+		}
+	}
 
-				}
-				else
-				{
-					return buscarUsuarioNoRegistrado(ID,indice+1,estado);
-				}
-			}
+	@Override
+	public Usuario buscarUsuario(String ID, int indice)  {
+		if(indice==listaUsuarios.size())
+		{
+			return null;
 		}
 		else
 		{
-			if(indice==listaEmpleados.size())
+			if(listaUsuarios.get(indice).getID().equals(ID))
 			{
-				return null;
+				return listaUsuarios.get(indice);
 			}
 			else
 			{
-				if(listaEmpleados.get(indice).getID().equals(ID))
-				{
-					return listaEmpleados.get(indice).getID();
-				}
-				else
-				{
-					return buscarUsuarioNoRegistrado(ID,indice+1,estado);
-				}
+					return buscarUsuario(ID,indice+1);
 			}
 		}
 	}
 
-	 */
+	@Override
+
+	public Empleado buscarEmpleado (String ID,int indice)  {
+		if(indice==listaEmpleados.size())
+		{
+			return null;
+		}
+		else
+		{
+			if(listaEmpleados.get(indice).getID().equals(ID))
+			{
+				return listaEmpleados.get(indice);
+			}
+			else
+			{
+				return buscarEmpleado(ID,indice+1);
+			}
+		}
+	}
 }

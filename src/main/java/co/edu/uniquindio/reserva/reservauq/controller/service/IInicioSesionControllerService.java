@@ -1,9 +1,10 @@
 package co.edu.uniquindio.reserva.reservauq.controller.service;
 
-import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
-import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
+import co.edu.uniquindio.reserva.reservauq.exceptions.CampoVacioException;
+import co.edu.uniquindio.reserva.reservauq.exceptions.ContraseñaIncorrectaException;
+import co.edu.uniquindio.reserva.reservauq.exceptions.UsuarioNoRegistradoException;
 
 public interface IInicioSesionControllerService {
 
-    public boolean inicioSesion(UsuarioDto usuarioDto, EmpleadoDto empleadoDto);
+    public Object inicioSesion(String ID, String contrasenia) throws UsuarioNoRegistradoException, CampoVacioException, ContraseñaIncorrectaException;
 }
