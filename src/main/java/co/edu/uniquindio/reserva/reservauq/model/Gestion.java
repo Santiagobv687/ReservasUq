@@ -1,7 +1,6 @@
 package co.edu.uniquindio.reserva.reservauq.model;
 
-import co.edu.uniquindio.reserva.reservauq.exceptions.CampoVacioException;
-import co.edu.uniquindio.reserva.reservauq.exceptions.EmpleadoException;
+import co.edu.uniquindio.reserva.reservauq.exceptions.*;
 import co.edu.uniquindio.reserva.reservauq.model.services.IGestionService;
 
 import java.util.ArrayList;
@@ -123,9 +122,12 @@ public class Gestion implements IGestionService {
 
 	@Override
 
-	public void registrarUsuario(String nobmre,String ID,) throws CampoVacioException {
-		validarCampoVacio(ID,"El usuario debe tener una ID");
-		validarCampoVacio();
+	public void registrarUsuario(Usuario usuario) throws CampoVacioException, UsuarioExistenteException {
+		validarCampoVacio(usuario.getNombre(),"Debe indicar su nombre de usuario");
+		validarCampoVacio(usuario.getID(),"El usuario debe tener una ID");
+		validarCampoVacio(usuario.getCorreo(),"Debe indicar su correo electronico");
+		validarCampoVacio(usuario.getContrasenia(),"Debe indicar su contraseña");
+		buscarYAgregarUsuario(usuario,0);
 	}
 
 	@Override
@@ -134,6 +136,98 @@ public class Gestion implements IGestionService {
 		if(cualquiera.isEmpty()||cualquiera==null)
 		{
 			throw new CampoVacioException(msg);
+		}
+	}
+
+	@Override
+
+	public void buscarYAgregarUsuario(Usuario usuario,int indice) throws UsuarioExistenteException {
+		if(indice==listaUsuarios.size())
+		{
+			agregarUsuario(usuario);
+		}
+		else
+		{
+			if(listaUsuarios.get(indice).getID().equals(usuario.getID()))
+			{
+					throw new UsuarioExistenteException();
+			}
+			else
+			{
+				buscarYAgregarUsuario(usuario,indice+1);
+			}
+		}
+	}
+
+	@Override
+
+	public void agregarUsuario(Usuario usuario) {
+		getListaClientes().add(usuario);
+	}
+
+	@Override
+
+	public boolean iniciarSesion(String ID,String contrasenia) throws CampoVacioException, ContraseñaIncorrectaException, UsuarioNoRegistradoException {
+		validarCampoVacio(ID,"El usuario debe tener una ID");
+		validarCampoVacio(contrasenia,"Debe indicar su contraseña");
+		String usuarioNoRegistrado=buscarUsuarioNoRegistrado(ID,0,1);
+
+
+		if(usuarioNoRegistrado==null)
+		{
+			throw new UsuarioNoRegistradoException();
+		}
+		else
+		{
+			if(validarContrasenia(contrasenia,0,1)==false)
+			{
+				throw new ContraseñaIncorrectaException();
+			}
+		}
+	}
+
+	@Override
+	public boolean validarContrasenia(,int indice,int estado) {
+		
+	}
+
+	@Override
+	public boolean buscarUsuarioNoRegistrado(String ID, int indice,int estado)  {
+		if(estado==1)
+		{
+			if(indice==listaUsuarios.size())
+			{
+				buscarUsuarioNoRegistrado(ID,indice=0,estado=2);
+			}
+			else
+			{
+				if(listaUsuarios.get(indice).getID().equals(ID))
+				{
+
+				}
+				else
+				{
+					return buscarUsuarioNoRegistrado(ID,indice+1,estado);
+				}
+			}
+		}
+		else
+		{
+			if(indice==listaEmpleados.size())
+			{
+				return null;
+			}
+			else
+			{
+				if(listaEmpleados.get(indice).getID().equals(ID))
+				{
+					return listaEmpleados.get(indice).getID();
+				}
+				else
+				{
+					return buscarUsuarioNoRegistrado(ID,indice+1,estado);
+				}
+			}
 		}
 	}
 }

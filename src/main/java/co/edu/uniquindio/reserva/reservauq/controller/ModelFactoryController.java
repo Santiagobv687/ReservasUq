@@ -1,13 +1,19 @@
 package co.edu.uniquindio.reserva.reservauq.controller;
 
+import co.edu.uniquindio.reserva.reservauq.exceptions.CampoVacioException;
+import co.edu.uniquindio.reserva.reservauq.exceptions.UsuarioExistenteException;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
+import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.mappers.BancoMapper;
 import co.edu.uniquindio.reserva.reservauq.controller.service.IModelFactoryService;
+import co.edu.uniquindio.reserva.reservauq.model.Reserva;
+import co.edu.uniquindio.reserva.reservauq.model.Usuario;
 import co.edu.uniquindio.reserva.reservauq.utils.BancoUtils;
 import co.edu.uniquindio.reserva.reservauq.exceptions.EmpleadoException;
 import co.edu.uniquindio.reserva.reservauq.model.Empleado;
 import co.edu.uniquindio.reserva.reservauq.model.Gestion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModelFactoryController implements IModelFactoryService {
@@ -85,4 +91,20 @@ public class ModelFactoryController implements IModelFactoryService {
             return false;
         }
     }
+
+    //Metodos usuarios
+
+    @Override
+     public List<UsuarioDto> obtenerUsuario() {
+        return mapper.getUsuariosDto(gestion.getListaClientes());
+    }
+
+    @Override
+    public void registraUsuario(UsuarioDto usuarioDto) throws UsuarioExistenteException, CampoVacioException {
+        Usuario usuario=mapper.usuarioDtoToUsuario(usuarioDto);
+        gestion.registrarUsuario(usuario);
+
+    }
+
+
 }

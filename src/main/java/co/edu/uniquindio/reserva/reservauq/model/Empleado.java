@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Empleado extends Persona {
     private ArrayList<Evento> listaEventos;
 
-    public Empleado(String ID, String nombre, String correo, ArrayList<Evento> listaEventos) {
-        super(ID, nombre, correo);
+    public Empleado(String ID, String nombre, String correo, ArrayList<Evento> listaEventos,String contrasenia) {
+        super(ID, nombre, correo,contrasenia);
         this.listaEventos.addAll(listaEventos);
     }
 
