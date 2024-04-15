@@ -1,9 +1,6 @@
 package co.edu.uniquindio.reserva.reservauq.utils;
 
-import co.edu.uniquindio.reserva.reservauq.model.Evento;
-import co.edu.uniquindio.reserva.reservauq.model.Gestion;
-import co.edu.uniquindio.reserva.reservauq.model.Empleado;
-import co.edu.uniquindio.reserva.reservauq.model.Reserva;
+import co.edu.uniquindio.reserva.reservauq.model.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,9 +14,11 @@ public class GestionUtils {
         Evento evento;
 
         Empleado empleado = new Empleado();
-        empleado.setNombre("juan");
+        empleado.setNombre("Santiago");
         empleado.setID("1234");
-        empleado.setCorreo("juanito@gmail.com");
+        empleado.setCorreo("santiagobv687@gmail.com");
+        empleado.setContrasenia("dante");
+        empleado.setRolEmpleado(RolEmpleado.ADMINISTRADOR);
         ArrayList<Evento> listaEventos1=new ArrayList<>();
         empleado.setListaEventos(listaEventos1);
         gestion.getListaEmpleados().add(empleado);
@@ -28,6 +27,8 @@ public class GestionUtils {
         empleado.setNombre("Ana");
         empleado.setID("4567");
         empleado.setCorreo("ana777@gmail.com");
+        empleado.setContrasenia("aeiou");
+        empleado.setRolEmpleado(RolEmpleado.EMPLEADO);
         ArrayList<Evento> listaEventos2=new ArrayList<>();
         empleado.setListaEventos(listaEventos2);
         gestion.getListaEmpleados().add(empleado);
@@ -36,6 +37,8 @@ public class GestionUtils {
         empleado.setNombre("Pedro");
         empleado.setID("789");
         empleado.setCorreo("pedroSanchez@hotmail.com");
+        empleado.setContrasenia("pedrox");
+        empleado.setRolEmpleado(RolEmpleado.EMPLEADO);
         ArrayList<Evento> listaEventos3=new ArrayList<>();
         empleado.setListaEventos(listaEventos3);
         gestion.getListaEmpleados().add(empleado);

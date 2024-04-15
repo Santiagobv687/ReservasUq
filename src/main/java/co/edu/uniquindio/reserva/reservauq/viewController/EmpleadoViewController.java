@@ -3,6 +3,7 @@ package co.edu.uniquindio.reserva.reservauq.viewController;
 import co.edu.uniquindio.reserva.reservauq.controller.EmpleadoController;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.reserva.reservauq.model.Evento;
+import co.edu.uniquindio.reserva.reservauq.model.RolEmpleado;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +30,9 @@ public class EmpleadoViewController {
     private Button btnEliminar;
 
     @FXML
+    private ComboBox<RolEmpleado> comboRol;
+
+    @FXML
     private TableView<EmpleadoDto> tableEmpleados;
 
     @FXML
@@ -39,6 +43,9 @@ public class EmpleadoViewController {
 
     @FXML
     private TableColumn<EmpleadoDto, String> tcID;
+
+    @FXML
+    private TableColumn<EmpleadoDto, String> tcRol;
 
     @FXML
     private TextField txtCorreo;
@@ -67,6 +74,8 @@ public class EmpleadoViewController {
         tcID.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().ID()));
         tcNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
         tcCorreo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().correo()));
+        tcRol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().rolEmpleado().toString()));
+        comboRol.getItems().addAll(RolEmpleado.values());
     }
 
     private void obtenerEmpleados() {
@@ -85,6 +94,7 @@ public class EmpleadoViewController {
             txtNombre.setText(empleadoSeleccionado.nombre());
             txtCorreo.setText(empleadoSeleccionado.correo());
             txtID.setText(empleadoSeleccionado.ID());
+            comboRol.setValue(empleadoSeleccionado.rolEmpleado());
         }
     }
 
@@ -170,7 +180,8 @@ public class EmpleadoViewController {
         return new EmpleadoDto(
                 txtID.getText(),
                 txtNombre.getText(),
-                txtCorreo.getText());
+                txtCorreo.getText(),
+                comboRol.getSelectionModel().getSelectedItem());
 
     }
 

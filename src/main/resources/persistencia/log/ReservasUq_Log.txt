@@ -10,3 +10,7 @@ abr. 15, 2024 8:23:44 A. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUt
 INFORMACIÓN: agregarEmpleado,No se ha agregado al empleado: El empleado con ID: 1234 ya existe,2024-04-15
 abr. 15, 2024 8:24:27 A. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
 ADVERTENCIA: eliminarEmpleado,Se ha eliminado al empleado: 4567,2024-04-15
+abr. 15, 2024 8:47:05 A. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: actualizarEmpleado,Se ha actualizado al empleado: 1234,2024-04-15
+abr. 15, 2024 8:47:13 A. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: actualizarEmpleado,Se ha actualizado al empleado: 789,2024-04-15
