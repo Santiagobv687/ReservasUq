@@ -78,10 +78,10 @@ public class Gestion implements IGestionService {
 	}
 
 	@Override
-	public Boolean eliminarEmpleado(String cedula) throws EmpleadoException {
+	public Boolean eliminarEmpleado(String ID) throws EmpleadoException {
 		Empleado empleado = null;
 		boolean flagExiste = false;
-		empleado = obtenerEmpleado(cedula);
+		empleado = obtenerEmpleado(ID);
 		if(empleado == null)
 			throw new EmpleadoException("El empleado a eliminar no existe");
 		else{

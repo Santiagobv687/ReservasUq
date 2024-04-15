@@ -113,6 +113,7 @@ public class EmpleadoViewController {
                 mostrarMensaje("Notificación empleado", "Empleado creado", "El empleado se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposEmpleado();
             }else{
+                tableEmpleados.refresh();
                 mostrarMensaje("Notificación empleado", "Empleado no creado", "No se ha podido crear al empleado. Revise los campos de información.", Alert.AlertType.ERROR);
             }
         }

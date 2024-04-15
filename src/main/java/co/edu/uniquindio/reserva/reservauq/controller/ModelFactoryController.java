@@ -8,6 +8,7 @@ import co.edu.uniquindio.reserva.reservauq.mapping.mappers.GestionMapper;
 import co.edu.uniquindio.reserva.reservauq.controller.service.IModelFactoryService;
 import co.edu.uniquindio.reserva.reservauq.model.*;
 import co.edu.uniquindio.reserva.reservauq.utils.GestionUtils;
+import co.edu.uniquindio.reserva.reservauq.utils.Persistencia;
 
 import java.util.List;
 
@@ -55,10 +56,12 @@ public class ModelFactoryController implements IModelFactoryService {
             if(!gestion.verificarEmpleadoExistente(empleadoDto.ID())) {
                 Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
                 getGestion().agregarEmpleado(empleado);
+                registrarAccionesSistema("Se ha agregado al empleado: "+empleadoDto.ID(), 1, "agregarEmpleado");
             }
             return true;
         }catch (EmpleadoException e){
-            e.getMessage();
+            registrarAccionesSistema("No se ha agregado al empleado: "+e.getMessage(), 2, "agregarEmpleado");
+
             return false;
         }
     }
@@ -68,9 +71,11 @@ public class ModelFactoryController implements IModelFactoryService {
         boolean flagExiste = false;
         try {
             flagExiste = getGestion().eliminarEmpleado(ID);
+            registrarAccionesSistema("Se ha eliminado al empleado: "+ID, 1, "eliminarEmpleado");
+
         } catch (EmpleadoException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            registrarAccionesSistema("No se ha agregado el empleado: "+e.getMessage(), 2, "agregarEmpleado");
+
         }
         return flagExiste;
     }
@@ -80,9 +85,11 @@ public class ModelFactoryController implements IModelFactoryService {
         try {
             Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
             getGestion().actualizarEmpleado(IDActual, empleado);
+            registrarAccionesSistema("Se ha actualizado al empleado: "+empleadoDto.ID(), 1, "actualizarEmpleado");
             return true;
         } catch (EmpleadoException e) {
-            e.printStackTrace();
+            registrarAccionesSistema("No se ha actualizado al empleado:"+e.getMessage(), 2, "agregarEmpleado");
+
             return false;
         }
     }
@@ -133,5 +140,9 @@ public class ModelFactoryController implements IModelFactoryService {
             e.getMessage();
             return false;
         }
+    }
+
+    public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
+        Persistencia.guardaRegistroLog(mensaje, nivel, accion);
     }
 }

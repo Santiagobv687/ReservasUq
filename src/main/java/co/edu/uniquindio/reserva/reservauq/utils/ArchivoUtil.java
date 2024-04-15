@@ -64,8 +64,7 @@ public  class ArchivoUtil {
     }
 
 
-    public static void guardarRegistroLog(String mensajeLog, int nivel, String accion, String rutaArchivo)
-    {
+    public static void guardarRegistroLog(String mensajeLog, int nivel, String accion, String rutaArchivo) {
         String log = "";
         Logger LOGGER = Logger.getLogger(accion);
         FileHandler fileHandler =  null;
@@ -154,8 +153,7 @@ public  class ArchivoUtil {
      */
 
     @SuppressWarnings("unchecked")
-    public static Object cargarRecursoSerializado(String rutaArchivo)throws Exception
-    {
+    public static Object cargarRecursoSerializado(String rutaArchivo)throws Exception {
         Object aux = null;
 //		Empresa empresa = null;
         ObjectInputStream ois = null;
@@ -174,7 +172,6 @@ public  class ArchivoUtil {
         return aux;
     }
 
-
     public static void salvarRecursoSerializado(String rutaArchivo, Object object)	throws Exception {
         ObjectOutputStream oos = null;
         try {
@@ -187,9 +184,6 @@ public  class ArchivoUtil {
                 oos.close();
         }
     }
-
-
-
 
     public static Object cargarRecursoSerializadoXML(String rutaArchivo) throws IOException {
 
@@ -212,9 +206,5 @@ public  class ArchivoUtil {
         codificadorXML.close();
 
     }
-
-
-
-
 
 }
