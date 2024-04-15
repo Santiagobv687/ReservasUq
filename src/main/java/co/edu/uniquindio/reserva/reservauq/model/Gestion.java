@@ -1,17 +1,13 @@
 package co.edu.uniquindio.reserva.reservauq.model;
-
 import co.edu.uniquindio.reserva.reservauq.exceptions.*;
 import co.edu.uniquindio.reserva.reservauq.model.services.IGestionService;
-
 import java.util.ArrayList;
-
 
 public class Gestion implements IGestionService {
 	ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 	ArrayList<Empleado> listaEmpleados = new ArrayList<>();
 	ArrayList<Reserva> listaReservas= new ArrayList<>();
 	ArrayList<Evento> listaEventos= new ArrayList<>();
-
 
 	public Gestion() {
 	}
@@ -32,7 +28,21 @@ public class Gestion implements IGestionService {
 		this.listaEmpleados = listaEmpleados;
 	}
 
+	public ArrayList<Reserva> getListaReservas() {
+		return listaReservas;
+	}
 
+	public void setListaReservas(ArrayList<Reserva> listaReservas) {
+		this.listaReservas = listaReservas;
+	}
+
+	public ArrayList<Evento> getListaEventos() {
+		return listaEventos;
+	}
+
+	public void setListaEventos(ArrayList<Evento> listaEventos) {
+		this.listaEventos = listaEventos;
+	}
 
 	@Override
 	public Empleado crearEmpleado(String ID, String nombre, String correo, ArrayList<Evento> listaEventos) throws EmpleadoException {
@@ -123,7 +133,6 @@ public class Gestion implements IGestionService {
 	//Metodos relacionados con los usuarios
 
 	@Override
-
 	public void registrarUsuario(Usuario usuario) throws CampoVacioException, UsuarioExistenteException {
 		validarCampoVacio(usuario.getNombre(),"Debe indicar su nombre de usuario");
 		validarCampoVacio(usuario.getID(),"El usuario debe tener una ID");
@@ -133,7 +142,6 @@ public class Gestion implements IGestionService {
 	}
 
 	@Override
-
 	public void validarCampoVacio(String cualquiera,String msg) throws CampoVacioException {
 		if(cualquiera.isEmpty()||cualquiera==null)
 		{
@@ -142,7 +150,6 @@ public class Gestion implements IGestionService {
 	}
 
 	@Override
-
 	public void buscarYAgregarUsuario(Usuario usuario,int indice) throws UsuarioExistenteException {
 		if(indice==listaUsuarios.size())
 		{
@@ -162,13 +169,11 @@ public class Gestion implements IGestionService {
 	}
 
 	@Override
-
 	public void agregarUsuario(Usuario usuario) {
 		getListaUsuarios().add(usuario);
 	}
 
 	@Override
-
 	public Object iniciarSesion(String ID,String contrasenia) throws CampoVacioException, ContraseñaIncorrectaException, UsuarioNoRegistradoException {
 		validarCampoVacio(ID,"El usuario debe tener una ID");
 		validarCampoVacio(contrasenia,"Debe indicar su contraseña");
@@ -218,7 +223,6 @@ public class Gestion implements IGestionService {
 	}
 
 	@Override
-
 	public Empleado buscarEmpleado (String ID,int indice)  {
 		if(indice==listaEmpleados.size())
 		{
@@ -235,5 +239,25 @@ public class Gestion implements IGestionService {
 				return buscarEmpleado(ID,indice+1);
 			}
 		}
+	}
+
+	public boolean verificarEventoExistente(String ID) throws EventoException {
+		boolean empleadoEncontrado = false;
+		for (Empleado empleado : getListaEmpleados()) {
+			if(empleado.getID().equalsIgnoreCase(ID)){
+				empleadoEncontrado = true;
+				break;
+			}
+		}
+		if(empleadoEncontrado){
+			throw new EventoException("El Evento con ID: "+ID+" ya existe");
+		}else{
+			return false;
+		}
+	}
+
+
+	public void agregarEvento(Evento nuevoEvento) throws EventoException {
+		listaEventos.add(nuevoEvento);
 	}
 }

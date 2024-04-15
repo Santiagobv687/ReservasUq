@@ -50,6 +50,7 @@ public class InicioSesionViewController {
     @FXML
     void iniciarSesionEvent(ActionEvent event) throws IOException {
         mostrarVentanaGestion();
+        /*
         String ID=txtID.getText();
         String contrasenia=txtContrasenia.getText();
         UsuarioDto usuarioIniciado;
@@ -60,39 +61,23 @@ public class InicioSesionViewController {
             if(queEs instanceof UsuarioDto)
             {
                 usuarioIniciado=(UsuarioDto) queEs;
-
-
             }
             else if(queEs instanceof EmpleadoDto)
             {
 
             }
+        }
+        catch (UsuarioNoRegistradoException | CampoVacioException | ContraseñaIncorrectaException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setTitle("Advertencia");
+            alert.setContentText(e.getMessage());
+            alert.show();
+        }
 
-        }
-        catch (UsuarioNoRegistradoException e)
-        {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText(null);
-            alert.setTitle("Advertencia");
-            alert.setContentText(e.getMessage());
-            alert.show();
-        }
-        catch (CampoVacioException e)
-        {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText(null);
-            alert.setTitle("Advertencia");
-            alert.setContentText(e.getMessage());
-            alert.show();
-        }
-        catch (ContraseñaIncorrectaException e)
-        {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText(null);
-            alert.setTitle("Advertencia");
-            alert.setContentText(e.getMessage());
-            alert.show();
-        }
+         */
+
     }
     public void mostrarVentanaGestion() throws IOException {
         try {

@@ -13,28 +13,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="622.0" prefWidth="768.0" style="-fx-background-color: #FFB923;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.reserva.reservauq.viewController.UsuarioViewController">
+<AnchorPane prefHeight="622.0" prefWidth="768.0" style="-fx-background-color: #FFB923;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.reserva.reservauq.viewController.EventoViewController">
    <children>
       <SplitPane dividerPositions="0.7000000000000001" layoutX="4.0" layoutY="10.0" orientation="VERTICAL" prefHeight="576.0" prefWidth="755.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="385.0" prefWidth="753.0" style="-fx-background-color: white;">
                <children>
-                  <Label layoutX="469.0" layoutY="267.0" prefHeight="17.0" prefWidth="67.0" text="Reservas:">
-                     <font>
-                        <Font name="Lucida Fax Demibold" size="12.0" />
-                     </font>
-                  </Label>
                   <Label layoutX="475.0" layoutY="68.0" text="Fecha:">
                      <font>
                         <Font name="Lucida Fax Demibold" size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnActualizar" layoutX="326.0" layoutY="341.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: #5FDBD7;" text="Actualizar" textFill="WHITE">
+                  <Button fx:id="btnActualizar" layoutX="326.0" layoutY="341.0" mnemonicParsing="false" onAction="#actualizarEvento" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: #5FDBD7;" text="Actualizar" textFill="WHITE">
                      <font>
                         <Font name="Lucida Fax Demibold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnAgregar" layoutX="111.0" layoutY="341.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: green;" text="Agregar" textFill="WHITE">
+                  <Button fx:id="btnAgregar" layoutX="111.0" layoutY="341.0" mnemonicParsing="false" onAction="#agregarEvento" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: green;" text="Agregar" textFill="WHITE">
                      <font>
                         <Font name="Lucida Fax Demibold" size="12.0" />
                      </font>
@@ -55,7 +50,6 @@
                         <Image url="@../../../../../Imagenes/LogoUQ.png" />
                      </image>
                   </ImageView>
-                  <ComboBox fx:id="comboEvento" layoutX="468.0" layoutY="294.0" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: #FFB923;" />
                   <DatePicker fx:id="txtFecha" layoutX="475.0" layoutY="92.0" prefHeight="25.0" prefWidth="228.0" />
                   <Label layoutX="470.0" layoutY="200.0" text="Empleado:">
                      <font>
@@ -63,7 +57,7 @@
                      </font>
                   </Label>
                   <ComboBox fx:id="comboEmpleado" layoutX="468.0" layoutY="227.0" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: #FFB923;" />
-                  <Button fx:id="btnEliminar" layoutX="553.0" layoutY="341.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: red;" text="Eliminar" textFill="WHITE">
+                  <Button fx:id="btnEliminar" layoutX="553.0" layoutY="341.0" mnemonicParsing="false" onAction="#eliminarEvento" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: red;" text="Eliminar" textFill="WHITE">
                      <font>
                         <Font name="Lucida Fax Demibold" size="12.0" />
                      </font>
@@ -73,33 +67,31 @@
                         <Font name="Bell MT Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtID1" layoutX="41.0" layoutY="165.0" prefHeight="25.0" prefWidth="304.0" />
+                  <TextField fx:id="txtNombre" layoutX="41.0" layoutY="165.0" prefHeight="25.0" prefWidth="304.0" />
                   <Label layoutX="45.0" layoutY="201.0" text="Descripción:">
                      <font>
                         <Font name="Bell MT Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtID11" layoutX="41.0" layoutY="229.0" prefHeight="47.0" prefWidth="304.0" />
+                  <TextField fx:id="txtDescripcion" layoutX="41.0" layoutY="229.0" prefHeight="47.0" prefWidth="304.0" />
                   <Label layoutX="474.0" layoutY="141.0" text="Capacidad:">
                      <font>
                         <Font name="Bell MT Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtID12" layoutX="475.0" layoutY="165.0" prefHeight="25.0" prefWidth="228.0" />
+                  <TextField fx:id="txtCapacidad" layoutX="475.0" layoutY="165.0" prefHeight="25.0" prefWidth="228.0" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="215.0" prefWidth="753.0">
                <children>
-                  <TableView fx:id="tablaUsuarios" layoutX="8.0" layoutY="32.0" prefHeight="104.0" prefWidth="736.0">
+                  <TableView fx:id="tablaEventos" layoutX="100.0" layoutY="32.0" prefHeight="104.0" prefWidth="573.0">
                      <columns>
                         <TableColumn fx:id="tcID" prefWidth="93.33331298828125" style="-fx-background-color: #FFB923;" text="ID" />
-                        <TableColumn fx:id="tcUsuario" prefWidth="98.6666259765625" style="-fx-background-color: #FFB923;" text="Nombre" />
-                        <TableColumn fx:id="tcEvento" prefWidth="121.33334350585938" style="-fx-background-color: #FFB923;" text="Descripción" />
+                        <TableColumn fx:id="tcNombre" prefWidth="98.6666259765625" style="-fx-background-color: #FFB923;" text="Nombre" />
+                        <TableColumn fx:id="tcDescripcion" prefWidth="121.33334350585938" style="-fx-background-color: #FFB923;" text="Descripción" />
                         <TableColumn fx:id="tcFecha" minWidth="0.0" prefWidth="77.3333740234375" style="-fx-background-color: #FFB923;" text="Fecha" />
-                        <TableColumn fx:id="tcEstado" minWidth="0.0" prefWidth="78.0" style="-fx-background-color: #FFB923;" text="Estado" />
-                        <TableColumn fx:id="tcFecha1" minWidth="0.0" prefWidth="91.3333740234375" style="-fx-background-color: #FFB923;" text="Capacidad" />
-                        <TableColumn fx:id="tcFecha2" minWidth="0.0" prefWidth="88.0" style="-fx-background-color: #FFB923;" text="Empleado" />
-                        <TableColumn fx:id="tcFecha21" minWidth="0.0" prefWidth="84.66668701171875" style="-fx-background-color: #FFB923;" text="Reservas" />
+                        <TableColumn fx:id="tcCapacidad" minWidth="0.0" prefWidth="91.3333740234375" style="-fx-background-color: #FFB923;" text="Capacidad" />
+                        <TableColumn fx:id="tcEmpleado" minWidth="0.0" prefWidth="88.0" style="-fx-background-color: #FFB923;" text="Empleado" />
                      </columns>
                   </TableView>
                </children>

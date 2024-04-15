@@ -2,16 +2,13 @@ package co.edu.uniquindio.reserva.reservauq.controller;
 
 import co.edu.uniquindio.reserva.reservauq.exceptions.*;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
+import co.edu.uniquindio.reserva.reservauq.mapping.dto.EventoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.mappers.GestionMapper;
 import co.edu.uniquindio.reserva.reservauq.controller.service.IModelFactoryService;
-import co.edu.uniquindio.reserva.reservauq.model.Reserva;
-import co.edu.uniquindio.reserva.reservauq.model.Usuario;
+import co.edu.uniquindio.reserva.reservauq.model.*;
 import co.edu.uniquindio.reserva.reservauq.utils.GestionUtils;
-import co.edu.uniquindio.reserva.reservauq.model.Empleado;
-import co.edu.uniquindio.reserva.reservauq.model.Gestion;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ModelFactoryController implements IModelFactoryService {
@@ -38,7 +35,7 @@ public class ModelFactoryController implements IModelFactoryService {
         gestion = GestionUtils.inicializarDatos();
     }
 
-    public Gestion getBanco() {
+    public Gestion getGestion() {
         return gestion;
     }
 
@@ -57,7 +54,7 @@ public class ModelFactoryController implements IModelFactoryService {
         try{
             if(!gestion.verificarEmpleadoExistente(empleadoDto.ID())) {
                 Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
-                getBanco().agregarEmpleado(empleado);
+                getGestion().agregarEmpleado(empleado);
             }
             return true;
         }catch (EmpleadoException e){
@@ -70,7 +67,7 @@ public class ModelFactoryController implements IModelFactoryService {
     public boolean eliminarEmpleado(String ID) {
         boolean flagExiste = false;
         try {
-            flagExiste = getBanco().eliminarEmpleado(ID);
+            flagExiste = getGestion().eliminarEmpleado(ID);
         } catch (EmpleadoException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -82,7 +79,7 @@ public class ModelFactoryController implements IModelFactoryService {
     public boolean actualizarEmpleado(String IDActual, EmpleadoDto empleadoDto) {
         try {
             Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
-            getBanco().actualizarEmpleado(IDActual, empleado);
+            getGestion().actualizarEmpleado(IDActual, empleado);
             return true;
         } catch (EmpleadoException e) {
             e.printStackTrace();
@@ -104,7 +101,6 @@ public class ModelFactoryController implements IModelFactoryService {
     }
 
     @Override
-
     public Object iniciarSesion(String ID,String contrasenia) throws UsuarioNoRegistradoException, CampoVacioException, ContraseñaIncorrectaException {
         Object queEs=gestion.iniciarSesion(ID,contrasenia);
         Usuario usuarioIniciado;
@@ -116,5 +112,26 @@ public class ModelFactoryController implements IModelFactoryService {
         }
         empleadoIniciado=(Empleado)queEs;
         return mapper.empleadoToEmpleadoDto(empleadoIniciado);
+    }
+
+    //Metodos Eventos
+    @Override
+    public List<EventoDto> obtenerEventos() {
+        return mapper.getEventosDto(gestion.getListaEventos());
+    }
+
+    @Override
+    public boolean agregarEvento(EventoDto eventoDto){
+        try{
+            if(!gestion.verificarEventoExistente(eventoDto.IDEvento())){
+                Evento evento= mapper.eventoDtoToEvento(eventoDto);
+                getGestion().agregarEvento(evento);
+            }
+            return true;
+        }
+         catch (EventoException e) {
+            e.getMessage();
+            return false;
+        }
     }
 }
