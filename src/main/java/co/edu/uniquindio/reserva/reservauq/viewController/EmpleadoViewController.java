@@ -107,24 +107,21 @@ public class EmpleadoViewController {
         //1. Capturar los datos
         EmpleadoDto empleadoDto = construirEmpleadoDto();
         //2. Validar la información
-        if(datosValidos(empleadoDto)){
+        if(esValido(empleadoDto)){
             if(empleadoControllerService.agregarEmpleado(empleadoDto)){
                 listaEmpleadosDto.add(empleadoDto);
                 mostrarMensaje("Notificación empleado", "Empleado creado", "El empleado se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposEmpleado();
             }else{
-                mostrarMensaje("Notificación empleado", "Empleado no creado", "El empleado no se ha creado con éxito", Alert.AlertType.ERROR);
+                mostrarMensaje("Notificación empleado", "Empleado no creado", "No se ha podido crear al empleado. Revise los campos de información.", Alert.AlertType.ERROR);
             }
-        }else{
-            mostrarMensaje("Notificación empleado", "Empleado no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
         }
-
     }
 
     private void eliminarEmpleado() {
         boolean empleadoEliminado = false;
         if(empleadoSeleccionado != null){
-            if(mostrarMensajeConfirmacion("¿Estas seguro de elmininar al empleado?")){
+            if(mostrarMensajeConfirmacion("¿Estas seguro de eliminar al empleado?")){
                 empleadoEliminado = empleadoControllerService.eliminarEmpleado(empleadoSeleccionado.ID());
                 if(empleadoEliminado == true){
                     listaEmpleadosDto.remove(empleadoSeleccionado);
@@ -144,31 +141,31 @@ public class EmpleadoViewController {
     private void actualizarEmpleado() {
         boolean clienteActualizado = false;
         //1. Capturar los datos
-        String IDActual = empleadoSeleccionado.ID();
-        EmpleadoDto empleadoDto = construirEmpleadoDto();
+
         //2. verificar el empleado seleccionado
         if(empleadoSeleccionado != null){
+            String IDActual = empleadoSeleccionado.ID();
+            EmpleadoDto empleadoDto = construirEmpleadoDto();
             //3. Validar la información
-            if(datosValidos(empleadoSeleccionado)){
+            if(esValido(empleadoDto)){
                 clienteActualizado = empleadoControllerService.actualizarEmpleado(IDActual,empleadoDto);
                 if(clienteActualizado){
                     listaEmpleadosDto.remove(empleadoSeleccionado);
                     listaEmpleadosDto.add(empleadoDto);
                     tableEmpleados.refresh();
-                    mostrarMensaje("Notificación empleado", "Empleado actualizado", "El empleado se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                    mostrarMensaje("Notificación", "Empleado actualizado", "El empleado se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
                     limpiarCamposEmpleado();
                 }else{
-                    mostrarMensaje("Notificación empleado", "Empleado no actualizado", "El empleado no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                    mostrarMensaje("Notificación", "Empleado no actualizado", "No se ha podido actualizar al empleado.", Alert.AlertType.INFORMATION);
                 }
-            }else{
-                mostrarMensaje("Notificación empleado", "Empleado no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
             }
-
+        }
+        else{
+            mostrarMensaje("Notificación empleado", "Empleado no seleccionado", "Seleccionado un empleado de la lista", Alert.AlertType.WARNING);
         }
     }
 
     private EmpleadoDto construirEmpleadoDto() {
-        ArrayList<Evento> listaEventos=new ArrayList<>();
         return new EmpleadoDto(
                 txtID.getText(),
                 txtNombre.getText(),
@@ -182,14 +179,14 @@ public class EmpleadoViewController {
         txtCorreo.setText("");
     }
 
-    private boolean datosValidos(EmpleadoDto empleadoDto) {
+    private boolean esValido(EmpleadoDto empleadoDto) {
         String mensaje = "";
         if(empleadoDto.nombre() == null || empleadoDto.nombre().equals(""))
-            mensaje += "El nombre es invalido \n" ;
+            mensaje += "Debe de completar el campo de Nombre \n" ;
         if(empleadoDto.ID() == null || empleadoDto.ID().equals(""))
-            mensaje += "El ID es invalido \n" ;
+            mensaje += "Debe completar el campo de ID\n" ;
         if(empleadoDto.correo() == null || empleadoDto.correo().equals(""))
-            mensaje += "El correo es invalido \n" ;
+            mensaje += "Debe completar el campo de correo \n" ;
         if(mensaje.equals("")){
             return true;
         }else{

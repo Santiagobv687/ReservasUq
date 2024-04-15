@@ -1,8 +1,6 @@
 package co.edu.uniquindio.reserva.reservauq.controller;
 
-import co.edu.uniquindio.reserva.reservauq.controller.service.IGestionControllerService;
-
-public class GestionController implements IGestionControllerService {
+public class GestionController {
 
     ModelFactoryController modelFactoryController;
 

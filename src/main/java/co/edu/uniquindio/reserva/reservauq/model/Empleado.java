@@ -5,8 +5,11 @@ import java.util.ArrayList;
 public class Empleado extends Persona {
     private ArrayList<Evento> listaEventos;
 
-    public Empleado(String ID, String nombre, String correo, ArrayList<Evento> listaEventos) {
-        super(ID, nombre, correo);
+    private RolEmpleado rolEmpleado;
+
+    public Empleado(String ID, String nombre, String correo, String contrasenia, RolEmpleado rolEmpleado, ArrayList<Evento> listaEventos) {
+        super(ID, nombre, correo, contrasenia);
+        this.rolEmpleado=rolEmpleado;
         this.listaEventos.addAll(listaEventos);
     }
 
@@ -20,5 +23,13 @@ public class Empleado extends Persona {
 
     public void setListaEventos(ArrayList<Evento> listaEventos) {
         this.listaEventos = listaEventos;
+    }
+
+    public RolEmpleado getRolEmpleado() {
+        return rolEmpleado;
+    }
+
+    public void setRolEmpleado(RolEmpleado rolEmpleado) {
+        this.rolEmpleado = rolEmpleado;
     }
 }

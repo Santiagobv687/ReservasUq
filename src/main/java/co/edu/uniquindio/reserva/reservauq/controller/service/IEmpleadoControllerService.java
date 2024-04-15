@@ -9,7 +9,7 @@ public interface IEmpleadoControllerService {
 
     boolean agregarEmpleado(EmpleadoDto empleadoDto);
 
-    boolean eliminarEmpleado(String cedula);
+    boolean eliminarEmpleado(String ID);
 
-    boolean actualizarEmpleado(String cedulaActual, EmpleadoDto empleadoDto);
+    boolean actualizarEmpleado(String IDActual, EmpleadoDto empleadoDto);
 }
