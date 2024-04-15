@@ -13,9 +13,11 @@ public class Persistencia {
 
 
     //bancoUq/src/main/resources/persistencia/archivoClientes.txt
-    public static final String RUTA_ARCHIVO_USUARIOS = "src/main/resources/persistencia/archivoUsuarios.txt";
-    public static final String RUTA_ARCHIVO_EMPLEADOS = "src/main/resources/persistencia/archivoEmpleados.txt";
-    public static final String RUTA_ARCHIVO_EVENTOS = "/src/main/resources/persistencia/archivoEventos.txt";
+    public static final String RUTA_ARCHIVO_USUARIOS = "src/main/resources/persistencia/archivos/archivoUsuarios.txt";
+    public static final String RUTA_ARCHIVO_EMPLEADOS = "src/main/resources/persistencia/archivos/archivoEmpleados.txt";
+    public static final String RUTA_ARCHIVO_EVENTOS = "/src/main/resources/persistencia/archivos/archivoEventos.txt";
+    public static final String RUTA_ARCHIVO_RESERVAS = "/src/main/resources/persistencia/archivos/archivoReservas.txt";
+
     public static final String RUTA_ARCHIVO_LOG = "src/main/resources/persistencia/log/ReservasUq_Log.txt";
     public static final String RUTA_ARCHIVO_MODELO_GESTION_BINARIO = "src/main/resources/persistencia/model.dat";
     public static final String RUTA_ARCHIVO_MODELO_GESTION_XML = "src/main/resources/persistencia/model.xml";
@@ -66,6 +68,7 @@ public class Persistencia {
             contenido+= empleado.getID()+
                     "@@"+empleado.getNombre()+
                     "@@"+empleado.getCorreo()+
+                    "@@"+empleado.getContrasenia()+
                     "@@"+empleado.getRolEmpleado().toString()+"\n";
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_EMPLEADOS, contenido, false);
@@ -115,10 +118,11 @@ public class Persistencia {
         {
             linea = contenido.get(i);
             Empleado empleado = new Empleado();
-            empleado.setID(linea.split(",")[0]);
-            empleado.setNombre(linea.split(",")[1]);
-            empleado.setCorreo(linea.split(",")[2]);
-            empleado.setRolEmpleado(RolEmpleado.valueOf(linea.split(",")[3]));
+            empleado.setID(linea.split("@@")[0]);
+            empleado.setNombre(linea.split("@@")[1]);
+            empleado.setCorreo(linea.split("@@")[2]);
+            empleado.setContrasenia(linea.split("@@")[3]);
+            empleado.setRolEmpleado(RolEmpleado.valueOf(linea.split("@@")[4]));
             empleados.add(empleado);
         }
         return empleados;
@@ -205,7 +209,7 @@ public class Persistencia {
     //------------------------------------SERIALIZACIÓN  y XML
 
 
-    public static Gestion cargarRecursoBancoBinario() {
+    public static Gestion cargarRecursoGestionBinario() {
 
         Gestion gestion = null;
 
@@ -218,7 +222,7 @@ public class Persistencia {
         return gestion;
     }
 
-    public static void guardarRecursoBancoBinario(Gestion gestion) {
+    public static void guardarRecursoGestionBinario(Gestion gestion) {
         try {
             ArchivoUtil.salvarRecursoSerializado(RUTA_ARCHIVO_MODELO_GESTION_BINARIO, gestion);
         } catch (Exception e) {
@@ -228,23 +232,23 @@ public class Persistencia {
     }
 
 
-    public static Gestion cargarRecursoBancoXML() {
+    public static Gestion cargarRecursoGestionXML() {
 
-        Gestion banco = null;
+        Gestion gestion = null;
 
         try {
-            banco = (Gestion)ArchivoUtil.cargarRecursoSerializadoXML(RUTA_ARCHIVO_MODELO_GESTION_XML);
+            gestion = (Gestion)ArchivoUtil.cargarRecursoSerializadoXML(RUTA_ARCHIVO_MODELO_GESTION_XML);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return banco;
+        return gestion;
 
     }
 
 
 
-    public static void guardarRecursoBancoXML(Gestion gestion) {
+    public static void guardarRecursoGestionXML(Gestion gestion) {
 
         try {
             ArchivoUtil.salvarRecursoSerializadoXML(RUTA_ARCHIVO_MODELO_GESTION_XML, gestion);

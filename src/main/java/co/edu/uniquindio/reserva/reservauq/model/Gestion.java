@@ -1,9 +1,13 @@
 package co.edu.uniquindio.reserva.reservauq.model;
 import co.edu.uniquindio.reserva.reservauq.exceptions.*;
 import co.edu.uniquindio.reserva.reservauq.model.services.IGestionService;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Gestion implements IGestionService {
+public class Gestion implements IGestionService, Serializable {
+
+	private static final long serialVersionUID=1L;
 	ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 	ArrayList<Empleado> listaEmpleados = new ArrayList<>();
 	ArrayList<Reserva> listaReservas= new ArrayList<>();
@@ -45,7 +49,7 @@ public class Gestion implements IGestionService {
 	}
 
 	@Override
-	public Empleado crearEmpleado(String ID, String nombre, String correo, ArrayList<Evento> listaEventos) throws EmpleadoException {
+	public Empleado crearEmpleado(String ID, String nombre, String correo, String contrasenia, ArrayList<Evento> listaEventos) throws EmpleadoException {
 		Empleado nuevoEmpleado = null;
 		boolean empleadoExiste = verificarEmpleadoExistente(ID);
 		if(empleadoExiste){
@@ -55,6 +59,7 @@ public class Gestion implements IGestionService {
 			nuevoEmpleado.setNombre(nombre);
 			nuevoEmpleado.setID(ID);
 			nuevoEmpleado.setCorreo(correo);
+			nuevoEmpleado.setContrasenia(contrasenia);
 			nuevoEmpleado.setListaEventos(listaEventos);
 		}
 		return nuevoEmpleado;

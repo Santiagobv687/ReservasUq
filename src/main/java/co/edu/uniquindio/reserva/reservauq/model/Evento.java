@@ -1,9 +1,12 @@
 package co.edu.uniquindio.reserva.reservauq.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Evento {
+public class Evento implements Serializable {
+
+    private static final long serialVersionUID=1L;
     private String IDEvento;
     private String nombreEvento;
     private String descripcion;
@@ -11,6 +14,10 @@ public class Evento {
     private int capacidadMax;
     private Empleado empleadoEncargado;
     private ArrayList<Reserva> listaReservas;
+
+    public Evento(){
+
+    }
 
     public String getIDEvento() {
         return IDEvento;

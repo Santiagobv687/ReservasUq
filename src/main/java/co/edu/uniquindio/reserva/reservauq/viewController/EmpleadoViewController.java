@@ -48,7 +48,13 @@ public class EmpleadoViewController {
     private TableColumn<EmpleadoDto, String> tcRol;
 
     @FXML
+    private TableColumn<EmpleadoDto, String> tcContrasenia;
+
+    @FXML
     private TextField txtCorreo;
+
+    @FXML
+    private TextField txtContrasenia;
 
     @FXML
     private TextField txtID;
@@ -75,6 +81,7 @@ public class EmpleadoViewController {
         tcNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
         tcCorreo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().correo()));
         tcRol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().rolEmpleado().toString()));
+        tcContrasenia.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().contrasenia()));
         comboRol.getItems().addAll(RolEmpleado.values());
     }
 
@@ -181,6 +188,7 @@ public class EmpleadoViewController {
                 txtID.getText(),
                 txtNombre.getText(),
                 txtCorreo.getText(),
+                txtContrasenia.getText(),
                 comboRol.getSelectionModel().getSelectedItem());
 
     }
@@ -199,6 +207,8 @@ public class EmpleadoViewController {
             mensaje += "Debe completar el campo de ID\n" ;
         if(empleadoDto.correo() == null || empleadoDto.correo().equals(""))
             mensaje += "Debe completar el campo de correo \n" ;
+        if(empleadoDto.contrasenia() == null || empleadoDto.contrasenia().equals(""))
+            mensaje += "Debe completar el campo de contraseña \n" ;
         if(mensaje.equals("")){
             return true;
         }else{

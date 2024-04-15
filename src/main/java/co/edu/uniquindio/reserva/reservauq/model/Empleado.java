@@ -1,8 +1,11 @@
 package co.edu.uniquindio.reserva.reservauq.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Empleado extends Persona {
+public class Empleado extends Persona implements Serializable {
+
+    private static final long serialVersionUID=1L;
     private ArrayList<Evento> listaEventos;
 
     private RolEmpleado rolEmpleado;
@@ -14,8 +17,10 @@ public class Empleado extends Persona {
     }
 
     public Empleado() {
-        super();
+
     }
+
+
 
     public ArrayList<Evento> getListaEventos() {
         return listaEventos;
