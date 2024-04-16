@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="622.0" prefWidth="768.0" style="-fx-background-color: #FFB923;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.reserva.reservauq.viewController.UsuarioViewController">
+   <children>
+      <SplitPane layoutX="4.0" layoutY="10.0" orientation="VERTICAL" prefHeight="576.0" prefWidth="755.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="447.0" prefWidth="735.0" style="-fx-background-color: white;">
+               <children>
+                  <Label layoutX="42.0" layoutY="72.0" prefHeight="30.0" prefWidth="173.0" text="Mis Reservas">
+                     <font>
+                        <Font name="MT Extra" size="23.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="143.0" fitWidth="151.0" layoutX="557.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../Imagenes/LogoUQ.png" />
+                     </image>
+                  </ImageView>
+                  <TableView fx:id="tablaUsuarios" layoutX="26.0" layoutY="184.0" prefHeight="206.0" prefWidth="665.0">
+                     <columns>
+                        <TableColumn fx:id="tcID" prefWidth="93.33331298828125" style="-fx-background-color: #FFB923;" text="ID" />
+                        <TableColumn fx:id="tcUsuario" prefWidth="133.99996948242188" style="-fx-background-color: #FFB923;" text="Usuario" />
+                        <TableColumn fx:id="tcEvento" prefWidth="172.66668701171875" style="-fx-background-color: #FFB923;" text="Evento" />
+                        <TableColumn fx:id="tcFecha" minWidth="0.0" prefWidth="148.6666259765625" style="-fx-background-color: #FFB923;" text="Fecha de Solicitud" />
+                        <TableColumn fx:id="tcEstado" prefWidth="115.3333740234375" style="-fx-background-color: #FFB923;" text="Estado" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
