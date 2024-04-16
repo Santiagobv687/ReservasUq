@@ -9,6 +9,7 @@ import co.edu.uniquindio.reserva.reservauq.exceptions.UsuarioNoRegistradoExcepti
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.reserva.reservauq.model.Empleado;
+import co.edu.uniquindio.reserva.reservauq.model.RolEmpleado;
 import co.edu.uniquindio.reserva.reservauq.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,6 +41,11 @@ public class InicioSesionViewController {
     @FXML
     private TextField txtID;
 
+    @FXML
+
+    void initialize() {
+        InicioSesionControllerService = new InicioSesionController();
+    }
 
 
     @FXML
@@ -49,8 +55,6 @@ public class InicioSesionViewController {
 
     @FXML
     void iniciarSesionEvent(ActionEvent event) throws IOException {
-        mostrarVentanaGestion();
-        /*
         String ID=txtID.getText();
         String contrasenia=txtContrasenia.getText();
         UsuarioDto usuarioIniciado;
@@ -64,7 +68,10 @@ public class InicioSesionViewController {
             }
             else if(queEs instanceof EmpleadoDto)
             {
-
+                if(((EmpleadoDto) queEs).rolEmpleado()== RolEmpleado.ADMINISTRADOR)
+                {
+                    mostrarVentanaGestion();
+                }
             }
         }
         catch (UsuarioNoRegistradoException | CampoVacioException | ContraseñaIncorrectaException e)
@@ -75,9 +82,6 @@ public class InicioSesionViewController {
             alert.setContentText(e.getMessage());
             alert.show();
         }
-
-         */
-
     }
     public void mostrarVentanaGestion() throws IOException {
         try {
