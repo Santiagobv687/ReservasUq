@@ -102,6 +102,7 @@ public class EmpleadoViewController {
             txtCorreo.setText(empleadoSeleccionado.correo());
             txtID.setText(empleadoSeleccionado.ID());
             comboRol.setValue(empleadoSeleccionado.rolEmpleado());
+            txtContrasenia.setText(empleadoSeleccionado.contrasenia());
         }
     }
 
@@ -197,6 +198,7 @@ public class EmpleadoViewController {
         txtID.setText("");
         txtNombre.setText("");
         txtCorreo.setText("");
+        txtContrasenia.setText("");
     }
 
     private boolean esValido(EmpleadoDto empleadoDto) {

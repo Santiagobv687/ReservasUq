@@ -42,3 +42,7 @@ abr. 15, 2024 1:09:24 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUt
 INFORMACIÓN: actualizarEmpleado,Se ha actualizado al empleado: 4567,2024-04-15
 abr. 15, 2024 1:09:39 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-04-15
+abr. 16, 2024 12:32:05 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-04-16
+abr. 16, 2024 12:32:15 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-04-16
