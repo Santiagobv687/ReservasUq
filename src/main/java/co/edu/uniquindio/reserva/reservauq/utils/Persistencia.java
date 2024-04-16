@@ -13,6 +13,8 @@ public class Persistencia {
 
 
     //bancoUq/src/main/resources/persistencia/archivoClientes.txt
+
+    public static final String RUTA_ARCHIVO_COPIA = "src/main/resources/persistencia/respaldo/";
     public static final String RUTA_ARCHIVO_USUARIOS = "src/main/resources/persistencia/archivos/archivoUsuarios.txt";
     public static final String RUTA_ARCHIVO_EMPLEADOS = "src/main/resources/persistencia/archivos/archivoEmpleados.txt";
     public static final String RUTA_ARCHIVO_EVENTOS = "/src/main/resources/persistencia/archivos/archivoEventos.txt";
@@ -252,6 +254,7 @@ public class Persistencia {
 
         try {
             ArchivoUtil.salvarRecursoSerializadoXML(RUTA_ARCHIVO_MODELO_GESTION_XML, gestion);
+            ArchivoUtil.crearCopiaXML(RUTA_ARCHIVO_MODELO_GESTION_XML, RUTA_ARCHIVO_COPIA);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -31,19 +31,19 @@ public class ModelFactoryController implements IModelFactoryService {
     public ModelFactoryController() {
         System.out.println("Invocación clase singleton");
         cargarDatosBase();
-        //salvarDatosPrueba();
+        salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
-		//cargarDatosDesdeArchivos();
+		cargarDatosDesdeArchivos();
 
         //3. Guardar y Cargar el recurso serializable binario
-        //guardarResourceBinario();
-        //cargarResourceBinario();
+        guardarResourceBinario();
+        cargarResourceBinario();
 
 
         //4. Guardar y Cargar el recurso serializable XML
-        //guardarResourceXML();
-        //cargarResourceXML();
+        guardarResourceXML();
+        cargarResourceXML();
 
         //Siempre se debe verificar si la raiz del recurso es null
 
@@ -77,7 +77,7 @@ public class ModelFactoryController implements IModelFactoryService {
                 Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
                 getGestion().agregarEmpleado(empleado);
                 registrarAccionesSistema("Se ha agregado al empleado: " + empleadoDto.ID(), 1, "agregarEmpleado");
-          //      guardarResourceXML();
+                guardarResourceXML();
             }
             return true;
         } catch (EmpleadoException e) {
@@ -93,7 +93,7 @@ public class ModelFactoryController implements IModelFactoryService {
         try {
             flagExiste = getGestion().eliminarEmpleado(ID);
             registrarAccionesSistema("Se ha eliminado al empleado: " + ID, 1, "eliminarEmpleado");
-            //guardarResourceXML();
+            guardarResourceXML();
         } catch (EmpleadoException e) {
             registrarAccionesSistema("No se ha agregado el empleado: " + e.getMessage(), 2, "agregarEmpleado");
 
@@ -107,7 +107,7 @@ public class ModelFactoryController implements IModelFactoryService {
             Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
             getGestion().actualizarEmpleado(IDActual, empleado);
             registrarAccionesSistema("Se ha actualizado al empleado: " + empleadoDto.ID(), 1, "actualizarEmpleado");
-            //guardarResourceXML();
+            guardarResourceXML();
             return true;
         } catch (EmpleadoException e) {
             registrarAccionesSistema("No se ha actualizado al empleado:" + e.getMessage(), 2, "agregarEmpleado");

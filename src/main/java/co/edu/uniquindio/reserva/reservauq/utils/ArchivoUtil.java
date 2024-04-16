@@ -11,8 +11,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -205,6 +211,56 @@ public  class ArchivoUtil {
         codificadorXML.writeObject(objeto);
         codificadorXML.close();
 
+    }
+
+    public static void crearCopiaXML(String rutaArchivo, String rutaCopia) {
+        if (rutaArchivo == null || rutaArchivo.isEmpty() || rutaCopia == null || rutaCopia.isEmpty()) {
+            throw new IllegalArgumentException("Las rutas no pueden ser nulas o vacías.");
+        }
+
+        Path rutaArchivoOriginal = Paths.get(rutaArchivo);
+        Path rutaCopiaDir = Paths.get(rutaCopia);
+
+        if (!Files.exists(rutaArchivoOriginal) || !Files.isRegularFile(rutaArchivoOriginal)) {
+            throw new IllegalArgumentException("El archivo original no existe o no es un archivo regular.");
+        }
+
+        if (!Files.exists(rutaCopiaDir)) {
+            try {
+                Files.createDirectory(rutaCopiaDir);
+            } catch (IOException e) {
+                System.err.println("Error al crear el directorio de copia: " + e.getMessage());
+                return;
+            }
+        }
+
+        // Obtener la fecha y hora actual
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy_HH_mm_ss");
+        String fechaHoraActual = dateFormat.format(new Date());
+
+        // Generar el nombre del archivo de copia
+        String nombreArchivoCopia = "model_" + fechaHoraActual + ".xml";
+
+        // Ruta del archivo de copia relativa a la rutaCopiaDir
+        Path rutaArchivoCopia = rutaCopiaDir.resolve(nombreArchivoCopia);
+
+        try {
+            // Crear el archivo de copia si no existe
+            if (!Files.exists(rutaArchivoCopia)) {
+                Files.createFile(rutaArchivoCopia);
+                System.out.println("Archivo de copia creado correctamente.");
+            }
+
+            // Copiar el contenido del archivo original al de copia si existe
+            if (Files.exists(rutaArchivoOriginal)) {
+                Files.copy(rutaArchivoOriginal, rutaArchivoCopia, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Archivo XML copiado exitosamente como " + nombreArchivoCopia);
+            } else {
+                System.err.println("El archivo original no existe. Se ha creado un archivo de copia vacío.");
+            }
+        } catch (IOException e) {
+            System.err.println("Error al copiar el archivo XML: " + e.getMessage());
+        }
     }
 
 }
