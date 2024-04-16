@@ -30,20 +30,20 @@ public class ModelFactoryController implements IModelFactoryService {
 
     public ModelFactoryController() {
         System.out.println("Invocación clase singleton");
-        cargarDatosBase();
-        salvarDatosPrueba();
+        //cargarDatosBase();
+        //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
 		cargarDatosDesdeArchivos();
 
         //3. Guardar y Cargar el recurso serializable binario
         guardarResourceBinario();
-        cargarResourceBinario();
+        //cargarResourceBinario();
 
 
         //4. Guardar y Cargar el recurso serializable XML
-        guardarResourceXML();
-        cargarResourceXML();
+        //guardarResourceXML();
+        //cargarResourceXML();
 
         //Siempre se debe verificar si la raiz del recurso es null
 

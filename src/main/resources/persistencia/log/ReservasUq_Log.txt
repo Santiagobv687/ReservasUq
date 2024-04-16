@@ -1,0 +1,4 @@
+abr. 16, 2024 4:53:26 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-04-16
+abr. 16, 2024 5:18:53 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-04-16
