@@ -138,11 +138,12 @@ public class Gestion implements IGestionService, Serializable {
 	//Metodos relacionados con los usuarios
 
 	@Override
-	public void registrarUsuario(Usuario usuario) throws CampoVacioException, UsuarioExistenteException {
+	public void registrarUsuario(Usuario usuario) throws CampoVacioException, UsuarioExistenteException, ContraseñaIncorrectaException {
 		validarCampoVacio(usuario.getNombre(),"Debe indicar su nombre de usuario");
 		validarCampoVacio(usuario.getID(),"El usuario debe tener una ID");
 		validarCampoVacio(usuario.getCorreo(),"Debe indicar su correo electronico");
 		validarCampoVacio(usuario.getContrasenia(),"Debe indicar su contraseña");
+		validarCaracteresContrasenia(usuario.getContrasenia(),0,false,false,false);
 		buscarYAgregarUsuario(usuario,0);
 	}
 
@@ -154,6 +155,56 @@ public class Gestion implements IGestionService, Serializable {
 		}
 	}
 
+	@Override
+	public void validarCaracteresContrasenia(String contrasenia,int indice,boolean yaVocal,boolean yaMayus,boolean yaCaracterEspecial) throws ContraseñaIncorrectaException {
+		if(indice==contrasenia.length())
+		{
+
+			if(!yaVocal||!yaCaracterEspecial||!yaMayus)
+			{
+				throw new ContraseñaIncorrectaException("La contraseña debe contener por lo menos un caracter en mayuscula, una vocal y un caracter especial");
+			}
+		}
+		else
+		{
+			if(!yaVocal && isVocal(contrasenia.charAt(indice)))
+			{
+				yaVocal=true;
+			}
+
+			if(!yaMayus && Character.isUpperCase(contrasenia.charAt(indice)))
+			{
+				yaMayus=true;
+			}
+
+			if(!yaCaracterEspecial && isCaracterEspecial(contrasenia.charAt(indice)))
+			{
+				yaCaracterEspecial=true;
+			}
+
+			validarCaracteresContrasenia(contrasenia,indice+1,yaVocal,yaMayus,yaCaracterEspecial);
+		}
+	}
+
+	@Override
+
+	public boolean isVocal ( char caracterContrasenia) {
+		if(caracterContrasenia=='a'||caracterContrasenia=='e'||caracterContrasenia=='i'||caracterContrasenia=='o'||caracterContrasenia=='u')
+		{
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+
+	public boolean isCaracterEspecial( char caracterContrasenia) {
+		if(caracterContrasenia>=126&&caracterContrasenia<=254)
+		{
+			return true;
+		}
+		return false;
+	}
 	@Override
 	public void buscarYAgregarUsuario(Usuario usuario,int indice) throws UsuarioExistenteException {
 		if(indice==listaUsuarios.size())
