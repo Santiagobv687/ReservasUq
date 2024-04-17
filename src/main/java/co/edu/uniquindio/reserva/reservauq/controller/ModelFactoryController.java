@@ -34,10 +34,10 @@ public class ModelFactoryController implements IModelFactoryService {
         //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
-		//cargarDatosDesdeArchivos();
+		cargarDatosDesdeArchivos();
 
         //3. Guardar y Cargar el recurso serializable binario
-        //guardarResourceBinario();
+        guardarResourceBinario();
         //cargarResourceBinario();
 
 
@@ -47,12 +47,10 @@ public class ModelFactoryController implements IModelFactoryService {
 
         //Siempre se debe verificar si la raiz del recurso es null
 
-        /*if (gestion == null) {
+        if (gestion == null) {
             cargarDatosBase();
             // guardarResourceXML();
         }
-
-         */
         registrarAccionesSistema("Inicio de la Aplicacion", 1, "inicioAplicacion");
     }
 
