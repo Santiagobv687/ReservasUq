@@ -3,6 +3,7 @@ package co.edu.uniquindio.reserva.reservauq.viewController;
 import co.edu.uniquindio.reserva.reservauq.controller.EmpleadoController;
 import co.edu.uniquindio.reserva.reservauq.controller.RegistroController;
 import co.edu.uniquindio.reserva.reservauq.exceptions.CampoVacioException;
+import co.edu.uniquindio.reserva.reservauq.exceptions.ContraseñaIncorrectaException;
 import co.edu.uniquindio.reserva.reservauq.exceptions.UsuarioExistenteException;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.reserva.reservauq.model.Reserva;
@@ -55,7 +56,7 @@ public class RegistroViewController {
             alert.setContentText("El usuario ha sido registrado con exito");
             alert.show();
         }
-        catch (UsuarioExistenteException |CampoVacioException e)
+        catch (UsuarioExistenteException | CampoVacioException | ContraseñaIncorrectaException e)
         {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText(null);

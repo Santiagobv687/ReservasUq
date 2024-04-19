@@ -65,6 +65,7 @@ public class InicioSesionViewController {
             if(queEs instanceof UsuarioDto)
             {
                 usuarioIniciado=(UsuarioDto) queEs;
+                mostrarVentanaUsuarios(usuarioIniciado);
             }
             else if(queEs instanceof EmpleadoDto)
             {
@@ -82,6 +83,14 @@ public class InicioSesionViewController {
             alert.setContentText(e.getMessage());
             alert.show();
         }
+        catch(NullPointerException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setTitle("Advertencia");
+            alert.setContentText("No se ha obtenido acceso a nuestra base de datos");
+            alert.show();
+        }
     }
     public void mostrarVentanaGestion() throws IOException {
         try {
@@ -94,6 +103,25 @@ public class InicioSesionViewController {
             nuevaStage.setTitle("Nueva Ventana");
             Scene nuevaScene = new Scene(nuevaVentana);
             nuevaStage.setScene(nuevaScene);
+
+            nuevaStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void mostrarVentanaUsuarios(UsuarioDto usuarioDto) throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(ReservaApplication.class.getResource("EditarUsuario.fxml"));
+            AnchorPane nuevaVentana = (AnchorPane) loader.load();
+
+            // Crear un nuevo stage para la nueva ventana
+            Stage nuevaStage = new Stage();
+            nuevaStage.setTitle("Nueva Ventana");
+            Scene nuevaScene = new Scene(nuevaVentana);
+            nuevaStage.setScene(nuevaScene);
+            EditarUsuarioViewController.usuarioIniciado=usuarioDto;
 
             nuevaStage.show();
         } catch (IOException e) {

@@ -2,6 +2,7 @@ package co.edu.uniquindio.reserva.reservauq.viewController;
 
 import co.edu.uniquindio.reserva.reservauq.ReservaApplication;
 import co.edu.uniquindio.reserva.reservauq.controller.InicioSesionController;
+import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.reserva.reservauq.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,7 @@ import java.io.IOException;
 
 public class EditarUsuarioViewController {
 
-    public static Usuario usuarioIniciado;
+    public static UsuarioDto usuarioIniciado;
 
     @FXML
     void initialize() {
@@ -26,23 +27,5 @@ public class EditarUsuarioViewController {
     @FXML
     private TextField txtNombre;
 
-
-    public void mostrarVentanaGestion() throws IOException {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(ReservaApplication.class.getResource("EditarUsuario.fxml"));
-            AnchorPane nuevaVentana = (AnchorPane) loader.load();
-
-            // Crear un nuevo stage para la nueva ventana
-            Stage nuevaStage = new Stage();
-            nuevaStage.setTitle("Nueva Ventana");
-            Scene nuevaScene = new Scene(nuevaVentana);
-            nuevaStage.setScene(nuevaScene);
-            
-            nuevaStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 }

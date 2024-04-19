@@ -189,7 +189,7 @@ public class Gestion implements IGestionService, Serializable {
 	@Override
 
 	public boolean isVocal ( char caracterContrasenia) {
-		if(caracterContrasenia=='a'||caracterContrasenia=='e'||caracterContrasenia=='i'||caracterContrasenia=='o'||caracterContrasenia=='u')
+		if(caracterContrasenia=='a'||caracterContrasenia=='e'||caracterContrasenia=='i'||caracterContrasenia=='o'||caracterContrasenia=='u'||caracterContrasenia=='A'||caracterContrasenia=='E'||caracterContrasenia=='I'||caracterContrasenia=='O'||caracterContrasenia=='U')
 		{
 			return true;
 		}
