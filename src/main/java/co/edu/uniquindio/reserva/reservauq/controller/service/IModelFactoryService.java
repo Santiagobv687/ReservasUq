@@ -24,7 +24,7 @@ public interface IModelFactoryService {
 
 	List<UsuarioDto> obtenerUsuario();
 
-	void registraUsuario(UsuarioDto usuarioDto) throws UsuarioExistenteException, CampoVacioException;
+	void registraUsuario(UsuarioDto usuarioDto) throws UsuarioExistenteException, CampoVacioException, ContraseñaIncorrectaException;
 
 	Object iniciarSesion(String ID,String contrasenia)  throws UsuarioNoRegistradoException, CampoVacioException, ContraseñaIncorrectaException;
 

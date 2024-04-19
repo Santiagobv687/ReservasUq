@@ -20,7 +20,7 @@ public interface IGestionService {
 	public Empleado obtenerEmpleado(String ID);
 	public ArrayList<Empleado> obtenerEmpleados();
 
-    void registrarUsuario(Usuario usuario) throws CampoVacioException, UsuarioExistenteException;
+    void registrarUsuario(Usuario usuario) throws CampoVacioException, UsuarioExistenteException, ContraseñaIncorrectaException;
 
     public void validarCampoVacio(String cualquiera, String msg) throws CampoVacioException;
 
@@ -36,6 +36,10 @@ public interface IGestionService {
 
 	public Empleado buscarEmpleado(String ID,int indice) throws UsuarioNoRegistradoException;
 
+	public void validarCaracteresContrasenia(String contrasenia,int indice,boolean yaVocal,boolean yaMayus,boolean yaCaracterEspecial) throws ContraseñaIncorrectaException;
 
+	public boolean isVocal(char caracterContrasenia);
+
+	public boolean isCaracterEspecial(char caracterContrasenia);
 	}
 

@@ -124,7 +124,7 @@ public class ModelFactoryController implements IModelFactoryService {
     }
 
     @Override
-    public void registraUsuario(UsuarioDto usuarioDto) throws UsuarioExistenteException, CampoVacioException {
+    public void registraUsuario(UsuarioDto usuarioDto) throws UsuarioExistenteException, CampoVacioException, ContraseñaIncorrectaException {
         Usuario usuario = mapper.usuarioDtoToUsuario(usuarioDto);
         gestion.registrarUsuario(usuario);
     }
