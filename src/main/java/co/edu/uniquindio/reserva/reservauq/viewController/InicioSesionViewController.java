@@ -18,14 +18,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+
 
 public class InicioSesionViewController {
-
     InicioSesionController InicioSesionControllerService;
 
 
@@ -42,9 +46,22 @@ public class InicioSesionViewController {
     private TextField txtID;
 
     @FXML
+    private Button btnOcultar;
+
+    @FXML
+    private PasswordField PassFieldcontrasenia;
+
+    @FXML
+    private Button btnVisible;
+
+    @FXML
 
     void initialize() {
         InicioSesionControllerService = new InicioSesionController();
+        txtContrasenia.setVisible(false);
+        btnOcultar.setVisible(false);
+        txtContrasenia.setText("");
+        PassFieldcontrasenia.setText("");
     }
 
 
@@ -56,7 +73,15 @@ public class InicioSesionViewController {
     @FXML
     void iniciarSesionEvent(ActionEvent event) throws IOException {
         String ID=txtID.getText();
-        String contrasenia=txtContrasenia.getText();
+        String contrasenia;
+        if(btnVisible.isVisible())
+        {
+            contrasenia=PassFieldcontrasenia.getText();
+        }
+        else
+        {
+            contrasenia=txtContrasenia.getText();
+        }
         UsuarioDto usuarioIniciado;
         EmpleadoDto empleadoIniciado;
         try
@@ -127,5 +152,21 @@ public class InicioSesionViewController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void Ocultar(ActionEvent actionEvent) {
+        txtContrasenia.setVisible(false);
+        PassFieldcontrasenia.setText(txtContrasenia.getText());
+        PassFieldcontrasenia.setVisible(true);
+        btnVisible.setVisible(true);
+        btnOcultar.setVisible(false);
+    }
+
+    public void Visbilizar(ActionEvent actionEvent) {
+        PassFieldcontrasenia.setVisible(false);
+        txtContrasenia.setText(PassFieldcontrasenia.getText());
+        txtContrasenia.setVisible(true);
+        btnOcultar.setVisible(true);
+        btnVisible.setVisible(false);
     }
 }

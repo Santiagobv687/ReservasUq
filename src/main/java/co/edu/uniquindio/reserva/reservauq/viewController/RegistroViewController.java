@@ -12,14 +12,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
 
 public class RegistroViewController {
-
     RegistroController registroControllerService;
-
 
     @FXML
     private Button btnRegistrarse;
@@ -37,15 +36,37 @@ public class RegistroViewController {
     private TextField txtNombre;
 
     @FXML
+    private Button btnVisibilizar;
+
+    @FXML
+    private Button btnOcultar;
+
+    @FXML
+    private PasswordField PassFieldcontrasenia;
+
+    @FXML
 
     void initialize() {
         registroControllerService = new RegistroController();
+        txtContraseña.setVisible(false);
+        btnOcultar.setVisible(false);
+        txtContraseña.setText("");
+        PassFieldcontrasenia.setText("");
     }
 
     @FXML
     void registrarseEvent(ActionEvent event)  {
         ArrayList<Reserva> listaReservas=new ArrayList<Reserva>();
-        UsuarioDto usuario=new UsuarioDto(txtID.getText(),txtNombre.getText(),txtCorreo.getText(),txtContraseña.getText(),listaReservas);
+        String contrasenia;
+        if(PassFieldcontrasenia.getText().equals(""))
+        {
+            contrasenia=txtContraseña.getText();
+        }
+        else
+        {
+            contrasenia=PassFieldcontrasenia.getText();
+        }
+        UsuarioDto usuario=new UsuarioDto(txtID.getText(),txtNombre.getText(),txtCorreo.getText(),contrasenia,listaReservas);
         try
         {
             registroControllerService.registrarUsuario(usuario);
@@ -66,4 +87,19 @@ public class RegistroViewController {
         }
     }
 
+    public void Visibilizar(ActionEvent actionEvent) {
+        PassFieldcontrasenia.setVisible(false);
+        txtContraseña.setText(PassFieldcontrasenia.getText());
+        txtContraseña.setVisible(true);
+        btnOcultar.setVisible(true);
+        btnVisibilizar.setVisible(false);
+    }
+
+    public void Ocultar(ActionEvent actionEvent) {
+        txtContraseña.setVisible(false);
+        PassFieldcontrasenia.setText(txtContraseña.getText());
+        PassFieldcontrasenia.setVisible(true);
+        btnVisibilizar.setVisible(true);
+        btnOcultar.setVisible(false);
+    }
 }

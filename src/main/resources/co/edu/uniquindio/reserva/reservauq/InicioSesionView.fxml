@@ -46,7 +46,22 @@
                   <Font name="Lucida Fax Regular" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="394.0" layoutY="265.0" mnemonicParsing="false" text="Button" />
+            <Button fx:id="btnOcultar" layoutX="60.0" layoutY="309.0" mnemonicParsing="false" onAction="#Ocultar" prefHeight="46.0" prefWidth="14.0">
+               <graphic>
+                  <ImageView fx:id="iconoOjo" fitHeight="38.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../Imagenes/OjoTachado.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <PasswordField fx:id="PassFieldcontrasenia" layoutX="56.0" layoutY="262.0" prefHeight="30.0" prefWidth="323.0" promptText="ingrese la contraseña" />
+            <Button fx:id="btnVisible" layoutX="60.0" layoutY="309.0" mnemonicParsing="false" onAction="#Visbilizar" prefHeight="46.0" prefWidth="14.0">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../Imagenes/Ojo.png" />
+                     </image></ImageView>
+               </graphic></Button>
          </children>
       </Pane>
    </children>
