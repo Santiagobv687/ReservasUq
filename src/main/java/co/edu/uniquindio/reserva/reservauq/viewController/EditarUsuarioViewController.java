@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class EditarUsuarioViewController {
 
-    public static UsuarioDto usuarioIniciado;
+    UsuarioDto usuarioIniciado;
 
     @FXML
     void initialize() {

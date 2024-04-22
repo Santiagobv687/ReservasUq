@@ -146,7 +146,6 @@ public class InicioSesionViewController {
             nuevaStage.setTitle("Nueva Ventana");
             Scene nuevaScene = new Scene(nuevaVentana);
             nuevaStage.setScene(nuevaScene);
-            EditarUsuarioViewController.usuarioIniciado=usuarioDto;
 
             nuevaStage.show();
         } catch (IOException e) {
