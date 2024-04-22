@@ -138,7 +138,7 @@ public class InicioSesionViewController {
     public void mostrarVentanaUsuarios(UsuarioDto usuarioDto) throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(ReservaApplication.class.getResource("EditarUsuario.fxml"));
+            loader.setLocation(ReservaApplication.class.getResource("EditarUsuarioView.fxml"));
             AnchorPane nuevaVentana = (AnchorPane) loader.load();
 
             // Crear un nuevo stage para la nueva ventana
@@ -147,6 +147,8 @@ public class InicioSesionViewController {
             Scene nuevaScene = new Scene(nuevaVentana);
             nuevaStage.setScene(nuevaScene);
 
+            EditarUsuarioViewController usuarioInicio=(EditarUsuarioViewController) loader.getController();
+            usuarioInicio.setearUsuario(usuarioDto);
             nuevaStage.show();
         } catch (IOException e) {
             e.printStackTrace();
