@@ -16,7 +16,7 @@ public class EventoController {
         return modelFactoryController.obtenerEventos();
     }
 
-    public boolean agregarEmpleado(EventoDto eventoDto) {
+    public boolean agregarEvento(EventoDto eventoDto) {
         return modelFactoryController.agregarEvento(eventoDto);
     }
 }

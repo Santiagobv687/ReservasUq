@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="622.0" prefWidth="768.0" style="-fx-background-color: #FFB923;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.reserva.reservauq.viewController.UsuarioViewController">
+<AnchorPane prefHeight="622.0" prefWidth="768.0" style="-fx-background-color: #FFB923;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.reserva.reservauq.viewController.ReservaViewController">
    <children>
       <SplitPane dividerPositions="0.6686046511627908" layoutX="4.0" layoutY="10.0" orientation="VERTICAL" prefHeight="576.0" prefWidth="755.0">
          <items>

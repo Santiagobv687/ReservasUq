@@ -43,7 +43,6 @@ public class EventoViewController {
     @FXML
     private TableColumn<EventoDto, String> tcEmpleado;
 
-
     @FXML
     private TableColumn<EventoDto, String> tcFecha;
 
@@ -127,7 +126,7 @@ public class EventoViewController {
     void agregarEvento(ActionEvent event) {
         EventoDto eventoDto=construirEventoDto();
         if(esValido(eventoDto)){
-            if(eventoControllerService.agregarEmpleado(eventoDto)){
+            if(eventoControllerService.agregarEvento(eventoDto)){
 
             }
         }

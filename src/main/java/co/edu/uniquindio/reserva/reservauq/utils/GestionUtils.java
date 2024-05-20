@@ -64,6 +64,34 @@ public class GestionUtils {
         evento.setListaReservas(listaReservas);
         gestion.getListaEventos().add(evento);
 
+
+        Usuario usuario;
+        usuario=new Usuario();
+        usuario.setID("68766");
+        usuario.setNombre("Julian");
+        usuario.setCorreo("julian@gmail.com");
+        usuario.setContrasenia("escarlata");
+        usuario.setListaReservas(listaReservas);
+        gestion.getListaUsuarios().add(usuario);
+
+        usuario=new Usuario();
+        usuario.setID("1111");
+        usuario.setNombre("Roman");
+        usuario.setCorreo("roman123@gmail.com");
+        usuario.setContrasenia("tribal");
+        usuario.setListaReservas(listaReservas);
+        gestion.getListaUsuarios().add(usuario);
+
+        usuario=new Usuario();
+        usuario.setID("5454");
+        usuario.setNombre("Cody");
+        usuario.setCorreo("cody43@gmail.com");
+        usuario.setContrasenia("holabuenas");
+        usuario.setListaReservas(listaReservas);
+        gestion.getListaUsuarios().add(usuario);
+
         return gestion;
+
+
     }
 }

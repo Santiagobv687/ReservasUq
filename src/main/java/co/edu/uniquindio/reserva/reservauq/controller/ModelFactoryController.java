@@ -30,14 +30,14 @@ public class ModelFactoryController implements IModelFactoryService {
 
     public ModelFactoryController() {
         System.out.println("Invocación clase singleton");
-        //cargarDatosBase();
+        cargarDatosBase();
         //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
-		cargarDatosDesdeArchivos();
+		//cargarDatosDesdeArchivos();
 
         //3. Guardar y Cargar el recurso serializable binario
-        guardarResourceBinario();
+        //guardarResourceBinario();
         //cargarResourceBinario();
 
 
@@ -123,6 +123,7 @@ public class ModelFactoryController implements IModelFactoryService {
         return mapper.getUsuariosDto(gestion.getListaUsuarios());
     }
 
+
     @Override
     public void registraUsuario(UsuarioDto usuarioDto) throws UsuarioExistenteException, CampoVacioException, ContraseñaIncorrectaException {
         Usuario usuario = mapper.usuarioDtoToUsuario(usuarioDto);
@@ -140,6 +141,49 @@ public class ModelFactoryController implements IModelFactoryService {
         }
         empleadoIniciado = (Empleado) queEs;
         return mapper.empleadoToEmpleadoDto(empleadoIniciado);
+    }
+
+    @Override
+    public boolean agregarUsuario(UsuarioDto usuarioDto) {
+        try {
+            if (!gestion.verificarUsuarioExistente(usuarioDto.ID())) {
+                Usuario usuario = mapper.usuarioDtoToUsuario(usuarioDto);
+                getGestion().agregarUsuario(usuario);
+                registrarAccionesSistema("Se ha agregado al usuario: " + usuarioDto.ID(), 1, "agregarUsuario");
+                guardarResourceXML();
+            }
+            return true;
+        } catch (UsuarioException e) {
+            registrarAccionesSistema("No se ha agregado al usuario: " + e.getMessage(), 2, "agregarUsuario");
+            return false;
+        }
+    }
+
+    @Override
+    public boolean eliminarUsuario(String ID) {
+        boolean flagExiste = false;
+        try {
+            flagExiste = getGestion().eliminarUsuario(ID);
+            registrarAccionesSistema("Se ha eliminado al usuario: " + ID, 1, "eliminarUsuario");
+            guardarResourceXML();
+        } catch (UsuarioException e) {
+            registrarAccionesSistema("No se ha agregado el usuario: " + e.getMessage(), 2, "agregarUsuario");
+        }
+        return flagExiste;
+    }
+
+    @Override
+    public boolean actualizarUsuario(String IDActual, UsuarioDto usuarioDto) {
+        try {
+            Usuario usuario = mapper.usuarioDtoToUsuario(usuarioDto);
+            getGestion().actualizarUsuario(IDActual, usuario);
+            registrarAccionesSistema("Se ha actualizado al usuario: " + usuarioDto.ID(), 1, "actualizarUsuario");
+            guardarResourceXML();
+            return true;
+        } catch (UsuarioException e) {
+            registrarAccionesSistema("No se ha actualizado al usuario:" + e.getMessage(), 2, "agregarUsuario");
+            return false;
+        }
     }
 
     //Metodos Eventos

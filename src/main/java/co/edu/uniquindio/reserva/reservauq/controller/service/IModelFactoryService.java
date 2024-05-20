@@ -1,9 +1,6 @@
 package co.edu.uniquindio.reserva.reservauq.controller.service;
 
-import co.edu.uniquindio.reserva.reservauq.exceptions.CampoVacioException;
-import co.edu.uniquindio.reserva.reservauq.exceptions.ContraseñaIncorrectaException;
-import co.edu.uniquindio.reserva.reservauq.exceptions.UsuarioExistenteException;
-import co.edu.uniquindio.reserva.reservauq.exceptions.UsuarioNoRegistradoException;
+import co.edu.uniquindio.reserva.reservauq.exceptions.*;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EventoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
@@ -28,7 +25,14 @@ public interface IModelFactoryService {
 
 	Object iniciarSesion(String ID,String contrasenia)  throws UsuarioNoRegistradoException, CampoVacioException, ContraseñaIncorrectaException;
 
+	boolean agregarUsuario(UsuarioDto usuarioDto) throws UsuarioException;
+
+	boolean eliminarUsuario(String ID) throws UsuarioException;
+
+	boolean actualizarUsuario(String IDActual, UsuarioDto usuarioDto) throws UsuarioException;
+
 	List<EventoDto> obtenerEventos();
 
 	boolean agregarEvento(EventoDto eventoDto);
+
 }

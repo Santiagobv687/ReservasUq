@@ -2,3 +2,37 @@ abr. 16, 2024 4:53:26 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUt
 INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-04-16
 abr. 16, 2024 5:18:53 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-04-16
+may. 20, 2024 2:35:40 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 2:42:59 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 2:48:35 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 2:56:48 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 3:00:53 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 3:02:14 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 3:08:32 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 3:13:10 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 3:14:19 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 3:14:57 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 4:01:53 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 4:03:39 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 4:05:02 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 4:11:53 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 4:18:43 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 4:22:42 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20
+may. 20, 2024 4:36:35 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-20

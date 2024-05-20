@@ -78,6 +78,9 @@ public class Gestion implements IGestionService, Serializable {
 			empleadoActual.setNombre(empleado.getNombre());
 			empleadoActual.setID(empleado.getID());
 			empleadoActual.setCorreo(empleado.getCorreo());
+			empleadoActual.setRolEmpleado(empleado.getRolEmpleado());
+			empleadoActual.setContrasenia(empleado.getContrasenia());
+			empleadoActual.setListaEventos(empleado.getListaEventos());
 			return true;
 		}
 	}
@@ -296,6 +299,67 @@ public class Gestion implements IGestionService, Serializable {
 			}
 		}
 	}
+
+	@Override
+	public boolean verificarUsuarioExistente(String ID) throws UsuarioException {
+		if(usuarioExiste(ID)){
+			throw new UsuarioException("El usuario con ID: " + ID + " ya existe");
+		} else {
+			return false;
+		}
+	}
+
+	public boolean usuarioExiste(String ID) {
+		boolean usuarioEncontrado = false;
+		for (Usuario usuario : getListaUsuarios()) {
+			if(usuario.getID().equalsIgnoreCase(ID)){
+				usuarioEncontrado = true;
+				break;
+			}
+		}
+		return usuarioEncontrado;
+	}
+
+	@Override
+	public boolean eliminarUsuario(String ID) throws UsuarioException {
+		Usuario usuario = null;
+		boolean flagExiste = false;
+		usuario = obtenerUsuario(ID);
+		if(usuario == null)
+			throw new UsuarioException("El usuario a eliminar no existe");
+		else {
+			getListaUsuarios().remove(usuario);
+			flagExiste = true;
+		}
+		return flagExiste;
+	}
+
+	@Override
+	public Usuario obtenerUsuario(String ID) {
+		Usuario usuarioEncontrado = null;
+		for (Usuario usuario : getListaUsuarios()) {
+			if(usuario.getID().equalsIgnoreCase(ID)){
+				usuarioEncontrado = usuario;
+				break;
+			}
+		}
+		return usuarioEncontrado;
+	}
+
+	@Override
+	public boolean actualizarUsuario(String IDActual, Usuario usuario) throws UsuarioException {
+		Usuario usuarioActual = obtenerUsuario(IDActual);
+		if(usuarioActual == null)
+			throw new UsuarioException("El usuario a actualizar no existe");
+		else {
+			usuarioActual.setNombre(usuario.getNombre());
+			usuarioActual.setID(usuario.getID());
+			usuarioActual.setCorreo(usuario.getCorreo());
+			return true;
+		}
+	}
+
+
 
 	public boolean verificarEventoExistente(String ID) throws EventoException {
 		boolean empleadoEncontrado = false;
