@@ -99,7 +99,7 @@ public class EventoViewController {
             return new SimpleStringProperty(fechaString);
         });
         tcCapacidad.setCellValueFactory(cellData -> new SimpleStringProperty(Integer.toString(cellData.getValue().capacidadMax())));
-        //tcEmpleado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombreEmpleado()));
+        tcEmpleado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().empleado().nombre()));
         ObservableList<String> nombresEmpleados = FXCollections.observableArrayList();
         for (EmpleadoDto empleado : listaEmpleadosDto) {
             nombresEmpleados.add(empleado.nombre());

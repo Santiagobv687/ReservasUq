@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static java.util.Calendar.APRIL;
+import static java.util.Calendar.JUNE;
 
 public class GestionUtils {
 
@@ -19,9 +20,41 @@ public class GestionUtils {
         empleado.setCorreo("santiagobv687@gmail.com");
         empleado.setContrasenia("dante");
         empleado.setRolEmpleado(RolEmpleado.ADMINISTRADOR);
-        ArrayList<Evento> listaEventos1=new ArrayList<>();
+        ArrayList<Evento> listaEventos1 = new ArrayList<>();
         empleado.setListaEventos(listaEventos1);
         gestion.getListaEmpleados().add(empleado);
+
+        ArrayList<Reserva> listaReservas = new ArrayList<>();
+        evento = new Evento();
+        evento.setIDEvento("111");
+        evento.setNombreEvento("Cumpleaños");
+        evento.setDescripcion("Celebra el cumpleaños de la forma que desees");
+        evento.setCapacidadMax(30);
+        evento.setEmpleadoEncargado(empleado);
+        evento.setFecha(LocalDate.of(2024, APRIL, 14));
+        evento.setListaReservas(listaReservas);
+        evento.setEmpleadoEncargado(empleado);
+        gestion.getListaEventos().add(evento);
+
+        Usuario usuario;
+        usuario = new Usuario();
+        usuario.setID("68766");
+        usuario.setNombre("Julian");
+        usuario.setCorreo("julian@gmail.com");
+        usuario.setContrasenia("escarlata");
+        usuario.setListaReservas(listaReservas);
+        gestion.getListaUsuarios().add(usuario);
+
+        Reserva reserva;
+        reserva=new Reserva();
+        reserva.setIDReserva("1");
+        reserva.setUsuario(usuario);
+        System.out.println(usuario.getNombre());
+        reserva.setEvento(evento);
+        System.out.println(evento.getNombreEvento());
+        reserva.setFechaSolicitud(LocalDate.of(2024, APRIL, 14));
+        reserva.setEstado(EstadoReserva.PENDIENTE);
+        gestion.getListaReservas().add(reserva);
 
         empleado = new Empleado();
         empleado.setNombre("Ana");
@@ -43,17 +76,6 @@ public class GestionUtils {
         empleado.setListaEventos(listaEventos3);
         gestion.getListaEmpleados().add(empleado);
 
-        ArrayList<Reserva> listaReservas=new ArrayList<>();
-        evento=new Evento();
-        evento.setIDEvento("111");
-        evento.setNombreEvento("Cumpleaños");
-        evento.setDescripcion("Celebra el cumpleaños de la forma que desees");
-        evento.setCapacidadMax(30);
-        evento.setEmpleadoEncargado(empleado);
-        evento.setFecha(LocalDate.of(2024, APRIL, 14));
-        evento.setListaReservas(listaReservas);
-        gestion.getListaEventos().add(evento);
-
         evento=new Evento();
         evento.setIDEvento("2222");
         evento.setNombreEvento("Graduacion");
@@ -62,17 +84,11 @@ public class GestionUtils {
         evento.setEmpleadoEncargado(empleado);
         evento.setFecha(LocalDate.of(2024, APRIL, 14));
         evento.setListaReservas(listaReservas);
+        evento.setEmpleadoEncargado(empleado);
         gestion.getListaEventos().add(evento);
 
 
-        Usuario usuario;
-        usuario=new Usuario();
-        usuario.setID("68766");
-        usuario.setNombre("Julian");
-        usuario.setCorreo("julian@gmail.com");
-        usuario.setContrasenia("escarlata");
-        usuario.setListaReservas(listaReservas);
-        gestion.getListaUsuarios().add(usuario);
+
 
         usuario=new Usuario();
         usuario.setID("1111");
@@ -81,6 +97,14 @@ public class GestionUtils {
         usuario.setContrasenia("tribal");
         usuario.setListaReservas(listaReservas);
         gestion.getListaUsuarios().add(usuario);
+
+        reserva=new Reserva();
+        reserva.setIDReserva("1");
+        reserva.setUsuario(usuario);
+        reserva.setEvento(evento);
+        reserva.setFechaSolicitud(LocalDate.of(2024, JUNE, 16));
+        reserva.setEstado(EstadoReserva.RECHAZADA);
+        gestion.getListaReservas().add(reserva);
 
         usuario=new Usuario();
         usuario.setID("5454");

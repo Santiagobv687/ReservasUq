@@ -348,14 +348,14 @@ public class Gestion implements IGestionService, Serializable {
 
 
 	public boolean verificarEventoExistente(String ID) throws EventoException {
-		boolean empleadoEncontrado = false;
-		for (Empleado empleado : getListaEmpleados()) {
-			if(empleado.getID().equalsIgnoreCase(ID)){
-				empleadoEncontrado = true;
+		boolean eventoEncontrado = false;
+		for (Evento evento : getListaEventos()) {
+			if(evento.getIDEvento().equalsIgnoreCase(ID)){
+				eventoEncontrado = true;
 				break;
 			}
 		}
-		if(empleadoEncontrado){
+		if(eventoEncontrado){
 			throw new EventoException("El Evento con ID: "+ID+" ya existe");
 		}else{
 			return false;
@@ -402,6 +402,65 @@ public class Gestion implements IGestionService, Serializable {
 			throw new EventoInexistenteException("El evento a eliminar no existe");
 		else {
 			getListaEventos().remove(evento);
+			flagExiste = true;
+		}
+		return flagExiste;
+	}
+
+	//Metodos de Reservas
+
+	public boolean verificarReservaExistente(String ID) throws ReservaException {
+		boolean reservaEncontrada = false;
+		for (Reserva reserva : getListaReservas()) {
+			if(reserva.getIDReserva().equalsIgnoreCase(ID)){
+				reservaEncontrada = true;
+				break;
+			}
+		}
+		if(reservaEncontrada){
+			throw new ReservaException("La Reserva con ID: " + ID + " ya existe");
+		} else {
+			return false;
+		}
+	}
+
+	public void agregarReserva(Reserva nuevaReserva) throws ReservaException {
+		listaReservas.add(nuevaReserva);
+	}
+
+	public boolean actualizarReserva(String IDActual, Reserva reserva) throws ReservaInexistenteException {
+		Reserva reservaActual = obtenerReserva(IDActual);
+		if (reservaActual == null) {
+			throw new ReservaInexistenteException("La reserva a actualizar no existe");
+		} else {
+			reservaActual.setIDReserva(reserva.getIDReserva());
+			reservaActual.setUsuario(reserva.getUsuario());
+			reservaActual.setEvento(reserva.getEvento());
+			reservaActual.setFechaSolicitud(reserva.getFechaSolicitud());
+			reservaActual.setEstado(reserva.getEstado());
+			return true;
+		}
+	}
+
+	public Reserva obtenerReserva(String IDReserva) {
+		Reserva reservaEncontrada = null;
+		for (Reserva reserva : getListaReservas()) {
+			if (reserva.getIDReserva().equalsIgnoreCase(IDReserva)) {
+				reservaEncontrada = reserva;
+				break;
+			}
+		}
+		return reservaEncontrada;
+	}
+
+	public boolean eliminarReserva(String ID) throws ReservaInexistenteException {
+		Reserva reserva = null;
+		boolean flagExiste = false;
+		reserva = obtenerReserva(ID);
+		if (reserva == null)
+			throw new ReservaInexistenteException("La reserva a eliminar no existe");
+		else {
+			getListaReservas().remove(reserva);
 			flagExiste = true;
 		}
 		return flagExiste;

@@ -3,6 +3,7 @@ package co.edu.uniquindio.reserva.reservauq.controller;
 import co.edu.uniquindio.reserva.reservauq.exceptions.*;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EventoDto;
+import co.edu.uniquindio.reserva.reservauq.mapping.dto.ReservaDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.mappers.GestionMapper;
 import co.edu.uniquindio.reserva.reservauq.controller.service.IModelFactoryService;
@@ -11,6 +12,7 @@ import co.edu.uniquindio.reserva.reservauq.utils.GestionUtils;
 import co.edu.uniquindio.reserva.reservauq.utils.Persistencia;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModelFactoryController implements IModelFactoryService {
@@ -64,7 +66,7 @@ public class ModelFactoryController implements IModelFactoryService {
         this.gestion = gestion;
     }
 
-
+    //Metodos Empleados
     @Override
     public List<EmpleadoDto> obtenerEmpleados() {
         return mapper.getEmpleadosDto(gestion.getListaEmpleados());
@@ -193,9 +195,30 @@ public class ModelFactoryController implements IModelFactoryService {
     //Metodos Eventos
     @Override
     public List<EventoDto> obtenerEventos() {
-        return mapper.getEventosDto(gestion.getListaEventos());
-    }
+        List<Evento> listaEventos = gestion.getListaEventos();
+        List<EventoDto> listaEventosDto = new ArrayList<>();
 
+        for (Evento evento : listaEventos) {
+            // Convertir usuario y evento a sus respectivos DTOs
+            EmpleadoDto empleadoDto= mapper.empleadoToEmpleadoDto(evento.getEmpleadoEncargado());
+
+            // Crear un nuevo ReservaDto con los DTOs convertidos
+            EventoDto eventoDto = new EventoDto(
+                    evento.getIDEvento(),
+                    evento.getNombreEvento(),
+                    evento.getDescripcion(),
+                    evento.getFecha(),
+                    evento.getCapacidadMax(),
+                    empleadoDto,
+                    evento.getListaReservas()
+            );
+
+            // Añadir a la lista de ReservaDto
+            listaEventosDto.add(eventoDto);
+        }
+
+        return listaEventosDto;
+    }
     @Override
     public boolean agregarEvento(EventoDto eventoDto) {
         try {
@@ -242,7 +265,87 @@ public class ModelFactoryController implements IModelFactoryService {
         return flagExiste;
     }
 
+    //Metodos de Reservas
 
+    @Override
+    public List<ReservaDto> obtenerReservas() {
+        List<Reserva> listaReservas = gestion.getListaReservas();
+        List<ReservaDto> listaReservasDto = new ArrayList<>();
+
+        for (Reserva reserva : listaReservas) {
+            // Convertir usuario y evento a sus respectivos DTOs
+            UsuarioDto usuarioDto = mapper.usuarioToUsuarioDto(reserva.getUsuario());
+            EventoDto eventoDto = mapper.eventoToEventoDto(reserva.getEvento());
+
+            // Crear un nuevo ReservaDto con los DTOs convertidos
+            ReservaDto reservaDto = new ReservaDto(
+                    reserva.getIDReserva(),
+                    usuarioDto,
+                    eventoDto,
+                    reserva.getFechaSolicitud(),
+                    reserva.getEstado()
+            );
+
+            // Añadir a la lista de ReservaDto
+            listaReservasDto.add(reservaDto);
+        }
+
+        return listaReservasDto;
+    }
+
+    @Override
+    public boolean agregarReserva(ReservaDto reservaDto) {
+        try {
+            if (!gestion.verificarReservaExistente(reservaDto.IDReserva())) {
+                Reserva reserva = mapper.reservaDtoToReserva(reservaDto);
+                Usuario usuario = mapper.usuarioDtoToUsuario(reservaDto.usuarioReserva());
+                Evento evento = mapper.eventoDtoToEvento(reservaDto.eventoReserva());
+                reserva.setUsuario(usuario);
+                reserva.setEvento(evento);
+                getGestion().agregarReserva(reserva);
+                registrarAccionesSistema("Se ha creado la reserva: " + reservaDto.IDReserva(), 1, "agregarReserva");
+            }
+            return true;
+        } catch (ReservaException e) {
+            registrarAccionesSistema("No se ha agregado la reserva: " + e.getMessage(), 2, "agregarReserva");
+            return false;
+        }
+    }
+
+    @Override
+    public boolean actualizarReserva(String IDActual, ReservaDto reservaDto) {
+        try {
+            Reserva reserva = mapper.reservaDtoToReserva(reservaDto);
+            Usuario usuario = mapper.usuarioDtoToUsuario(reservaDto.usuarioReserva());
+            Evento evento = mapper.eventoDtoToEvento(reservaDto.eventoReserva());
+            reserva.setUsuario(usuario);
+            reserva.setEvento(evento);
+            getGestion().actualizarReserva(IDActual, reserva);
+            registrarAccionesSistema("Se ha actualizado la reserva: " + reservaDto.IDReserva(), 1, "actualizarReserva");
+            //guardarResourceXML();
+            return true;
+        } catch (ReservaInexistenteException e) {
+            registrarAccionesSistema("No se ha actualizado la reserva: " + e.getMessage(), 2, "actualizarReserva");
+            return false;
+        }
+    }
+
+    @Override
+    public boolean eliminarReserva(String ID) {
+        boolean flagExiste = false;
+        try {
+            flagExiste = getGestion().eliminarReserva(ID);
+            registrarAccionesSistema("Se ha eliminado la reserva: " + ID, 1, "eliminarReserva");
+            //guardarResourceXML();
+        } catch (ReservaInexistenteException e) {
+            registrarAccionesSistema("No se ha eliminado la reserva: " + e.getMessage(), 2, "eliminarReserva");
+        }
+        return flagExiste;
+    }
+
+
+
+    //Metodos de flujo de archivos
     public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
         Persistencia.guardaRegistroLog(mensaje, nivel, accion);
     }
@@ -267,6 +370,7 @@ public class ModelFactoryController implements IModelFactoryService {
     private void cargarDatosBase() {
         gestion = GestionUtils.inicializarDatos();
     }
+
     private void cargarResourceXML() {
         gestion = Persistencia.cargarRecursoGestionXML();
     }
@@ -282,6 +386,5 @@ public class ModelFactoryController implements IModelFactoryService {
     private void guardarResourceBinario() {
         Persistencia.guardarRecursoGestionBinario(gestion);
     }
-
 
 }

@@ -115,7 +115,7 @@ public class UsuarioViewController {
 
     private void crearUsuario() {
         //1. Capturar los datos
-        UsuarioDto usuarioDto = construirUsuarioDto();
+        UsuarioDto usuarioDto = construirUsuarioDto(true);
         //2. Validar la información
         if(esValido(usuarioDto)){
             if(usuarioControllerService.agregarUsuario(usuarioDto)){
@@ -156,7 +156,7 @@ public class UsuarioViewController {
         //2. verificar el usuario seleccionado
         if(usuarioSeleccionado != null){
             String IDActual = usuarioSeleccionado.ID();
-            UsuarioDto usuarioDto = construirUsuarioDto();
+            UsuarioDto usuarioDto = construirUsuarioDto(false);
             //3. Validar la información
             if(esValido(usuarioDto)){
                 usuarioActualizado = usuarioControllerService.actualizarUsuario(IDActual,usuarioDto);
@@ -176,8 +176,14 @@ public class UsuarioViewController {
         }
     }
 
-    private UsuarioDto construirUsuarioDto() {
-        ArrayList<Reserva> listaReservas=new ArrayList<>();
+    private UsuarioDto construirUsuarioDto(boolean crear) {
+
+        ArrayList<Reserva> listaReservas;
+        if (crear) {
+            listaReservas = new ArrayList<Reserva>();
+        } else {
+            listaReservas = usuarioSeleccionado.listaReservas();
+        }
         return new UsuarioDto(
                 txtID.getText(),
                 txtNombre.getText(),

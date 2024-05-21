@@ -1,7 +1,284 @@
 package co.edu.uniquindio.reserva.reservauq.viewController;
 
+import co.edu.uniquindio.reserva.reservauq.controller.EventoController;
+import co.edu.uniquindio.reserva.reservauq.controller.ReservaController;
+import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
+import co.edu.uniquindio.reserva.reservauq.mapping.dto.EventoDto;
+import co.edu.uniquindio.reserva.reservauq.mapping.dto.ReservaDto;
+import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
+import co.edu.uniquindio.reserva.reservauq.model.EstadoReserva;
+import co.edu.uniquindio.reserva.reservauq.model.Evento;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Optional;
 
 public class ReservaViewController {
+
+    ReservaController reservaControllerService;
+    ObservableList<ReservaDto> listaReservasDto = FXCollections.observableArrayList();
+    ReservaDto reservaSeleccionada;
+    ArrayList<UsuarioDto> listaUsuariosDto=new ArrayList<>();
+    ArrayList<EventoDto> listaEventosDto=new ArrayList<>();
+
+    @FXML
+    private Button btnActualizar;
+
+    @FXML
+    private Button btnAgregar;
+
+    @FXML
+    private Button btnEliminar;
+
+    @FXML
+    private ComboBox<String> comboEstado;
+
+    @FXML
+    private ComboBox<String> comboEvento;
+
+    @FXML
+    private ComboBox<String> comboUsuario;
+
+    @FXML
+    private TableView<ReservaDto> tablaReservas;
+
+    @FXML
+    private TableColumn<ReservaDto, String> tcEstado;
+
+    @FXML
+    private TableColumn<ReservaDto, String> tcEvento;
+
+    @FXML
+    private TableColumn<ReservaDto, String> tcFecha;
+
+    @FXML
+    private TableColumn<ReservaDto, String> tcID;
+
+    @FXML
+    private TableColumn<ReservaDto, String> tcUsuario;
+
+    @FXML
+    private DatePicker txtFecha;
+
+    @FXML
+    private TextField txtID;
+
+
+    @FXML
+    void initialize() {
+        reservaControllerService = new ReservaController();
+        initView();
+    }
+
+    private void initView() {
+        obtenerReservas();
+        System.out.println("Datos en listaReservasDto: " + listaReservasDto);
+        initDataBinding();
+
+        tablaReservas.getItems().clear();
+        tablaReservas.setItems(listaReservasDto);
+        listenerSelection();
+    }
+
+    private void initDataBinding() {
+        tcID.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().IDReserva()));
+        tcEvento.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().eventoReserva().nombreEvento()));
+        tcUsuario.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().usuarioReserva().nombre()));
+        tcEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().estado().toString()));
+        tcFecha.setCellValueFactory(cellData -> {
+            LocalDate fecha = cellData.getValue().fechaSolicitud();
+            String fechaString = fecha != null ? fecha.toString() : "";
+            return new SimpleStringProperty(fechaString);
+        });
+
+        ObservableList<String> nombresEventos = FXCollections.observableArrayList();
+        ObservableList<String> nombresUsuarios = FXCollections.observableArrayList();
+        ObservableList<String> estadosReserva = FXCollections.observableArrayList(EstadoReserva.APROBADA.toString(), EstadoReserva.PENDIENTE.toString(), EstadoReserva.RECHAZADA.toString());
+
+        for (EventoDto evento : listaEventosDto) {
+            nombresEventos.add(evento.nombreEvento());
+        }
+        for (UsuarioDto usuario : listaUsuariosDto) {
+            nombresUsuarios.add(usuario.nombre());
+        }
+
+        comboEvento.setItems(nombresEventos);
+        comboUsuario.setItems(nombresUsuarios);
+        comboEstado.setItems(estadosReserva);
+    }
+
+    private void obtenerReservas() {
+        listaReservasDto.addAll(reservaControllerService.obtenerReservas());
+        listaEventosDto.addAll(reservaControllerService.obtenerEventos());
+        listaUsuariosDto.addAll(reservaControllerService.obtenerUsuarios());
+    }
+
+    private void listenerSelection() {
+        tablaReservas.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            reservaSeleccionada = newSelection;
+            mostrarInformacionReserva(reservaSeleccionada);
+        });
+    }
+
+    private void mostrarInformacionReserva(ReservaDto reservaSeleccionada) {
+        if (reservaSeleccionada != null) {
+            txtID.setText(reservaSeleccionada.IDReserva());
+            txtFecha.setValue(reservaSeleccionada.fechaSolicitud());
+            comboEvento.setValue(reservaSeleccionada.eventoReserva().nombreEvento());
+            comboUsuario.setValue(reservaSeleccionada.usuarioReserva().nombre());
+            comboEstado.setValue(reservaSeleccionada.estado().toString());
+        }
+    }
+
+    @FXML
+    void actualizarReserva(ActionEvent event) {
+        boolean reservaActualizada = false;
+
+        // 1. Verificar la reserva seleccionada
+        if (reservaSeleccionada != null) {
+            String IDActual = reservaSeleccionada.IDReserva();
+            ReservaDto reservaDto = construirReservaDto(false);
+
+            // 2. Validar la información
+            if (esValido(reservaDto)) {
+                reservaActualizada = reservaControllerService.actualizarReserva(IDActual, reservaDto);
+
+                if (reservaActualizada) {
+                    listaReservasDto.remove(reservaSeleccionada);
+                    listaReservasDto.add(reservaDto);
+                    tablaReservas.refresh();
+                    tablaReservas.getSelectionModel().clearSelection();
+                    mostrarMensaje("Notificación", "Reserva actualizada", "La reserva se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
+                    limpiarCamposReserva();
+                } else {
+                    mostrarMensaje("Notificación", "Reserva no actualizada", "No se ha podido actualizar la reserva.", Alert.AlertType.INFORMATION);
+                }
+            }
+        } else {
+            mostrarMensaje("Notificación reserva", "Reserva no seleccionada", "Seleccione una reserva de la lista", Alert.AlertType.WARNING);
+        }
+    }
+
+    @FXML
+    void agregarReserva(ActionEvent event) {
+        ReservaDto reservaDto = construirReservaDto(true);
+        if (esValido(reservaDto)) {
+            if (reservaControllerService.agregarReserva(reservaDto)) {
+                listaReservasDto.add(reservaDto);
+                mostrarMensaje("Notificación Reserva", "Reserva Creada", "La reserva se ha creado con éxito", Alert.AlertType.INFORMATION);
+                limpiarCamposReserva();
+            }
+        }
+    }
+
+    @FXML
+    void eliminarReserva(ActionEvent event) {
+        boolean reservaEliminada = false;
+        if (reservaSeleccionada != null) {
+            if (mostrarMensajeConfirmacion("¿Estás seguro de eliminar la reserva?")) {
+                reservaEliminada = reservaControllerService.eliminarReserva(reservaSeleccionada.IDReserva());
+                if (reservaEliminada) {
+                    listaReservasDto.remove(reservaSeleccionada);
+                    reservaSeleccionada = null;
+                    tablaReservas.getSelectionModel().clearSelection();
+                    limpiarCamposReserva();
+                    mostrarMensaje("Notificación reserva", "Reserva eliminada", "La reserva se ha eliminado con éxito", Alert.AlertType.INFORMATION);
+                } else {
+                    mostrarMensaje("Notificación reserva", "Reserva no eliminada", "La reserva no se puede eliminar", Alert.AlertType.ERROR);
+                }
+            }
+        } else {
+            mostrarMensaje("Notificación reserva", "Reserva no seleccionada", "Seleccione una reserva de la lista", Alert.AlertType.WARNING);
+        }
+    }
+
+    private void limpiarCamposReserva() {
+        txtID.setText("");
+        comboEstado.setValue(null);
+        txtFecha.setValue(null);
+        comboEvento.setValue(null);
+        comboUsuario.setValue(null);
+    }
+
+    public ReservaDto construirReservaDto(boolean crearNuevo) {
+        String nombreEvento = comboEvento.getSelectionModel().getSelectedItem();
+        String nombreUsuario = comboUsuario.getSelectionModel().getSelectedItem();
+        String estadoReserva = comboEstado.getSelectionModel().getSelectedItem();
+
+        EventoDto eventoSeleccionado = null;
+        UsuarioDto usuarioSeleccionado = null;
+
+        for (EventoDto evento : listaEventosDto) {
+            if (evento.nombreEvento().equals(nombreEvento)) {
+                eventoSeleccionado = evento;
+                break;
+            }
+        }
+        for (UsuarioDto usuario : listaUsuariosDto) {
+            if (usuario.nombre().equals(nombreUsuario)) {
+                usuarioSeleccionado = usuario;
+                break;
+            }
+        }
+
+        EstadoReserva estado = EstadoReserva.valueOf(estadoReserva.toUpperCase());
+
+        return new ReservaDto(
+                txtID.getText(),
+                usuarioSeleccionado,
+                eventoSeleccionado,
+                txtFecha.getValue(),
+                estado
+        );
+    }
+
+
+    private boolean esValido(ReservaDto reservaDto) {
+        String mensaje = "";
+        if (reservaDto.IDReserva() == null || reservaDto.IDReserva().isEmpty())
+            mensaje += "Debe completar el campo de ID\n";
+        if (reservaDto.eventoReserva().nombreEvento() == null || reservaDto.eventoReserva().nombreEvento().isEmpty())
+            mensaje += "Debe completar el campo de Evento\n";
+        if (reservaDto.usuarioReserva().nombre() == null || reservaDto.usuarioReserva().nombre().isEmpty())
+            mensaje += "Debe completar el campo de Usuario\n";
+        if (reservaDto.estado() == null)
+            mensaje += "Debe completar el campo de Estado\n";
+        if (reservaDto.fechaSolicitud() == null)
+            mensaje += "Debe completar el campo de Fecha\n";
+
+        if (mensaje.isEmpty()) {
+            return true;
+        } else {
+            mostrarMensaje("Notificación Reserva", "Datos inválidos", mensaje, Alert.AlertType.WARNING);
+            return false;
+        }
+    }
+
+    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
+        Alert aler = new Alert(alertType);
+        aler.setTitle(titulo);
+        aler.setHeaderText(header);
+        aler.setContentText(contenido);
+        aler.showAndWait();
+    }
+
+    private boolean mostrarMensajeConfirmacion(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Confirmación");
+        alert.setContentText(mensaje);
+        Optional<ButtonType> action = alert.showAndWait();
+        if (action.get() == ButtonType.OK) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
