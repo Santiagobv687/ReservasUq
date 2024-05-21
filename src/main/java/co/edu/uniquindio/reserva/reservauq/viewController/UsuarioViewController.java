@@ -54,11 +54,12 @@ public class UsuarioViewController {
     @FXML
     private TextField txtNombre;
 
-
+    private EventNotifier notifier;
 
     @FXML
     void initialize() {
         usuarioControllerService = new UsuarioController();
+        notifier = EventNotifier.getInstance(); // Obtener la instancia del notifier
         initView();
     }
 
@@ -120,6 +121,7 @@ public class UsuarioViewController {
         if(esValido(usuarioDto)){
             if(usuarioControllerService.agregarUsuario(usuarioDto)){
                 listaUsuariosDto.add(usuarioDto);
+                notifier.notify("usuarioAgregado", null, usuarioDto); // Notificar que se ha agregado un usuario
                 mostrarMensaje("Notificación usuario", "Usuario creado", "El usuario se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposUsuario();
             }else{
@@ -136,6 +138,7 @@ public class UsuarioViewController {
                 usuarioEliminado = usuarioControllerService.eliminarUsuario(usuarioSeleccionado.ID());
                 if(usuarioEliminado == true){
                     listaUsuariosDto.remove(usuarioSeleccionado);
+                    notifier.notify("usuarioEliminado", usuarioSeleccionado, null); // Notificar que se ha eliminado un usuario
                     usuarioSeleccionado = null;
                     tablaUsuarios.getSelectionModel().clearSelection();
                     limpiarCamposUsuario();
@@ -163,6 +166,7 @@ public class UsuarioViewController {
                 if(usuarioActualizado){
                     listaUsuariosDto.remove(usuarioSeleccionado);
                     listaUsuariosDto.add(usuarioDto);
+                    notifier.notify("usuarioActualizado", usuarioSeleccionado, usuarioDto);
                     tablaUsuarios.refresh();
                     mostrarMensaje("Notificación", "Usuario actualizado", "El usuario se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
                     limpiarCamposUsuario();

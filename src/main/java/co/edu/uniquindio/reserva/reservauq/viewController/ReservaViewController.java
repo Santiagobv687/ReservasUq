@@ -69,22 +69,55 @@ public class ReservaViewController {
     @FXML
     private TextField txtID;
 
+    private EventNotifier notifier;
+
 
     @FXML
     void initialize() {
         reservaControllerService = new ReservaController();
+        notifier = EventNotifier.getInstance(); // Obtener la instancia del notifier
         initView();
+        setupEventListeners(); // Configurar los listeners de eventos
     }
 
     private void initView() {
         obtenerReservas();
-        System.out.println("Datos en listaReservasDto: " + listaReservasDto);
         initDataBinding();
-
         tablaReservas.getItems().clear();
         tablaReservas.setItems(listaReservasDto);
         listenerSelection();
     }
+
+    private void setupEventListeners() {
+        notifier.addPropertyChangeListener(event -> {
+            if ("usuarioAgregado".equals(event.getPropertyName()) || "usuarioEliminado".equals(event.getPropertyName())
+                    || "usuarioActualizado".equals(event.getPropertyName()) || "eventoAgregado".equals(event.getPropertyName())
+                || "eventoEliminado".equals(event.getPropertyName()) || "eventoActualizado".equals(event.getPropertyName())) {
+                actualizar();
+            }
+        });
+    }
+
+    private void actualizar(){
+        comboUsuario.getItems().clear();
+        comboEvento.getItems().clear();
+        obtenerReservas();
+        tablaReservas.refresh();
+
+        ObservableList<String> nombresEventos = FXCollections.observableArrayList();
+        ObservableList<String> nombresUsuarios = FXCollections.observableArrayList();
+
+        for (EventoDto evento : listaEventosDto) {
+            nombresEventos.add(evento.nombreEvento());
+        }
+        for (UsuarioDto usuario : listaUsuariosDto) {
+            nombresUsuarios.add(usuario.nombre());
+        }
+
+        comboEvento.setItems(nombresEventos);
+        comboUsuario.setItems(nombresUsuarios);
+    }
+
 
     private void initDataBinding() {
         tcID.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().IDReserva()));
@@ -114,6 +147,9 @@ public class ReservaViewController {
     }
 
     private void obtenerReservas() {
+        listaReservasDto.clear();
+        listaEventosDto.clear();
+        listaUsuariosDto.clear();
         listaReservasDto.addAll(reservaControllerService.obtenerReservas());
         listaEventosDto.addAll(reservaControllerService.obtenerEventos());
         listaUsuariosDto.addAll(reservaControllerService.obtenerUsuarios());

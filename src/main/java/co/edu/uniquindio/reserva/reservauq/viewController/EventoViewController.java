@@ -4,6 +4,7 @@ import co.edu.uniquindio.reserva.reservauq.controller.EventoController;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EventoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.ReservaDto;
+import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.reserva.reservauq.model.Reserva;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -72,10 +73,14 @@ public class EventoViewController {
     @FXML
     private TextField txtNombre;
 
+    private EventNotifier notifier;
+
     @FXML
     void initialize() {
         eventoControllerService = new EventoController();
+        notifier = EventNotifier.getInstance(); // Obtener la instancia del notifier
         initView();
+        setupEventListeners();
     }
 
     private void initView() {
@@ -85,6 +90,27 @@ public class EventoViewController {
         tablaEventos.getItems().clear();
         tablaEventos.setItems(listaEventosDto);
         listenerSelection();
+    }
+
+    private void setupEventListeners() {
+        notifier.addPropertyChangeListener(event -> {
+            if ("empleadoAgregado".equals(event.getPropertyName()) || "empleadoEliminado".equals(event.getPropertyName())
+                    || "empleadoActualizado".equals(event.getPropertyName())) {
+                actualizar();
+            }
+        });
+    }
+
+    private void actualizar() {
+        comboEmpleado.getItems().clear();
+        obtenerEventos();
+        tablaEventos.refresh();
+
+        ObservableList<String> nombresEmpleados = FXCollections.observableArrayList();
+        for (EmpleadoDto empleado : listaEmpleadosDto) {
+            nombresEmpleados.add(empleado.nombre());
+        }
+        comboEmpleado.setItems(nombresEmpleados);
     }
 
 
@@ -108,6 +134,8 @@ public class EventoViewController {
     }
 
     private void obtenerEventos() {
+        listaEventosDto.clear();
+        listaEmpleadosDto.clear();
         listaEventosDto.addAll(eventoControllerService.obtenerEventos());
         listaEmpleadosDto.addAll(eventoControllerService.obtenerEmpleados());
     }
@@ -147,6 +175,7 @@ public class EventoViewController {
                     listaEventosDto.add(eventoDto);
                     tablaEventos.refresh();
                     tablaEventos.getSelectionModel().clearSelection();
+                    notifier.notify("eventoActualizado", eventoSeleccionado, eventoDto); // Notificar que se ha agregado un usuario
                     mostrarMensaje("Notificación", "Evento actualizado", "El evento se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
                     limpiarCamposEvento();
                 } else {
@@ -164,6 +193,7 @@ public class EventoViewController {
         if(esValido(eventoDto)){
             if(eventoControllerService.agregarEvento(eventoDto)){
                 listaEventosDto.add(eventoDto);
+                notifier.notify("eventoAgregado", null, eventoDto); // Notificar que se ha agregado un usuario
                 mostrarMensaje("Notificación Evento", "Evento Creado", "El evento se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposEvento();
             }
@@ -179,6 +209,7 @@ public class EventoViewController {
                 eventoEliminado = eventoControllerService.eliminarEvento(eventoSeleccionado.IDEvento());
                 if (eventoEliminado) {
                     listaEventosDto.remove(eventoSeleccionado);
+                    notifier.notify("eventoEliminado", eventoSeleccionado, null); // Notificar que se ha agregado un usuario
                     eventoSeleccionado = null;
                     tablaEventos.getSelectionModel().clearSelection();
                     limpiarCamposEvento();

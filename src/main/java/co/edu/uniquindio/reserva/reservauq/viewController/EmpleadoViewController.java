@@ -62,9 +62,12 @@ public class EmpleadoViewController {
     @FXML
     private TextField txtNombre;
 
+    private EventNotifier notifier;
+
     @FXML
     void initialize() {
         empleadoControllerService = new EmpleadoController();
+        notifier = EventNotifier.getInstance(); // Obtener la instancia del notifier
         initView();
     }
 
@@ -128,6 +131,7 @@ public class EmpleadoViewController {
         if(esValido(empleadoDto)){
             if(empleadoControllerService.agregarEmpleado(empleadoDto)){
                 listaEmpleadosDto.add(empleadoDto);
+                notifier.notify("empleadoAgregado", null, empleadoDto);
                 mostrarMensaje("Notificación empleado", "Empleado creado", "El empleado se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposEmpleado();
             }else{
@@ -144,6 +148,7 @@ public class EmpleadoViewController {
                 empleadoEliminado = empleadoControllerService.eliminarEmpleado(empleadoSeleccionado.ID());
                 if(empleadoEliminado == true){
                     listaEmpleadosDto.remove(empleadoSeleccionado);
+                    notifier.notify("empleadoEliminado", empleadoSeleccionado, null);
                     empleadoSeleccionado = null;
                     tableEmpleados.getSelectionModel().clearSelection();
                     limpiarCamposEmpleado();
@@ -171,6 +176,7 @@ public class EmpleadoViewController {
                 if(clienteActualizado){
                     listaEmpleadosDto.remove(empleadoSeleccionado);
                     listaEmpleadosDto.add(empleadoDto);
+                    notifier.notify("empleadoActualizado", empleadoSeleccionado, empleadoDto);
                     tableEmpleados.refresh();
                     tableEmpleados.getSelectionModel().clearSelection();
                     mostrarMensaje("Notificación", "Empleado actualizado", "El empleado se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
