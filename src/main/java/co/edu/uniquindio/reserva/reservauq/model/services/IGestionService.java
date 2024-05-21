@@ -12,9 +12,6 @@ import java.util.ArrayList;
 public interface IGestionService {
 
 	Boolean eliminarEmpleado(String ID)throws EmpleadoException;
-
-    Empleado crearEmpleado(String ID, String nombre, String correo, String contrasenia, ArrayList<Evento> listaEventos) throws EmpleadoException;
-
     boolean actualizarEmpleado(String IDActual, Empleado empleado) throws EmpleadoException;
 	boolean  verificarEmpleadoExistente(String ID) throws EmpleadoException;
 	Empleado obtenerEmpleado(String ID);

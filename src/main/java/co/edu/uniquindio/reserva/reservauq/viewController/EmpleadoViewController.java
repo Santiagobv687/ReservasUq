@@ -164,7 +164,7 @@ public class EmpleadoViewController {
         //2. verificar el empleado seleccionado
         if(empleadoSeleccionado != null){
             String IDActual = empleadoSeleccionado.ID();
-            EmpleadoDto empleadoDto = construirEmpleadoDto();
+            EmpleadoDto empleadoDto = actualizarEmpleadoDto();
             //3. Validar la información
             if(esValido(empleadoDto)){
                 clienteActualizado = empleadoControllerService.actualizarEmpleado(IDActual,empleadoDto);
@@ -172,6 +172,7 @@ public class EmpleadoViewController {
                     listaEmpleadosDto.remove(empleadoSeleccionado);
                     listaEmpleadosDto.add(empleadoDto);
                     tableEmpleados.refresh();
+                    tableEmpleados.getSelectionModel().clearSelection();
                     mostrarMensaje("Notificación", "Empleado actualizado", "El empleado se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
                     limpiarCamposEmpleado();
                 }else{
@@ -185,12 +186,26 @@ public class EmpleadoViewController {
     }
 
     private EmpleadoDto construirEmpleadoDto() {
+        ArrayList<Evento> listaEventos=new ArrayList<>();
         return new EmpleadoDto(
                 txtID.getText(),
                 txtNombre.getText(),
                 txtCorreo.getText(),
                 txtContrasenia.getText(),
-                comboRol.getSelectionModel().getSelectedItem());
+                comboRol.getSelectionModel().getSelectedItem(),
+                listaEventos);
+
+    }
+
+    private EmpleadoDto actualizarEmpleadoDto() {
+        ArrayList<Evento> listaEventos=empleadoSeleccionado.listaEventos();
+        return new EmpleadoDto(
+                txtID.getText(),
+                txtNombre.getText(),
+                txtCorreo.getText(),
+                txtContrasenia.getText(),
+                comboRol.getSelectionModel().getSelectedItem(),
+                listaEventos);
 
     }
 
@@ -199,6 +214,7 @@ public class EmpleadoViewController {
         txtNombre.setText("");
         txtCorreo.setText("");
         txtContrasenia.setText("");
+        comboRol.setValue(null);
     }
 
     private boolean esValido(EmpleadoDto empleadoDto) {

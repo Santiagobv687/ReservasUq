@@ -35,4 +35,8 @@ public interface IModelFactoryService {
 
 	boolean agregarEvento(EventoDto eventoDto);
 
+	boolean actualizarEvento(String IDActual, EventoDto eventoDto);
+
+	boolean eliminarEvento(String ID);
+
 }

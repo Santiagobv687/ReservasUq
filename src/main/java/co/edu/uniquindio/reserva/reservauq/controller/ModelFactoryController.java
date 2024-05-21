@@ -77,7 +77,7 @@ public class ModelFactoryController implements IModelFactoryService {
                 Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
                 getGestion().agregarEmpleado(empleado);
                 registrarAccionesSistema("Se ha agregado al empleado: " + empleadoDto.ID(), 1, "agregarEmpleado");
-                guardarResourceXML();
+            //    guardarResourceXML();
             }
             return true;
         } catch (EmpleadoException e) {
@@ -93,9 +93,9 @@ public class ModelFactoryController implements IModelFactoryService {
         try {
             flagExiste = getGestion().eliminarEmpleado(ID);
             registrarAccionesSistema("Se ha eliminado al empleado: " + ID, 1, "eliminarEmpleado");
-            guardarResourceXML();
+          //  guardarResourceXML();
         } catch (EmpleadoException e) {
-            registrarAccionesSistema("No se ha agregado el empleado: " + e.getMessage(), 2, "agregarEmpleado");
+            registrarAccionesSistema("No se ha eliminado el empleado: " + e.getMessage(), 2, "agregarEmpleado");
 
         }
         return flagExiste;
@@ -107,7 +107,7 @@ public class ModelFactoryController implements IModelFactoryService {
             Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
             getGestion().actualizarEmpleado(IDActual, empleado);
             registrarAccionesSistema("Se ha actualizado al empleado: " + empleadoDto.ID(), 1, "actualizarEmpleado");
-            guardarResourceXML();
+           // guardarResourceXML();
             return true;
         } catch (EmpleadoException e) {
             registrarAccionesSistema("No se ha actualizado al empleado:" + e.getMessage(), 2, "agregarEmpleado");
@@ -121,6 +121,7 @@ public class ModelFactoryController implements IModelFactoryService {
     @Override
     public List<UsuarioDto> obtenerUsuario() {
         return mapper.getUsuariosDto(gestion.getListaUsuarios());
+
     }
 
 
@@ -128,6 +129,7 @@ public class ModelFactoryController implements IModelFactoryService {
     public void registraUsuario(UsuarioDto usuarioDto) throws UsuarioExistenteException, CampoVacioException, ContraseñaIncorrectaException {
         Usuario usuario = mapper.usuarioDtoToUsuario(usuarioDto);
         gestion.registrarUsuario(usuario);
+        registrarAccionesSistema("Se ha registradoal usuario: " + usuario.getID(), 1, "registrarUsuario");
     }
 
     @Override
@@ -137,9 +139,11 @@ public class ModelFactoryController implements IModelFactoryService {
         Empleado empleadoIniciado;
         if (queEs instanceof Usuario) {
             usuarioIniciado = (Usuario) queEs;
+            registrarAccionesSistema("Se ha iniciado sesion como usuario: " + usuarioIniciado.getID(), 1, "IniciarSesion");
             return mapper.usuarioToUsuarioDto(usuarioIniciado);
         }
         empleadoIniciado = (Empleado) queEs;
+        registrarAccionesSistema("Se ha iniciado sesion como empleado: " + empleadoIniciado.getID(), 1, "IniciarSesion");
         return mapper.empleadoToEmpleadoDto(empleadoIniciado);
     }
 
@@ -150,7 +154,7 @@ public class ModelFactoryController implements IModelFactoryService {
                 Usuario usuario = mapper.usuarioDtoToUsuario(usuarioDto);
                 getGestion().agregarUsuario(usuario);
                 registrarAccionesSistema("Se ha agregado al usuario: " + usuarioDto.ID(), 1, "agregarUsuario");
-                guardarResourceXML();
+                //guardarResourceXML();
             }
             return true;
         } catch (UsuarioException e) {
@@ -165,9 +169,9 @@ public class ModelFactoryController implements IModelFactoryService {
         try {
             flagExiste = getGestion().eliminarUsuario(ID);
             registrarAccionesSistema("Se ha eliminado al usuario: " + ID, 1, "eliminarUsuario");
-            guardarResourceXML();
+            //guardarResourceXML();
         } catch (UsuarioException e) {
-            registrarAccionesSistema("No se ha agregado el usuario: " + e.getMessage(), 2, "agregarUsuario");
+            registrarAccionesSistema("No se ha eliminado el usuario: " + e.getMessage(), 2, "agregarUsuario");
         }
         return flagExiste;
     }
@@ -178,7 +182,7 @@ public class ModelFactoryController implements IModelFactoryService {
             Usuario usuario = mapper.usuarioDtoToUsuario(usuarioDto);
             getGestion().actualizarUsuario(IDActual, usuario);
             registrarAccionesSistema("Se ha actualizado al usuario: " + usuarioDto.ID(), 1, "actualizarUsuario");
-            guardarResourceXML();
+            //guardarResourceXML();
             return true;
         } catch (UsuarioException e) {
             registrarAccionesSistema("No se ha actualizado al usuario:" + e.getMessage(), 2, "agregarUsuario");
@@ -197,14 +201,47 @@ public class ModelFactoryController implements IModelFactoryService {
         try {
             if (!gestion.verificarEventoExistente(eventoDto.IDEvento())) {
                 Evento evento = mapper.eventoDtoToEvento(eventoDto);
+                Empleado empleado=mapper.empleadoDtoToEmpleado(eventoDto.empleado());
+                evento.setEmpleadoEncargado(empleado);
                 getGestion().agregarEvento(evento);
+                registrarAccionesSistema("Se ha creado el evento: " + eventoDto.IDEvento(), 1, "agregarEvento");
             }
             return true;
         } catch (EventoException e) {
-            e.getMessage();
+            registrarAccionesSistema("No se ha agregado el evento: " + e.getMessage(), 2, "agregarEvento");
             return false;
         }
     }
+
+    @Override
+    public boolean actualizarEvento(String IDActual, EventoDto eventoDto) {
+        try {
+            Evento evento = mapper.eventoDtoToEvento(eventoDto);
+            Empleado empleado = mapper.empleadoDtoToEmpleado(eventoDto.empleado());
+            evento.setEmpleadoEncargado(empleado);
+            getGestion().actualizarEvento(IDActual, evento);
+            registrarAccionesSistema("Se ha actualizado el evento: " + eventoDto.IDEvento(), 1, "actualizarEvento");
+            //guardarResourceXML();
+            return true;
+        } catch (EventoInexistenteException e) {
+            registrarAccionesSistema("No se ha actualizado el evento: " + e.getMessage(), 2, "actualizarEvento");
+            return false;
+        }
+    }
+
+    @Override
+    public boolean eliminarEvento(String ID) {
+        boolean flagExiste = false;
+        try {
+            flagExiste = getGestion().eliminarEvento(ID);
+            registrarAccionesSistema("Se ha eliminado el evento: " + ID, 1, "eliminarEvento");
+            //guardarResourceXML();
+        } catch (EventoInexistenteException e) {
+            registrarAccionesSistema("No se ha eliminado el evento: " + e.getMessage(), 2, "eliminarEvento");
+        }
+        return flagExiste;
+    }
+
 
     public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
         Persistencia.guardaRegistroLog(mensaje, nivel, accion);

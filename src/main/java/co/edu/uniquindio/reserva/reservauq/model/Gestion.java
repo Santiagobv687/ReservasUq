@@ -48,22 +48,6 @@ public class Gestion implements IGestionService, Serializable {
 		this.listaEventos = listaEventos;
 	}
 
-	@Override
-	public Empleado crearEmpleado(String ID, String nombre, String correo, String contrasenia, ArrayList<Evento> listaEventos) throws EmpleadoException {
-		Empleado nuevoEmpleado = null;
-		boolean empleadoExiste = verificarEmpleadoExistente(ID);
-		if(empleadoExiste){
-			throw new EmpleadoException("El empleado con ID: "+ID+" ya existe");
-		}else{
-			nuevoEmpleado = new Empleado();
-			nuevoEmpleado.setNombre(nombre);
-			nuevoEmpleado.setID(ID);
-			nuevoEmpleado.setCorreo(correo);
-			nuevoEmpleado.setContrasenia(contrasenia);
-			nuevoEmpleado.setListaEventos(listaEventos);
-		}
-		return nuevoEmpleado;
-	}
 
 	public void agregarEmpleado(Empleado nuevoEmpleado) throws EmpleadoException {
 		listaEmpleados.add(nuevoEmpleado);
@@ -355,6 +339,8 @@ public class Gestion implements IGestionService, Serializable {
 			usuarioActual.setNombre(usuario.getNombre());
 			usuarioActual.setID(usuario.getID());
 			usuarioActual.setCorreo(usuario.getCorreo());
+			usuarioActual.setContrasenia(usuario.getContrasenia());
+			usuarioActual.setListaReservas(usuario.getListaReservas());
 			return true;
 		}
 	}
@@ -379,5 +365,45 @@ public class Gestion implements IGestionService, Serializable {
 
 	public void agregarEvento(Evento nuevoEvento) throws EventoException {
 		listaEventos.add(nuevoEvento);
+	}
+
+	public boolean actualizarEvento(String IDActual, Evento evento) throws EventoInexistenteException {
+		Evento eventoActual = obtenerEvento(IDActual);
+		if (eventoActual == null) {
+			throw new EventoInexistenteException("El evento a actualizar no existe");
+		} else {
+			eventoActual.setNombreEvento(evento.getNombreEvento());
+			eventoActual.setIDEvento(evento.getIDEvento());
+			eventoActual.setDescripcion(evento.getDescripcion());
+			eventoActual.setFecha(evento.getFecha());
+			eventoActual.setCapacidadMax(evento.getCapacidadMax());
+			eventoActual.setEmpleadoEncargado(evento.getEmpleadoEncargado());
+			eventoActual.setListaReservas(evento.getListaReservas());
+			return true;
+		}
+	}
+
+	public Evento obtenerEvento(String IDEvento) {
+		Evento eventoEncontrado = null;
+		for (Evento evento : getListaEventos()) {
+			if (evento.getIDEvento().equalsIgnoreCase(IDEvento)) {
+				eventoEncontrado = evento;
+				break;
+			}
+		}
+		return eventoEncontrado;
+	}
+
+	public boolean eliminarEvento(String ID) throws EventoInexistenteException {
+		Evento evento = null;
+		boolean flagExiste = false;
+		evento = obtenerEvento(ID);
+		if (evento == null)
+			throw new EventoInexistenteException("El evento a eliminar no existe");
+		else {
+			getListaEventos().remove(evento);
+			flagExiste = true;
+		}
+		return flagExiste;
 	}
 }
