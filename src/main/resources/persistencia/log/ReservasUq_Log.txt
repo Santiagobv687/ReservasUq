@@ -190,3 +190,9 @@ may. 21, 2024 6:11:56 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUt
 INFORMACIÓN: agregarUsuario,Se ha agregado al usuario: 3333,2024-05-21
 may. 21, 2024 6:12:10 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: actualizarReserva,Se ha actualizado la reserva: 1,2024-05-21
+may. 21, 2024 7:17:02 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-21
+may. 21, 2024 7:52:51 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-21
+may. 21, 2024 7:53:37 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como empleado: 1234,2024-05-21

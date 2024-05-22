@@ -5,13 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d144cbfe-e8cf-4e39-926d-76b5f5200f53" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/viewController/EventNotifier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/viewController/EmpleadoViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/viewController/EmpleadoViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/viewController/EventoViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/viewController/EventoViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/viewController/ReservaViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/viewController/ReservaViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/viewController/UsuarioViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/viewController/UsuarioViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/co/edu/uniquindio/reserva/reservauq/GestionView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/co/edu/uniquindio/reserva/reservauq/GestionView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/controller/ModelFactoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/controller/ModelFactoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/utils/GestionUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/utils/GestionUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/utils/Persistencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/reserva/reservauq/utils/Persistencia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/persistencia/archivos/archivoEmpleados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/persistencia/archivos/archivoEmpleados.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/persistencia/archivos/archivoEventos.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/persistencia/archivos/archivoEventos.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/persistencia/archivos/archivoReservas.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/persistencia/archivos/archivoReservas.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/persistencia/archivos/archivoUsuarios.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/persistencia/archivos/archivoUsuarios.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/persistencia/log/ReservasUq_Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/persistencia/log/ReservasUq_Log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

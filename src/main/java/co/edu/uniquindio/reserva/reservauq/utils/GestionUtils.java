@@ -13,6 +13,7 @@ public class GestionUtils {
     public static Gestion inicializarDatos() {
         Gestion gestion = new Gestion();
         Evento evento;
+        ArrayList<Reserva> listaReservas = new ArrayList<>();
 
         Empleado empleado = new Empleado();
         empleado.setNombre("Santiago");
@@ -24,7 +25,7 @@ public class GestionUtils {
         empleado.setListaEventos(listaEventos1);
         gestion.getListaEmpleados().add(empleado);
 
-        ArrayList<Reserva> listaReservas = new ArrayList<>();
+
         evento = new Evento();
         evento.setIDEvento("111");
         evento.setNombreEvento("Cumpleaños");
@@ -34,6 +35,7 @@ public class GestionUtils {
         evento.setFecha(LocalDate.of(2024, APRIL, 14));
         evento.setListaReservas(listaReservas);
         evento.setEmpleadoEncargado(empleado);
+        evento.getEmpleadoEncargado().getListaEventos().add(evento);
         gestion.getListaEventos().add(evento);
 
         Usuario usuario;
@@ -49,11 +51,11 @@ public class GestionUtils {
         reserva=new Reserva();
         reserva.setIDReserva("1");
         reserva.setUsuario(usuario);
-        System.out.println(usuario.getNombre());
         reserva.setEvento(evento);
-        System.out.println(evento.getNombreEvento());
         reserva.setFechaSolicitud(LocalDate.of(2024, APRIL, 14));
         reserva.setEstado(EstadoReserva.PENDIENTE);
+        reserva.getUsuario().getListaReservas().add(reserva);
+        reserva.getEvento().getListaReservas().add(reserva);
         gestion.getListaReservas().add(reserva);
 
         empleado = new Empleado();
@@ -85,6 +87,7 @@ public class GestionUtils {
         evento.setFecha(LocalDate.of(2024, APRIL, 14));
         evento.setListaReservas(listaReservas);
         evento.setEmpleadoEncargado(empleado);
+        evento.getEmpleadoEncargado().getListaEventos().add(evento);
         gestion.getListaEventos().add(evento);
 
 
@@ -99,11 +102,13 @@ public class GestionUtils {
         gestion.getListaUsuarios().add(usuario);
 
         reserva=new Reserva();
-        reserva.setIDReserva("1");
+        reserva.setIDReserva("2");
         reserva.setUsuario(usuario);
         reserva.setEvento(evento);
         reserva.setFechaSolicitud(LocalDate.of(2024, JUNE, 16));
         reserva.setEstado(EstadoReserva.RECHAZADA);
+        reserva.getUsuario().getListaReservas().add(reserva);
+        reserva.getEvento().getListaReservas().add(reserva);
         gestion.getListaReservas().add(reserva);
 
         usuario=new Usuario();

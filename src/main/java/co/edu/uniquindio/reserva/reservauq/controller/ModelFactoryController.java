@@ -32,11 +32,11 @@ public class ModelFactoryController implements IModelFactoryService {
 
     public ModelFactoryController() {
         System.out.println("Invocación clase singleton");
-        cargarDatosBase();
+        //cargarDatosBase();
         //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
-		//cargarDatosDesdeArchivos();
+		cargarDatosDesdeArchivos();
 
         //3. Guardar y Cargar el recurso serializable binario
         //guardarResourceBinario();
@@ -224,9 +224,23 @@ public class ModelFactoryController implements IModelFactoryService {
         try {
             if (!gestion.verificarEventoExistente(eventoDto.IDEvento())) {
                 Evento evento = mapper.eventoDtoToEvento(eventoDto);
-                Empleado empleado=mapper.empleadoDtoToEmpleado(eventoDto.empleado());
+                Empleado empleado = mapper.empleadoDtoToEmpleado(eventoDto.empleado());
+
+                // Asignar el empleado al evento
                 evento.setEmpleadoEncargado(empleado);
+
+                // Agregar el evento a la lista de eventos del empleado
+                ArrayList<Evento> listaEventosEmpleado = empleado.getListaEventos(); // Asumiendo que existe este método
+                if (listaEventosEmpleado == null) {
+                    listaEventosEmpleado = new ArrayList<>();
+                    empleado.setListaEventos(listaEventosEmpleado); // Asumiendo que existe este método
+                }
+                listaEventosEmpleado.add(evento);
+
+                // Guardar el evento en la gestión
                 getGestion().agregarEvento(evento);
+
+                // Registrar la acción del sistema
                 registrarAccionesSistema("Se ha creado el evento: " + eventoDto.IDEvento(), 1, "agregarEvento");
             }
             return true;
@@ -239,12 +253,38 @@ public class ModelFactoryController implements IModelFactoryService {
     @Override
     public boolean actualizarEvento(String IDActual, EventoDto eventoDto) {
         try {
+            // Obtener el evento actual antes de actualizar
+            Evento eventoActual = getGestion().obtenerEvento(IDActual);
+            Empleado empleadoAnterior = eventoActual.getEmpleadoEncargado();
+
+            // Mapear el DTO al modelo de evento
             Evento evento = mapper.eventoDtoToEvento(eventoDto);
-            Empleado empleado = mapper.empleadoDtoToEmpleado(eventoDto.empleado());
-            evento.setEmpleadoEncargado(empleado);
+            Empleado empleadoNuevo = mapper.empleadoDtoToEmpleado(eventoDto.empleado());
+            evento.setEmpleadoEncargado(empleadoNuevo);
+
+            // Verificar si el empleado ha cambiado
+            if (!empleadoAnterior.getID().equals(empleadoNuevo.getID())) {
+                // Eliminar el evento de la lista de eventos del empleado anterior
+                List<Evento> listaEventosEmpleadoAnterior = empleadoAnterior.getListaEventos();
+                if (listaEventosEmpleadoAnterior != null) {
+                    listaEventosEmpleadoAnterior.remove(eventoActual);
+                }
+            }
+
+            // Actualizar el evento en la gestión
             getGestion().actualizarEvento(IDActual, evento);
+
+            // Agregar el evento a la lista de eventos del nuevo empleado
+            ArrayList<Evento> listaEventosEmpleadoNuevo = empleadoNuevo.getListaEventos();
+            if (listaEventosEmpleadoNuevo == null) {
+                listaEventosEmpleadoNuevo = new ArrayList<>();
+                empleadoNuevo.setListaEventos(listaEventosEmpleadoNuevo);
+            }
+            listaEventosEmpleadoNuevo.add(evento);
+
+            // Registrar la acción del sistema
             registrarAccionesSistema("Se ha actualizado el evento: " + eventoDto.IDEvento(), 1, "actualizarEvento");
-            //guardarResourceXML();
+
             return true;
         } catch (EventoInexistenteException e) {
             registrarAccionesSistema("No se ha actualizado el evento: " + e.getMessage(), 2, "actualizarEvento");
@@ -256,7 +296,21 @@ public class ModelFactoryController implements IModelFactoryService {
     public boolean eliminarEvento(String ID) {
         boolean flagExiste = false;
         try {
+            // Buscar el evento antes de eliminarlo
+            Evento evento = getGestion().obtenerEvento(ID);
+            Empleado empleadoEncargado = evento.getEmpleadoEncargado();
+
+            // Eliminar el evento de la lista de eventos del empleado encargado
+            if (empleadoEncargado != null) {
+                ArrayList<Evento> listaEventosEmpleado = empleadoEncargado.getListaEventos();
+                if (listaEventosEmpleado != null) {
+                    listaEventosEmpleado.remove(evento);
+                }
+            }
+
+            // Eliminar el evento en la gestión
             flagExiste = getGestion().eliminarEvento(ID);
+
             registrarAccionesSistema("Se ha eliminado el evento: " + ID, 1, "eliminarEvento");
             //guardarResourceXML();
         } catch (EventoInexistenteException e) {
@@ -264,6 +318,7 @@ public class ModelFactoryController implements IModelFactoryService {
         }
         return flagExiste;
     }
+
 
     //Metodos de Reservas
 
@@ -300,9 +355,18 @@ public class ModelFactoryController implements IModelFactoryService {
                 Reserva reserva = mapper.reservaDtoToReserva(reservaDto);
                 Usuario usuario = mapper.usuarioDtoToUsuario(reservaDto.usuarioReserva());
                 Evento evento = mapper.eventoDtoToEvento(reservaDto.eventoReserva());
+
+                // Establecer relaciones
                 reserva.setUsuario(usuario);
                 reserva.setEvento(evento);
+
+                // Agregar reserva a las listas de reservas de Usuario y Evento
+                usuario.getListaReservas().add(reserva);
+                evento.getListaReservas().add(reserva);
+
+                // Agregar reserva a la gestión
                 getGestion().agregarReserva(reserva);
+
                 registrarAccionesSistema("Se ha creado la reserva: " + reservaDto.IDReserva(), 1, "agregarReserva");
             }
             return true;
@@ -312,15 +376,34 @@ public class ModelFactoryController implements IModelFactoryService {
         }
     }
 
+
     @Override
     public boolean actualizarReserva(String IDActual, ReservaDto reservaDto) {
         try {
-            Reserva reserva = mapper.reservaDtoToReserva(reservaDto);
-            Usuario usuario = mapper.usuarioDtoToUsuario(reservaDto.usuarioReserva());
-            Evento evento = mapper.eventoDtoToEvento(reservaDto.eventoReserva());
-            reserva.setUsuario(usuario);
-            reserva.setEvento(evento);
-            getGestion().actualizarReserva(IDActual, reserva);
+            Reserva reservaExistente = getGestion().obtenerReserva(IDActual);
+            Reserva reservaNueva = mapper.reservaDtoToReserva(reservaDto);
+
+            Usuario usuarioNuevo = mapper.usuarioDtoToUsuario(reservaDto.usuarioReserva());
+            Evento eventoNuevo = mapper.eventoDtoToEvento(reservaDto.eventoReserva());
+
+            // Establecer relaciones para la nueva reserva
+            reservaNueva.setUsuario(usuarioNuevo);
+            reservaNueva.setEvento(eventoNuevo);
+
+            // Actualizar listas de reservas en Usuario y Evento
+            if (!reservaExistente.getUsuario().equals(usuarioNuevo)) {
+                reservaExistente.getUsuario().getListaReservas().remove(reservaExistente);
+                usuarioNuevo.getListaReservas().add(reservaNueva);
+            }
+
+            if (!reservaExistente.getEvento().equals(eventoNuevo)) {
+                reservaExistente.getEvento().getListaReservas().remove(reservaExistente);
+                eventoNuevo.getListaReservas().add(reservaNueva);
+            }
+
+            // Actualizar reserva en la gestión
+            getGestion().actualizarReserva(IDActual, reservaNueva);
+
             registrarAccionesSistema("Se ha actualizado la reserva: " + reservaDto.IDReserva(), 1, "actualizarReserva");
             //guardarResourceXML();
             return true;
@@ -330,11 +413,29 @@ public class ModelFactoryController implements IModelFactoryService {
         }
     }
 
+
     @Override
     public boolean eliminarReserva(String ID) {
         boolean flagExiste = false;
         try {
+            // Buscar la reserva antes de eliminarla
+            Reserva reserva = getGestion().obtenerReserva(ID);
+
+            // Eliminar la reserva de las listas de reservas de Usuario y Evento
+            Usuario usuario = reserva.getUsuario();
+            Evento evento = reserva.getEvento();
+
+            if (usuario != null) {
+                usuario.getListaReservas().remove(reserva);
+            }
+
+            if (evento != null) {
+                evento.getListaReservas().remove(reserva);
+            }
+
+            // Eliminar la reserva en la gestión
             flagExiste = getGestion().eliminarReserva(ID);
+
             registrarAccionesSistema("Se ha eliminado la reserva: " + ID, 1, "eliminarReserva");
             //guardarResourceXML();
         } catch (ReservaInexistenteException e) {
@@ -342,6 +443,7 @@ public class ModelFactoryController implements IModelFactoryService {
         }
         return flagExiste;
     }
+
 
 
 
@@ -362,6 +464,9 @@ public class ModelFactoryController implements IModelFactoryService {
     private void salvarDatosPrueba() {
         try {
             Persistencia.guardarEmpleados(getGestion().getListaEmpleados());
+            Persistencia.guardarUsuarios(getGestion().getListaUsuarios());
+            Persistencia.guardarEventos(getGestion().getListaEventos());
+            Persistencia.guardarReservas(getGestion().getListaReservas());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
