@@ -8,6 +8,7 @@ import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.mappers.GestionMapper;
 import co.edu.uniquindio.reserva.reservauq.controller.service.IModelFactoryService;
 import co.edu.uniquindio.reserva.reservauq.model.*;
+import co.edu.uniquindio.reserva.reservauq.utils.BoundedSemaphore;
 import co.edu.uniquindio.reserva.reservauq.utils.GestionUtils;
 import co.edu.uniquindio.reserva.reservauq.utils.Persistencia;
 
@@ -15,9 +16,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelFactoryController implements IModelFactoryService {
+public class ModelFactoryController implements IModelFactoryService, Runnable {
     Gestion gestion;
     GestionMapper mapper = GestionMapper.INSTANCE;
+    BoundedSemaphore semaphore = new BoundedSemaphore(1);
+    String mensaje = "";
+    int nivel = 0;
+    String accion = "";
+    Thread hilo1GuardarXml;
+    Thread hilo2GuardarLog;
 
     //------------------------------  Singleton ------------------------------------------------
     // Clase estatica oculta. Tan solo se instanciara el singleton una vez
@@ -449,7 +456,11 @@ public class ModelFactoryController implements IModelFactoryService {
 
     //Metodos de flujo de archivos
     public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
-        Persistencia.guardaRegistroLog(mensaje, nivel, accion);
+        this.mensaje = mensaje;
+        this.nivel = nivel;
+        this.accion = accion;
+        hilo2GuardarLog = new Thread(this);
+        hilo2GuardarLog.start();
     }
 
     private void cargarDatosDesdeArchivos() {
@@ -481,7 +492,8 @@ public class ModelFactoryController implements IModelFactoryService {
     }
 
     private void guardarResourceXML() {
-        Persistencia.guardarRecursoGestionXML(gestion);
+        hilo1GuardarXml = new Thread(this);
+        hilo1GuardarXml.start();
     }
 
     private void cargarResourceBinario() {
@@ -492,4 +504,36 @@ public class ModelFactoryController implements IModelFactoryService {
         Persistencia.guardarRecursoGestionBinario(gestion);
     }
 
+
+    //Hilos
+    @Override
+    public void run() {
+        Thread hiloActual = Thread.currentThread();
+        ocupar();
+        if(hiloActual == hilo1GuardarXml){
+            Persistencia.guardarRecursoGestionXML(gestion);
+            liberar();
+        }
+        if(hiloActual == hilo2GuardarLog){
+            Persistencia.guardaRegistroLog(mensaje, nivel, accion);
+            liberar();
+        }
+
+    }
+
+    private void ocupar() {
+        try {
+            semaphore.ocupar();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void liberar() {
+        try {
+            semaphore.liberar();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
