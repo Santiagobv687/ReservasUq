@@ -7,13 +7,9 @@ import java.util.ArrayList;
 public record UsuarioDto(
         String ID,
         String nombre,
-
         String correo,
-
         String contrasenia,
-
         ArrayList<Reserva> listaReservas
-
 ) {
 
 }

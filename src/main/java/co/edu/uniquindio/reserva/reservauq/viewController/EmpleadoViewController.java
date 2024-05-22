@@ -62,9 +62,12 @@ public class EmpleadoViewController {
     @FXML
     private TextField txtNombre;
 
+    private EventNotifier notifier;
+
     @FXML
     void initialize() {
         empleadoControllerService = new EmpleadoController();
+        notifier = EventNotifier.getInstance(); // Obtener la instancia del notifier
         initView();
     }
 
@@ -128,6 +131,7 @@ public class EmpleadoViewController {
         if(esValido(empleadoDto)){
             if(empleadoControllerService.agregarEmpleado(empleadoDto)){
                 listaEmpleadosDto.add(empleadoDto);
+                notifier.notify("empleadoAgregado", null, empleadoDto);
                 mostrarMensaje("Notificación empleado", "Empleado creado", "El empleado se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposEmpleado();
             }else{
@@ -144,6 +148,7 @@ public class EmpleadoViewController {
                 empleadoEliminado = empleadoControllerService.eliminarEmpleado(empleadoSeleccionado.ID());
                 if(empleadoEliminado == true){
                     listaEmpleadosDto.remove(empleadoSeleccionado);
+                    notifier.notify("empleadoEliminado", empleadoSeleccionado, null);
                     empleadoSeleccionado = null;
                     tableEmpleados.getSelectionModel().clearSelection();
                     limpiarCamposEmpleado();
@@ -164,14 +169,16 @@ public class EmpleadoViewController {
         //2. verificar el empleado seleccionado
         if(empleadoSeleccionado != null){
             String IDActual = empleadoSeleccionado.ID();
-            EmpleadoDto empleadoDto = construirEmpleadoDto();
+            EmpleadoDto empleadoDto = actualizarEmpleadoDto();
             //3. Validar la información
             if(esValido(empleadoDto)){
                 clienteActualizado = empleadoControllerService.actualizarEmpleado(IDActual,empleadoDto);
                 if(clienteActualizado){
                     listaEmpleadosDto.remove(empleadoSeleccionado);
                     listaEmpleadosDto.add(empleadoDto);
+                    notifier.notify("empleadoActualizado", empleadoSeleccionado, empleadoDto);
                     tableEmpleados.refresh();
+                    tableEmpleados.getSelectionModel().clearSelection();
                     mostrarMensaje("Notificación", "Empleado actualizado", "El empleado se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
                     limpiarCamposEmpleado();
                 }else{
@@ -185,12 +192,26 @@ public class EmpleadoViewController {
     }
 
     private EmpleadoDto construirEmpleadoDto() {
+        ArrayList<Evento> listaEventos=new ArrayList<>();
         return new EmpleadoDto(
                 txtID.getText(),
                 txtNombre.getText(),
                 txtCorreo.getText(),
                 txtContrasenia.getText(),
-                comboRol.getSelectionModel().getSelectedItem());
+                comboRol.getSelectionModel().getSelectedItem(),
+                listaEventos);
+
+    }
+
+    private EmpleadoDto actualizarEmpleadoDto() {
+        ArrayList<Evento> listaEventos=empleadoSeleccionado.listaEventos();
+        return new EmpleadoDto(
+                txtID.getText(),
+                txtNombre.getText(),
+                txtCorreo.getText(),
+                txtContrasenia.getText(),
+                comboRol.getSelectionModel().getSelectedItem(),
+                listaEventos);
 
     }
 
@@ -199,6 +220,7 @@ public class EmpleadoViewController {
         txtNombre.setText("");
         txtCorreo.setText("");
         txtContrasenia.setText("");
+        comboRol.setValue(null);
     }
 
     private boolean esValido(EmpleadoDto empleadoDto) {

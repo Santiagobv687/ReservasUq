@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="622.0" prefWidth="768.0" style="-fx-background-color: #FFB923;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.reserva.reservauq.viewController.UsuarioViewController">
+<AnchorPane prefHeight="622.0" prefWidth="768.0" style="-fx-background-color: #FFB923;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.reserva.reservauq.viewController.ReservaViewController">
    <children>
       <SplitPane dividerPositions="0.6686046511627908" layoutX="4.0" layoutY="10.0" orientation="VERTICAL" prefHeight="576.0" prefWidth="755.0">
          <items>
@@ -34,12 +34,12 @@
                         <Font name="Lucida Fax Demibold" size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnActualizar" layoutX="326.0" layoutY="329.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: #5FDBD7;" text="Actualizar" textFill="WHITE">
+                  <Button fx:id="btnActualizar" layoutX="326.0" layoutY="329.0" mnemonicParsing="false" onAction="#actualizarReserva" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: #5FDBD7;" text="Actualizar" textFill="WHITE">
                      <font>
                         <Font name="Lucida Fax Demibold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnAgregar" layoutX="114.0" layoutY="328.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: green;" text="Agregar" textFill="WHITE">
+                  <Button fx:id="btnAgregar" layoutX="114.0" layoutY="328.0" mnemonicParsing="false" onAction="#agregarReserva" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: green;" text="Agregar" textFill="WHITE">
                      <font>
                         <Font name="Lucida Fax Demibold" size="12.0" />
                      </font>
@@ -69,7 +69,7 @@
                      </font>
                   </Label>
                   <ComboBox fx:id="comboEstado" layoutX="475.0" layoutY="183.0" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: #FFB923;" />
-                  <Button fx:id="btnEliminar" layoutX="553.0" layoutY="329.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: red;" text="Eliminar" textFill="WHITE">
+                  <Button fx:id="btnEliminar" layoutX="553.0" layoutY="329.0" mnemonicParsing="false" onAction="#eliminarReserva" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: red;" text="Eliminar" textFill="WHITE">
                      <font>
                         <Font name="Lucida Fax Demibold" size="12.0" />
                      </font></Button>
@@ -77,7 +77,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="215.0" prefWidth="753.0">
                <children>
-                  <TableView fx:id="tablaUsuarios" layoutX="43.0" layoutY="27.0" prefHeight="104.0" prefWidth="665.0">
+                  <TableView fx:id="tablaReservas" layoutX="43.0" layoutY="27.0" prefHeight="104.0" prefWidth="665.0">
                      <columns>
                         <TableColumn fx:id="tcID" prefWidth="93.33331298828125" style="-fx-background-color: #FFB923;" text="ID" />
                         <TableColumn fx:id="tcUsuario" prefWidth="133.99996948242188" style="-fx-background-color: #FFB923;" text="Usuario" />

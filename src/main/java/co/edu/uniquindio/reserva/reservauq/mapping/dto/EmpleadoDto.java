@@ -10,8 +10,8 @@ public record EmpleadoDto(
         String ID,
         String nombre,
         String correo,
-
         String contrasenia,
-        RolEmpleado rolEmpleado
+        RolEmpleado rolEmpleado,
+        ArrayList<Evento> listaEventos
         ) {
 }

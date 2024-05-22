@@ -70,9 +70,9 @@
                   <TableView fx:id="tablaUsuarios" layoutX="96.0" layoutY="28.0" prefHeight="200.0" prefWidth="584.0">
                      <columns>
                         <TableColumn fx:id="tcID" prefWidth="93.33331298828125" style="-fx-background-color: #FFB923;" text="ID" />
-                        <TableColumn fx:id="tcNombre" prefWidth="133.99996948242188" style="-fx-background-color: #FFB923;" text="Nombre" />
-                        <TableColumn fx:id="tcCorreo" prefWidth="172.66668701171875" style="-fx-background-color: #FFB923;" text="Correo" />
-                        <TableColumn fx:id="tcCodigo" prefWidth="182.66668701171875" style="-fx-background-color: #FFB923;" text="Contraseña" />
+                        <TableColumn fx:id="tcNombreUsuario" prefWidth="133.99996948242188" style="-fx-background-color: #FFB923;" text="Nombre" />
+                        <TableColumn fx:id="tcCorreoUsuario" prefWidth="172.66668701171875" style="-fx-background-color: #FFB923;" text="Correo" />
+                        <TableColumn fx:id="tcContra" prefWidth="182.66668701171875" style="-fx-background-color: #FFB923;" text="Contraseña" />
                      </columns>
                   </TableView>
                   <Button fx:id="btnEliminar" layoutX="318.0" layoutY="238.0" mnemonicParsing="false" onAction="#eliminarUsuarioEvent" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: red;" text="Eliminar" textFill="WHITE" />

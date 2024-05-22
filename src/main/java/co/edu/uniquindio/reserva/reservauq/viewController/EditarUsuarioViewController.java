@@ -22,6 +22,8 @@ public class EditarUsuarioViewController {
 
     @FXML
     private Button btnActualizar;
+
+    @FXML
     private TextField txtCorreo;
 
     @FXML
