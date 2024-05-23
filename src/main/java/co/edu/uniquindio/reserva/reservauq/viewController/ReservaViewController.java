@@ -14,7 +14,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -35,6 +39,9 @@ public class ReservaViewController {
 
     @FXML
     private Button btnEliminar;
+
+    @FXML
+    private Button btnExportar;
 
     @FXML
     private ComboBox<String> comboEstado;
@@ -293,6 +300,46 @@ public class ReservaViewController {
         } else {
             mostrarMensaje("Notificación Reserva", "Datos inválidos", mensaje, Alert.AlertType.WARNING);
             return false;
+        }
+    }
+
+    @FXML
+    void exportarReservas(ActionEvent event) {
+        // Crear un FileChooser para que el usuario elija la ruta y el nombre del archivo CSV
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar Reservas");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos CSV", "*.csv"));
+
+        // Mostrar el diálogo de guardar archivo y obtener el archivo seleccionado por el usuario
+        File archivoCSV = fileChooser.showSaveDialog(btnExportar.getScene().getWindow());
+
+        if (archivoCSV != null) {
+            // Exportar las reservas al archivo CSV seleccionado por el usuario
+            try {
+                FileWriter writer = new FileWriter(archivoCSV);
+
+                // Escribir el encabezado del archivo CSV
+                writer.append("ID Reserva,Evento,Usuario,Estado,Fecha Solicitud\n");
+
+                // Escribir cada reserva en una nueva línea del archivo CSV
+                for (ReservaDto reserva : listaReservasDto) {
+                    writer.append(reserva.IDReserva()).append(",");
+                    writer.append(reserva.eventoReserva().nombreEvento()).append(",");
+                    writer.append(reserva.usuarioReserva().nombre()).append(",");
+                    writer.append(reserva.estado().toString()).append(",");
+                    writer.append(reserva.fechaSolicitud().toString()).append("\n");
+                }
+
+                // Cerrar el FileWriter
+                writer.flush();
+                writer.close();
+
+                // Mostrar mensaje de éxito
+                mostrarMensaje("Éxito", "Exportación Exitosa", "Las reservas se han exportado correctamente a " + archivoCSV.getAbsolutePath(), Alert.AlertType.INFORMATION);
+            } catch (IOException e) {
+                // Mostrar mensaje de error si ocurre algún problema durante la exportación
+                mostrarMensaje("Error", "Error al Exportar", "Ha ocurrido un error al exportar las reservas: " + e.getMessage(), Alert.AlertType.ERROR);
+            }
         }
     }
 
