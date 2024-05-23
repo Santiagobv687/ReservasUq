@@ -17,10 +17,6 @@ public class EditarUsuarioViewController {
         System.out.println(usuarioIniciado);
     }
 
-    public void setearUsuario(UsuarioDto usuarioDto) {
-        this.usuarioIniciado=usuarioDto;
-    }
-
     @FXML
     private Button btnActualizar;
 
@@ -42,5 +38,9 @@ public class EditarUsuarioViewController {
     @FXML
     public void eliminarUsuarioEvent(ActionEvent actionEvent) {
 
+    }
+
+    public void setUsuarioIniciado(UsuarioDto usuarioIniciado) {
+        this.usuarioIniciado = usuarioIniciado;
     }
 }

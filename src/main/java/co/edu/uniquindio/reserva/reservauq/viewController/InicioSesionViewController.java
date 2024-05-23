@@ -25,6 +25,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 
@@ -148,7 +149,7 @@ public class InicioSesionViewController {
             nuevaStage.setScene(nuevaScene);
 
             EditarUsuarioViewController usuarioInicio=(EditarUsuarioViewController) loader.getController();
-            usuarioInicio.setearUsuario(usuarioDto);
+            usuarioInicio.setUsuarioIniciado(usuarioDto);
             nuevaStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -169,5 +170,9 @@ public class InicioSesionViewController {
         txtContrasenia.setVisible(true);
         btnOcultar.setVisible(true);
         btnVisible.setVisible(false);
+    }
+
+    private void enviarDatos(MouseEvent evento,UsuarioDto usuarioDto){
+
     }
 }

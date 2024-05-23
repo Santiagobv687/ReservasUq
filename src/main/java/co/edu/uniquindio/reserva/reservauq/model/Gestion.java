@@ -4,6 +4,7 @@ import co.edu.uniquindio.reserva.reservauq.model.services.IGestionService;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class Gestion implements IGestionService, Serializable {
 
@@ -12,6 +13,14 @@ public class Gestion implements IGestionService, Serializable {
 	ArrayList<Empleado> listaEmpleados = new ArrayList<>();
 	ArrayList<Reserva> listaReservas= new ArrayList<>();
 	ArrayList<Evento> listaEventos= new ArrayList<>();
+
+    private final String correoOficial="diegon.penar@uqvirtual.edu.co";
+
+	private final String contraseniaAplicacion="kkjz pnib ioat grzk";
+
+	private Properties mProperties;
+
+	private Sesion mSesion;
 
 	public Gestion() {
 	}
@@ -230,10 +239,11 @@ public class Gestion implements IGestionService, Serializable {
 				throw new UsuarioNoRegistradoException();
 			}
 			validarContrasenia(contrasenia,0,isEmpleado);
-
+            redactarCorreoVerificacion(isEmpleado.getCorreo());
 			return isEmpleado;
 		}
 		validarContrasenia(contrasenia,0,isUsuario);
+        redactarCorreoVerificacion(isUsuario.getCorreo());
 
 		return isUsuario;
 	}
@@ -245,6 +255,12 @@ public class Gestion implements IGestionService, Serializable {
 			throw new ContraseñaIncorrectaException();
 		}
 	}
+
+    @Override
+
+    public void redactarCorreoVerificacion(String correo) {
+
+    }
 
 	@Override
 	public Usuario buscarUsuario(String ID, int indice)  {
