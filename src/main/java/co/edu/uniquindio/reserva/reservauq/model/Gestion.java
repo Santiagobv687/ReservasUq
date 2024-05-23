@@ -16,11 +16,11 @@ public class Gestion implements IGestionService, Serializable {
 
     private final String correoOficial="diegon.penar@uqvirtual.edu.co";
 
-	private final String contraseniaAplicacion="kkjz pnib ioat grzk";
+	private final String contraseniaAplicacion="";
 
 	private Properties mProperties;
 
-	private Sesion mSesion;
+	//private Sesion mSesion;
 
 	public Gestion() {
 	}
@@ -256,7 +256,7 @@ public class Gestion implements IGestionService, Serializable {
 		}
 	}
 
-    @Override
+    //@Override
 
     public void redactarCorreoVerificacion(String correo) {
 
