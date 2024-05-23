@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 
 public class EditarUsuarioViewController {
 
+    public TextField txtContrasenia;
     private UsuarioDto usuarioIniciado;
 
     @FXML
@@ -35,7 +36,7 @@ public class EditarUsuarioViewController {
 
     @FXML
     public void actualizarUsuarioEvent(ActionEvent actionEvent) {
-
+        String nombreNuevo=txtNombre.getText();
     }
 
     @FXML
