@@ -2,31 +2,24 @@ package co.edu.uniquindio.reserva.reservauq.viewController;
 
 import co.edu.uniquindio.reserva.reservauq.ReservaApplication;
 import co.edu.uniquindio.reserva.reservauq.controller.InicioSesionController;
-import co.edu.uniquindio.reserva.reservauq.controller.RegistroController;
 import co.edu.uniquindio.reserva.reservauq.exceptions.CampoVacioException;
-import co.edu.uniquindio.reserva.reservauq.exceptions.ContraseñaIncorrectaException;
+import co.edu.uniquindio.reserva.reservauq.exceptions.ContraseniaIncorrectaException;
 import co.edu.uniquindio.reserva.reservauq.exceptions.UsuarioNoRegistradoException;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
-import co.edu.uniquindio.reserva.reservauq.model.Empleado;
 import co.edu.uniquindio.reserva.reservauq.model.RolEmpleado;
-import co.edu.uniquindio.reserva.reservauq.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 
 
 public class InicioSesionViewController {
@@ -94,13 +87,13 @@ public class InicioSesionViewController {
             }
             else if(queEs instanceof EmpleadoDto)
             {
-                if(((EmpleadoDto) queEs).rolEmpleado()== RolEmpleado.ADMINISTRADOR)
+                if(((EmpleadoDto) queEs).rolEmpleado()== RolEmpleado.ADMINISTRADOR || ((EmpleadoDto) queEs).rolEmpleado()== RolEmpleado.EMPLEADO )
                 {
                     mostrarVentanaGestion();
                 }
             }
         }
-        catch (UsuarioNoRegistradoException | CampoVacioException | ContraseñaIncorrectaException e)
+        catch (UsuarioNoRegistradoException | CampoVacioException | ContraseniaIncorrectaException e)
         {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText(null);
@@ -125,7 +118,7 @@ public class InicioSesionViewController {
 
             // Crear un nuevo stage para la nueva ventana
             Stage nuevaStage = new Stage();
-            nuevaStage.setTitle("Nueva Ventana");
+            nuevaStage.setTitle("ReservasUQ");
             Scene nuevaScene = new Scene(nuevaVentana);
             nuevaStage.setScene(nuevaScene);
 
@@ -138,17 +131,14 @@ public class InicioSesionViewController {
     public void mostrarVentanaUsuarios(UsuarioDto usuarioDto) throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(ReservaApplication.class.getResource("EditarUsuarioView.fxml"));
+            loader.setLocation(ReservaApplication.class.getResource("PrincipalUsuariosView.fxml"));
             AnchorPane nuevaVentana = (AnchorPane) loader.load();
 
             // Crear un nuevo stage para la nueva ventana
             Stage nuevaStage = new Stage();
-            nuevaStage.setTitle("Nueva Ventana");
+            nuevaStage.setTitle("ReservasUQ");
             Scene nuevaScene = new Scene(nuevaVentana);
             nuevaStage.setScene(nuevaScene);
-
-            EditarUsuarioViewController usuarioInicio=(EditarUsuarioViewController) loader.getController();
-            usuarioInicio.setearUsuario(usuarioDto);
             nuevaStage.show();
         } catch (IOException e) {
             e.printStackTrace();
