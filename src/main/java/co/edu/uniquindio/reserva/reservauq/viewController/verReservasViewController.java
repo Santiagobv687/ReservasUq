@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -192,7 +193,7 @@ public class verReservasViewController {
     }
 
     @FXML
-    void agregarReserva(ActionEvent event) {
+    void agregarReserva(ActionEvent event) throws IOException {
         ReservaDto reservaDto = construirReservaDto(true);
         if (esValido(reservaDto)) {
             if (verReservasControllerService.agregarReserva(reservaDto)) {
