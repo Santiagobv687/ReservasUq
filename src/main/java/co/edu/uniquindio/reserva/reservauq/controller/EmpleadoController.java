@@ -6,10 +6,10 @@ import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
 import java.util.List;
 
 public class EmpleadoController implements IEmpleadoControllerService {
-    ModelFactoryControllerServidor modelFactoryController;
+    ModelFactoryController modelFactoryController;
 
     public EmpleadoController(){
-        modelFactoryController = ModelFactoryControllerServidor.getInstance();
+        modelFactoryController = ModelFactoryController.getInstance();
     }
 
     public List<EmpleadoDto> obtenerEmpleados() {

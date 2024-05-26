@@ -21,7 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelFactoryControllerServidor implements IModelFactoryServiceServidor, Runnable {
+public class ModelFactoryController implements IModelFactoryServiceServidor, Runnable {
     Gestion gestion;
     GestionMapper mapper = GestionMapper.INSTANCE;
     BoundedSemaphore semaphore = new BoundedSemaphore(1);
@@ -36,15 +36,15 @@ public class ModelFactoryControllerServidor implements IModelFactoryServiceServi
     //------------------------------  Singleton ------------------------------------------------
     // Clase estatica oculta. Tan solo se instanciara el singleton una vez
     private static class SingletonHolder {
-        private final static ModelFactoryControllerServidor eINSTANCE = new ModelFactoryControllerServidor();
+        private final static ModelFactoryController eINSTANCE = new ModelFactoryController();
     }
 
     // Método para obtener la instancia de nuestra clase
-    public static ModelFactoryControllerServidor getInstance() {
+    public static ModelFactoryController getInstance() {
         return SingletonHolder.eINSTANCE;
     }
 
-    public ModelFactoryControllerServidor() {
+    public ModelFactoryController() {
         System.out.println("Invocación clase singleton");
         //cargarDatosBase();
         //salvarDatosPrueba();

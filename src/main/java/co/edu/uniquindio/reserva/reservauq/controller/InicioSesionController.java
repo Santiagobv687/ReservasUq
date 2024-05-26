@@ -7,10 +7,10 @@ import co.edu.uniquindio.reserva.reservauq.exceptions.UsuarioNoRegistradoExcepti
 
 public class InicioSesionController implements IInicioSesionControllerService {
 
-    ModelFactoryControllerServidor modelFactoryController;
+    ModelFactoryController modelFactoryController;
 
     public InicioSesionController() {
-        modelFactoryController= ModelFactoryControllerServidor.getInstance();
+        modelFactoryController= ModelFactoryController.getInstance();
     }
 
     @Override

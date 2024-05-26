@@ -7,10 +7,10 @@ import java.util.List;
 
 public class EventoController {
 
-    ModelFactoryControllerServidor modelFactoryController;
+    ModelFactoryController modelFactoryController;
 
     public EventoController(){
-        modelFactoryController= ModelFactoryControllerServidor.getInstance();
+        modelFactoryController= ModelFactoryController.getInstance();
     }
 
     public List<EventoDto> obtenerEventos() {
