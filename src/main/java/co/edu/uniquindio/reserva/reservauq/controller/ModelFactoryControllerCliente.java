@@ -1,7 +1,6 @@
 package co.edu.uniquindio.reserva.reservauq.controller;
 
-import co.edu.uniquindio.reserva.reservauq.config.RabbitFactory;
-import co.edu.uniquindio.reserva.reservauq.controller.service.IModelFactoryServiceCliente;
+import co.edu.uniquindio.reserva.reservauq.controller.service.IModelFactoryService;
 import co.edu.uniquindio.reserva.reservauq.exceptions.*;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EventoDto;
@@ -12,16 +11,12 @@ import co.edu.uniquindio.reserva.reservauq.model.*;
 import co.edu.uniquindio.reserva.reservauq.utils.BoundedSemaphore;
 import co.edu.uniquindio.reserva.reservauq.utils.GestionUtils;
 import co.edu.uniquindio.reserva.reservauq.utils.Persistencia;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelFactoryControllerCliente implements IModelFactoryServiceCliente, Runnable {
+public class ModelFactoryControllerCliente implements IModelFactoryService, Runnable {
     Gestion gestion;
     GestionMapper mapper = GestionMapper.INSTANCE;
     BoundedSemaphore semaphore = new BoundedSemaphore(1);
@@ -30,8 +25,6 @@ public class ModelFactoryControllerCliente implements IModelFactoryServiceClient
     String accion = "";
     Thread hilo1GuardarXml;
     Thread hilo2GuardarLog;
-    RabbitFactory rabbitFactory;
-    ConnectionFactory connectionFactory;
 
     //------------------------------  Singleton ------------------------------------------------
     // Clase estatica oculta. Tan solo se instanciara el singleton una vez
@@ -67,14 +60,7 @@ public class ModelFactoryControllerCliente implements IModelFactoryServiceClient
             cargarDatosBase();
             // guardarResourceXML();
         }
-        initRabbitConnection();
         registrarAccionesSistema("Inicio de la Aplicacion", 1, "inicioAplicacion");
-    }
-
-    private void initRabbitConnection() {
-        rabbitFactory = new RabbitFactory();
-        connectionFactory = rabbitFactory.getConnectionFactory();
-        System.out.println("conexion establecidad");
     }
 
 
@@ -555,21 +541,6 @@ public class ModelFactoryControllerCliente implements IModelFactoryServiceClient
             semaphore.liberar();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public void establecerConexionCliente(String queue, String message) {
-        try (Connection connection = connectionFactory.newConnection();
-             Channel channel = connection.createChannel())
-        {
-            channel.queueDeclare(queue, false, false, false, null);
-            channel.basicPublish("", queue, null, message.getBytes(StandardCharsets.UTF_8));
-            System.out.println(" [x] Sent '" + message + "'");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
         }
     }
 }

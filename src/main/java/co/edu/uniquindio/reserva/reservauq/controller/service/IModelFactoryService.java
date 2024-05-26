@@ -9,7 +9,7 @@ import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import java.util.List;
 
 
-public interface IModelFactoryServiceCliente {
+public interface IModelFactoryService {
 
 	List<EmpleadoDto> obtenerEmpleados();
 	boolean agregarEmpleado(EmpleadoDto empleadoDto);
@@ -47,6 +47,4 @@ public interface IModelFactoryServiceCliente {
 	boolean actualizarReserva(String IDActual, ReservaDto reservaDto);
 
 	boolean eliminarReserva(String ID);
-
-    void establecerConexionCliente(String queue, String message);
 }
