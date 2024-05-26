@@ -35,6 +35,10 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     Thread hiloServicioConsumer2;
     RabbitFactory rabbitFactory;
     ConnectionFactory connectionFactory;
+    final String FILAACTUALIZARRESERVA="fila actualizar reserva";
+    final String FILAAGREGARRESERVA="fila agregar reserva";
+    Reserva reserva;
+    ArrayList<Reserva> reservas;
 
     //------------------------------  Singleton ------------------------------------------------
     // Clase estatica oculta. Tan solo se instanciara el singleton una vez
@@ -83,6 +87,11 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     public void consumirMensajesServicio1(){
         hiloServicioConsumer1 = new Thread(this);
         hiloServicioConsumer1.start();
+    }
+
+    public void consumirMensajesServicio2(){
+        hiloServicioConsumer2 = new Thread(this);
+        hiloServicioConsumer2.start();
     }
 
 
@@ -548,6 +557,12 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
             Persistencia.guardaRegistroLog(mensaje, nivel, accion);
             liberar();
         }
+        if(hiloActual == hiloServicioConsumer1){
+            consumirMensajes(FILAACTUALIZARRESERVA);
+        }
+        if(hiloActual == hiloServicioConsumer1){
+            consumirMensajes(FILAAGREGARRESERVA);
+        }
 
     }
 
@@ -574,31 +589,17 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
             channel.queueDeclare(queue, false, false, false, null);
 
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-                String message = new String(delivery.getBody());
-                System.out.println("Mensaje recibido: " + message);
-                //actualizarEstado(message);
-            };
-            while (true)
-            {
-                channel.basicConsume(queue, true, deliverCallback, consumerTag -> { });
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    private void consumirObjeto(String queue) {
-        try {
-            Connection connection = connectionFactory.newConnection();
-            Channel channel = connection.createChannel();
-            channel.queueDeclare(queue, false, false, false, null);
-
-            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-                byte [] objetoSerializado = delivery.getBody();
-
-                //actualizarEstado(message);
+                byte[] objetoSerializado=delivery.getBody();
+                try
+                {
+                    Object objetoDeserializado=deserializarObjeto(objetoSerializado);
+                    reserva=(Reserva) objetoDeserializado;
+                    reservas.add(reserva);
+                }
+                catch (ClassNotFoundException e)
+                {
+                    throw new RuntimeException(e);
+                }
             };
             while (true)
             {

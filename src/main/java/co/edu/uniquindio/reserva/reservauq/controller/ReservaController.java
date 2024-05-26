@@ -3,7 +3,9 @@ package co.edu.uniquindio.reserva.reservauq.controller;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EventoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.ReservaDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
+import co.edu.uniquindio.reserva.reservauq.model.Reserva;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReservaController {
@@ -37,5 +39,10 @@ public class ReservaController {
 
     public boolean eliminarReserva(String IDReserva) {
         return modelFactoryController.eliminarReserva(IDReserva);
+    }
+
+    public ArrayList<Reserva> actualizarMensajesReservas() {
+        modelFactoryController.consumirMensajesServicio1();
+        return modelFactoryController.reservas;
     }
 }

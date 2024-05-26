@@ -34,14 +34,18 @@ public class verReservasController {
         boolean sePuedeAgregar=modelFactoryController.agregarReserva(reservaDto);
         if(sePuedeAgregar)
         {
-            modelFactoryController.producirObjeto("Fila agregar reserva",reservaDto);
+            modelFactoryController.producirObjeto(modelFactoryController.FILAAGREGARRESERVA, reservaDto);
         }
-        return modelFactoryController.agregarReserva(reservaDto);
+        return sePuedeAgregar;
     }
 
     public boolean actualizarReserva(String idActual, ReservaDto reservaDto) throws IOException {
-        modelFactoryController.producirObjeto("Fila actualizar reserva",reservaDto);
-        return modelFactoryController.actualizarReserva(idActual, reservaDto);
+        boolean sePuedeActualizar=modelFactoryController.actualizarReserva(idActual, reservaDto);
+        if(sePuedeActualizar)
+        {
+            modelFactoryController.producirObjeto(modelFactoryController.FILAACTUALIZARRESERVA, reservaDto);
+        }
+        return sePuedeActualizar;
     }
 
     public boolean eliminarReserva(String IDReserva) {
