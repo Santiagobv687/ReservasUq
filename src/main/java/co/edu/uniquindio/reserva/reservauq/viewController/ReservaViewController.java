@@ -209,7 +209,7 @@ public class ReservaViewController {
     }
 
     @FXML
-    void agregarReserva(ActionEvent event) {
+    void agregarReserva(ActionEvent event) throws IOException {
         ReservaDto reservaDto = construirReservaDto(true);
         if (esValido(reservaDto)) {
             if (reservaControllerService.agregarReserva(reservaDto)) {
