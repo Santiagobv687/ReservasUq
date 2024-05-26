@@ -164,7 +164,7 @@ public class verReservasViewController {
     }
 
     @FXML
-    void actualizarReserva(ActionEvent event) {
+    void actualizarReserva(ActionEvent event) throws IOException {
         boolean reservaActualizada = false;
 
         // 1. Verificar la reserva seleccionada

@@ -37,7 +37,7 @@ public class verReservasController {
 
     public boolean actualizarReserva(String idActual, ReservaDto reservaDto) throws IOException {
         modelFactoryController.producirObjeto("Fila actualizar reserva",reservaDto);
-        
+
         return modelFactoryController.actualizarReserva(idActual, reservaDto);
     }
 
