@@ -5,6 +5,7 @@ import co.edu.uniquindio.reserva.reservauq.mapping.dto.ReservaDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.reserva.reservauq.model.Reserva;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +29,13 @@ public class ReservaController {
         return modelFactoryController.obtenerEventos();
     }
 
-    public boolean agregarReserva(ReservaDto reservaDto) {
-        //modelFactoryController.producirMensaje("Fila de reservas",);
-        return modelFactoryController.agregarReserva(reservaDto);
+    public boolean agregarReserva(ReservaDto reservaDto) throws IOException {
+        boolean sePuedeAgregar=modelFactoryController.agregarReserva(reservaDto);
+        if(sePuedeAgregar)
+        {
+            modelFactoryController.producirObjeto(modelFactoryController.FILAAGREGARRESERVA, reservaDto);
+        }
+        return sePuedeAgregar;
     }
 
     public boolean actualizarReserva(String idActual, ReservaDto reservaDto) {
