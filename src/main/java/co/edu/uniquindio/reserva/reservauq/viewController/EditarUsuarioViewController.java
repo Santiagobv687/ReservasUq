@@ -10,6 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
 import java.util.Objects;
 import java.util.Optional;
 
@@ -89,6 +91,7 @@ public class EditarUsuarioViewController {
             if(esValido(usuarioModificado)){
                 usuarioActualizado = editarUsuarioControllerService.actualizarUsuario(IDActual,usuarioModificado);
                 if(usuarioActualizado){
+                    notifier.notify("usuarioActualizado", usuarioIniciado, usuarioModificado);
                     mostrarMensaje("Notificación", "Perfil actualizado", "El perfil se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
                 }
                 else{
@@ -106,7 +109,11 @@ public class EditarUsuarioViewController {
         if(mostrarMensajeConfirmacion("¿Estas seguro de eliminar al usuario?")){
             usuarioEliminado = editarUsuarioControllerService.eliminarUsuario(usuarioIniciado.ID());
             if(usuarioEliminado){
+                notifier.notify("usuarioEliminado", usuarioEliminado, null); // Notificar que se ha eliminado un usuario
+
                 mostrarMensaje("Notificación usuario", "Usuario eliminado", "El usuario se ha eliminado con éxito", Alert.AlertType.INFORMATION);
+                Stage stage = (Stage) btnEliminarPerfil.getScene().getWindow();
+                stage.close();
             }else{
                 mostrarMensaje("Notificación usuario", "Usuario no eliminado", "El usuario no se puede eliminar", Alert.AlertType.ERROR);
             }
