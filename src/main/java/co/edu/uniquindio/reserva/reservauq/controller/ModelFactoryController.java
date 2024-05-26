@@ -1,5 +1,6 @@
 package co.edu.uniquindio.reserva.reservauq.controller;
 
+import co.edu.uniquindio.reserva.reservauq.config.RabbitFactory;
 import co.edu.uniquindio.reserva.reservauq.exceptions.*;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EventoDto;
@@ -11,8 +12,13 @@ import co.edu.uniquindio.reserva.reservauq.model.*;
 import co.edu.uniquindio.reserva.reservauq.utils.BoundedSemaphore;
 import co.edu.uniquindio.reserva.reservauq.utils.GestionUtils;
 import co.edu.uniquindio.reserva.reservauq.utils.Persistencia;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.DeliverCallback;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +31,10 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     String accion = "";
     Thread hilo1GuardarXml;
     Thread hilo2GuardarLog;
+    Thread hiloServicioConsumer1;
+    Thread hiloServicioConsumer2;
+    RabbitFactory rabbitFactory;
+    ConnectionFactory connectionFactory;
 
     //------------------------------  Singleton ------------------------------------------------
     // Clase estatica oculta. Tan solo se instanciara el singleton una vez
@@ -60,8 +70,21 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
             cargarDatosBase();
             // guardarResourceXML();
         }
+        initRabbitConnection();
         registrarAccionesSistema("Inicio de la Aplicacion", 1, "inicioAplicacion");
     }
+
+    private void initRabbitConnection() {
+        rabbitFactory = new RabbitFactory();
+        connectionFactory = rabbitFactory.getConnectionFactory();
+        System.out.println("conexion establecidad");
+    }
+
+    public void consumirMensajesServicio1(){
+        hiloServicioConsumer1 = new Thread(this);
+        hiloServicioConsumer1.start();
+    }
+
 
 
 
@@ -542,5 +565,77 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void consumirMensajes(String queue) {
+        try {
+            Connection connection = connectionFactory.newConnection();
+            Channel channel = connection.createChannel();
+            channel.queueDeclare(queue, false, false, false, null);
+
+            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                String message = new String(delivery.getBody());
+                System.out.println("Mensaje recibido: " + message);
+                //actualizarEstado(message);
+            };
+            while (true)
+            {
+                channel.basicConsume(queue, true, deliverCallback, consumerTag -> { });
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void consumirObjeto(String queue) {
+        try {
+            Connection connection = connectionFactory.newConnection();
+            Channel channel = connection.createChannel();
+            channel.queueDeclare(queue, false, false, false, null);
+
+            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                byte [] objetoSerializado = delivery.getBody();
+
+                //actualizarEstado(message);
+            };
+            while (true)
+            {
+                channel.basicConsume(queue, true, deliverCallback, consumerTag -> { });
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void producirObjeto(String queue, Object objeto) throws IOException {
+        byte objetoSerializado[]=serializarObjeto(objeto);
+        try (Connection connection = connectionFactory.newConnection();
+             Channel channel = connection.createChannel()) {
+            channel.queueDeclare(queue, false, false, false, null);
+            channel.basicPublish("", queue, null, objetoSerializado);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public byte[] serializarObjeto(Object objeto) throws IOException {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(objeto);
+        return bos.toByteArray();
+    }
+
+    public Object deserializarObjeto(byte[] objetoSerializado) throws IOException, ClassNotFoundException {
+        ByteArrayInputStream bis = new ByteArrayInputStream(objetoSerializado);
+        ObjectInputStream ois = new ObjectInputStream(bis);
+        Object objeto=new Object();
+        objeto=ois.readObject();
+        return objeto;
     }
 }

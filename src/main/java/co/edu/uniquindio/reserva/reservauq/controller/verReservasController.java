@@ -30,6 +30,7 @@ public class verReservasController {
     }
 
     public boolean agregarReserva(ReservaDto reservaDto) {
+        modelFactoryController.producirObjeto();
         return modelFactoryController.agregarReserva(reservaDto);
     }
 
