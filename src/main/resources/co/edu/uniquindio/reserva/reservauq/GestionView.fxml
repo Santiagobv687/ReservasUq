@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="655.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.reserva.reservauq.viewController.GestionViewController">
+   <children>
+      <TabPane layoutX="8.0" layoutY="8.0" prefHeight="642.0" prefWidth="865.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab style="-fx-background-color: #FFB923;" text="Usuario">
+              <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <children>
+                          <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="790.0">
+                              <items>
+                                  <fx:include source="UsuarioView.fxml" />
+                              </items>
+                          </SplitPane>
+                      </children>
+                  </AnchorPane>
+              </content>
+          </Tab>
+            <Tab style="-fx-background-color: #FFB923;" text="Empleado">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="790.0">
+                          <items>
+                              <fx:include source="EmpleadoView.fxml" />
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab style="-fx-background-color: #FFB923;" text="Evento">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="593.0" prefWidth="791.0">
+                     <children>
+                        <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="599.0" prefWidth="782.0">
+                           <items>
+                              <fx:include source="EventoView.fxml" />
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #FFB923;" text="Reserva">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="593.0" prefWidth="791.0">
+                     <children>
+                        <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="599.0" prefWidth="782.0">
+                           <items>
+                              <fx:include source="ReservaView.fxml" />
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
