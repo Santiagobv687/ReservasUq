@@ -41,7 +41,7 @@ public class ReservaController {
         return modelFactoryController.eliminarReserva(IDReserva);
     }
 
-    public ArrayList<Reserva> actualizarMensajesReservas() {
+    public ArrayList<ReservaDto> actualizarMensajesReservas() {
         modelFactoryController.consumirMensajesServicio1();
         return modelFactoryController.reservas;
     }

@@ -37,8 +37,8 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     ConnectionFactory connectionFactory;
     final String FILAACTUALIZARRESERVA="fila actualizar reserva";
     final String FILAAGREGARRESERVA="fila agregar reserva";
-    Reserva reserva;
-    ArrayList<Reserva> reservas;
+    ReservaDto reserva;
+    ArrayList<ReservaDto> reservas;
 
     //------------------------------  Singleton ------------------------------------------------
     // Clase estatica oculta. Tan solo se instanciara el singleton una vez
@@ -593,7 +593,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
                 try
                 {
                     Object objetoDeserializado=deserializarObjeto(objetoSerializado);
-                    reserva=(Reserva) objetoDeserializado;
+                    reserva=(ReservaDto) objetoDeserializado;
                     reservas.add(reserva);
                 }
                 catch (ClassNotFoundException e)
