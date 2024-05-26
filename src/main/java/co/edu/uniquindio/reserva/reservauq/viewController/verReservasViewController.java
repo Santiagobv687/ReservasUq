@@ -5,6 +5,7 @@ import co.edu.uniquindio.reserva.reservauq.mapping.dto.EventoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.ReservaDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.reserva.reservauq.model.EstadoReserva;
+import co.edu.uniquindio.reserva.reservauq.model.Gestion;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -297,5 +298,43 @@ public class verReservasViewController {
             return false;
         }
     }
+
+    @FXML
+    public void verReservas(ActionEvent actionEvent) {
+        ArrayList<ReservaDto> reservas=verReservasControllerService.actualizarMensajesReservas();
+        for(int i=0;i<reservas.size();i++)
+        {
+            if(reservas.get(i).usuarioReserva().ID().equals(Gestion.usuarioIniciado))
+            {
+                listaReservasDto.add(reservas.get(i));
+            }
+        }
+    }
+
+    public void agregarOActualizar(ArrayList<ReservaDto> reservas) {
+        int contador=0;
+        for(int i=0;i< reservas.size();i++)
+        {
+            for(int j=0;j<listaReservasDto.size();j++)
+            {
+                if(reservas.get(i).IDReserva().equals(listaReservasDto.get(j).IDReserva()))
+                {
+                    listaReservasDto.set(j,reservas.get(i));
+                }
+                else
+                {
+                    contador++;
+                }
+            }
+
+            if(contador==listaReservasDto.size())
+            {
+                listaReservasDto.add(reservas.get(i));
+            }
+
+            contador=0;
+        }
+    }
+
 
 }

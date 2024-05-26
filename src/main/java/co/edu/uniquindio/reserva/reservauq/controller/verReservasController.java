@@ -5,6 +5,7 @@ import co.edu.uniquindio.reserva.reservauq.mapping.dto.ReservaDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class verReservasController {
@@ -34,7 +35,7 @@ public class verReservasController {
         boolean sePuedeAgregar=modelFactoryController.agregarReserva(reservaDto);
         if(sePuedeAgregar)
         {
-            modelFactoryController.producirObjeto(modelFactoryController.FILAAGREGARRESERVA, reservaDto);
+            modelFactoryController.producirObjeto(modelFactoryController.FILA, reservaDto);
         }
         return sePuedeAgregar;
     }
@@ -43,9 +44,22 @@ public class verReservasController {
         boolean sePuedeActualizar=modelFactoryController.actualizarReserva(idActual, reservaDto);
         if(sePuedeActualizar)
         {
-            modelFactoryController.producirObjeto(modelFactoryController.FILAACTUALIZARRESERVA, reservaDto);
+            modelFactoryController.producirObjeto(modelFactoryController.FILA, reservaDto);
         }
         return sePuedeActualizar;
+    }
+
+    public ArrayList<ReservaDto> actualizarMensajesReservas() {
+        modelFactoryController.consumirMensajesServicio1();
+        try
+        {
+            modelFactoryController.hiloServicioConsumer1.join();
+        }
+        catch (InterruptedException e)
+        {
+            throw new RuntimeException(e);
+        }
+        return modelFactoryController.reservas;
     }
 
     public boolean eliminarReserva(String IDReserva) {

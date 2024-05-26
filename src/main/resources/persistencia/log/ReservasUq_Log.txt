@@ -276,3 +276,5 @@ may. 26, 2024 3:09:51 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUt
 INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como empleado: 1234,2024-05-26
 may. 26, 2024 3:10:08 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: actualizarReserva,Se ha actualizado la reserva: 1,2024-05-26
+may. 26, 2024 5:29:54 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioAplicacion,Inicio de la Aplicacion,2024-05-26

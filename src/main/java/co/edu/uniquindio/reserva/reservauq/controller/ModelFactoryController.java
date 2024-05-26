@@ -35,8 +35,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     Thread hiloServicioConsumer2;
     RabbitFactory rabbitFactory;
     ConnectionFactory connectionFactory;
-    final String FILAACTUALIZARRESERVA="fila actualizar reserva";
-    final String FILAAGREGARRESERVA="fila agregar reserva";
+    final String FILA="fila agregar reserva";
     ReservaDto reserva;
     ArrayList<ReservaDto> reservas;
 
@@ -558,10 +557,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
             liberar();
         }
         if(hiloActual == hiloServicioConsumer1){
-            consumirMensajes(FILAACTUALIZARRESERVA);
-        }
-        if(hiloActual == hiloServicioConsumer1){
-            consumirMensajes(FILAAGREGARRESERVA);
+            consumirMensajes(FILA);
         }
 
     }
