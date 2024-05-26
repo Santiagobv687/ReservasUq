@@ -5,7 +5,9 @@ import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EventoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.ReservaDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
+import co.edu.uniquindio.reserva.reservauq.model.Reserva;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,11 +22,9 @@ public interface IModelFactoryService {
 
 	List<UsuarioDto> obtenerUsuario();
 
-	UsuarioDto obtenerUsuarioDto();
+	void registraUsuario(UsuarioDto usuarioDto) throws UsuarioExistenteException, CampoVacioException, ContraseñaIncorrectaException;
 
-	void registraUsuario(UsuarioDto usuarioDto) throws UsuarioExistenteException, CampoVacioException, ContraseniaIncorrectaException;
-
-	Object iniciarSesion(String ID,String contrasenia)  throws UsuarioNoRegistradoException, CampoVacioException, ContraseniaIncorrectaException;
+	Object iniciarSesion(String ID,String contrasenia)  throws UsuarioNoRegistradoException, CampoVacioException, ContraseñaIncorrectaException;
 
 	boolean agregarUsuario(UsuarioDto usuarioDto) throws UsuarioException;
 

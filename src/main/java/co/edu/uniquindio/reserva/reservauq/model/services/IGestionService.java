@@ -2,6 +2,7 @@ package co.edu.uniquindio.reserva.reservauq.model.services;
 
 import co.edu.uniquindio.reserva.reservauq.exceptions.*;
 import co.edu.uniquindio.reserva.reservauq.model.Empleado;
+import co.edu.uniquindio.reserva.reservauq.model.Evento;
 import co.edu.uniquindio.reserva.reservauq.model.Persona;
 import co.edu.uniquindio.reserva.reservauq.model.Usuario;
 
@@ -16,7 +17,7 @@ public interface IGestionService {
 	Empleado obtenerEmpleado(String ID);
 	ArrayList<Empleado> obtenerEmpleados();
 
-    void registrarUsuario(Usuario usuario) throws CampoVacioException, UsuarioExistenteException, ContraseniaIncorrectaException;
+    void registrarUsuario(Usuario usuario) throws CampoVacioException, UsuarioExistenteException, ContraseñaIncorrectaException;
 
     void validarCampoVacio(String cualquiera, String msg) throws CampoVacioException;
 
@@ -24,15 +25,15 @@ public interface IGestionService {
 
 	void agregarUsuario(Usuario usuario);
 
-	Object iniciarSesion(String ID,String contrasenia) throws UsuarioNoRegistradoException, CampoVacioException, ContraseniaIncorrectaException;
+	Object iniciarSesion(String ID,String contrasenia) throws UsuarioNoRegistradoException, CampoVacioException, ContraseñaIncorrectaException;
 
-	void validarContrasenia(String contrasenia, int indice, Persona persona) throws ContraseniaIncorrectaException;
+	void validarContrasenia(String contrasenia, int indice, Persona persona) throws ContraseñaIncorrectaException;
 
 	Usuario buscarUsuario(String ID,int indice) throws UsuarioNoRegistradoException;
 
 	 Empleado buscarEmpleado(String ID,int indice) throws UsuarioNoRegistradoException;
 
-	void validarCaracteresContrasenia(String contrasenia,int indice,boolean yaVocal,boolean yaMayus,boolean yaCaracterEspecial) throws ContraseniaIncorrectaException;
+	void validarCaracteresContrasenia(String contrasenia,int indice,boolean yaVocal,boolean yaMayus,boolean yaCaracterEspecial) throws ContraseñaIncorrectaException;
 
 	boolean isVocal(char caracterContrasenia);
 

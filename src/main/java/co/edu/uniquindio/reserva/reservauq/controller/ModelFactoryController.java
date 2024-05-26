@@ -133,23 +133,16 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
 
     }
 
-    @Override
-    public UsuarioDto obtenerUsuarioDto(){
-        Usuario usuario=getGestion().obtenerUsuarioDto();
-        UsuarioDto usuarioDto=mapper.usuarioToUsuarioDto(usuario);
-        return usuarioDto;
-    }
-
 
     @Override
-    public void registraUsuario(UsuarioDto usuarioDto) throws UsuarioExistenteException, CampoVacioException, ContraseniaIncorrectaException {
+    public void registraUsuario(UsuarioDto usuarioDto) throws UsuarioExistenteException, CampoVacioException, ContraseñaIncorrectaException {
         Usuario usuario = mapper.usuarioDtoToUsuario(usuarioDto);
         gestion.registrarUsuario(usuario);
         registrarAccionesSistema("Se ha registradoal usuario: " + usuario.getID(), 1, "registrarUsuario");
     }
 
     @Override
-    public Object iniciarSesion(String ID, String contrasenia) throws UsuarioNoRegistradoException, CampoVacioException, ContraseniaIncorrectaException {
+    public Object iniciarSesion(String ID, String contrasenia) throws UsuarioNoRegistradoException, CampoVacioException, ContraseñaIncorrectaException {
         Object queEs = gestion.iniciarSesion(ID, contrasenia);
         Usuario usuarioIniciado;
         Empleado empleadoIniciado;

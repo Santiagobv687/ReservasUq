@@ -1,4 +1,4 @@
 package co.edu.uniquindio.reserva.reservauq.viewController;
 
-public class verReservasViewController {
+public class PerfilUsuarioViewController {
 }

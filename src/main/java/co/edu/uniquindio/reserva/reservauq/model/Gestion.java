@@ -13,7 +13,6 @@ public class Gestion implements IGestionService, Serializable {
 	ArrayList<Empleado> listaEmpleados = new ArrayList<>();
 	ArrayList<Reserva> listaReservas= new ArrayList<>();
 	ArrayList<Evento> listaEventos= new ArrayList<>();
-	public static String usuarioIniciado="";
 
     private final String correoOficial="diegon.penar@uqvirtual.edu.co";
 
@@ -134,13 +133,8 @@ public class Gestion implements IGestionService, Serializable {
 
 	//Metodos relacionados con los usuarios
 
-	public Usuario obtenerUsuarioDto(){
-		Usuario usuario=obtenerUsuario(usuarioIniciado);
-		return usuario;
-	}
-
 	@Override
-	public void registrarUsuario(Usuario usuario) throws CampoVacioException, UsuarioExistenteException, ContraseniaIncorrectaException {
+	public void registrarUsuario(Usuario usuario) throws CampoVacioException, UsuarioExistenteException, ContraseñaIncorrectaException {
 		validarCampoVacio(usuario.getNombre(),"Debe indicar su nombre de usuario");
 		validarCampoVacio(usuario.getID(),"El usuario debe tener una ID");
 		validarCampoVacio(usuario.getCorreo(),"Debe indicar su correo electronico");
@@ -158,13 +152,13 @@ public class Gestion implements IGestionService, Serializable {
 	}
 
 	@Override
-	public void validarCaracteresContrasenia(String contrasenia,int indice,boolean yaVocal,boolean yaMayus,boolean yaCaracterEspecial) throws ContraseniaIncorrectaException {
+	public void validarCaracteresContrasenia(String contrasenia,int indice,boolean yaVocal,boolean yaMayus,boolean yaCaracterEspecial) throws ContraseñaIncorrectaException {
 		if(indice==contrasenia.length())
 		{
 
 			if(!yaVocal||!yaCaracterEspecial||!yaMayus)
 			{
-				throw new ContraseniaIncorrectaException("La contraseña debe contener por lo menos un caracter en mayuscula, una vocal y un caracter especial");
+				throw new ContraseñaIncorrectaException("La contraseña debe contener por lo menos un caracter en mayuscula, una vocal y un caracter especial");
 			}
 		}
 		else
@@ -232,7 +226,7 @@ public class Gestion implements IGestionService, Serializable {
 	}
 
 	@Override
-	public Object iniciarSesion(String ID,String contrasenia) throws CampoVacioException, ContraseniaIncorrectaException, UsuarioNoRegistradoException {
+	public Object iniciarSesion(String ID,String contrasenia) throws CampoVacioException, ContraseñaIncorrectaException, UsuarioNoRegistradoException {
 		validarCampoVacio(ID,"El usuario debe tener una ID");
 		validarCampoVacio(contrasenia,"Debe indicar su contraseña");
 		Usuario isUsuario=buscarUsuario(ID,0);
@@ -251,15 +245,14 @@ public class Gestion implements IGestionService, Serializable {
 		validarContrasenia(contrasenia,0,isUsuario);
         redactarCorreoVerificacion(isUsuario.getCorreo());
 
-		usuarioIniciado=isUsuario.getID();
 		return isUsuario;
 	}
 
 	@Override
-	public void validarContrasenia(String contrasenia,int indice,Persona persona) throws ContraseniaIncorrectaException {
+	public void validarContrasenia(String contrasenia,int indice,Persona persona) throws ContraseñaIncorrectaException {
 		if(!contrasenia.equals(persona.getContrasenia()))
 		{
-			throw new ContraseniaIncorrectaException();
+			throw new ContraseñaIncorrectaException();
 		}
 	}
 
