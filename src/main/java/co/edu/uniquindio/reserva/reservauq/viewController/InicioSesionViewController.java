@@ -4,6 +4,7 @@ import co.edu.uniquindio.reserva.reservauq.ReservaApplication;
 import co.edu.uniquindio.reserva.reservauq.controller.InicioSesionController;
 import co.edu.uniquindio.reserva.reservauq.controller.RegistroController;
 import co.edu.uniquindio.reserva.reservauq.exceptions.CampoVacioException;
+import co.edu.uniquindio.reserva.reservauq.exceptions.ContraseniaIncorrectaException;
 import co.edu.uniquindio.reserva.reservauq.exceptions.ContraseñaIncorrectaException;
 import co.edu.uniquindio.reserva.reservauq.exceptions.UsuarioNoRegistradoException;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
@@ -101,7 +102,7 @@ public class InicioSesionViewController {
                 }
             }
         }
-        catch (UsuarioNoRegistradoException | CampoVacioException | ContraseñaIncorrectaException e)
+        catch (UsuarioNoRegistradoException | CampoVacioException | ContraseniaIncorrectaException e)
         {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText(null);
