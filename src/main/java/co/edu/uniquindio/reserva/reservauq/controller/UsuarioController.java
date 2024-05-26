@@ -6,10 +6,10 @@ import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import java.util.List;
 
 public class UsuarioController implements IUsuarioControllerService {
-    ModelFactoryController modelFactoryController;
+    ModelFactoryControllerServidor modelFactoryController;
 
     public UsuarioController(){
-        modelFactoryController = ModelFactoryController.getInstance();
+        modelFactoryController = ModelFactoryControllerServidor.getInstance();
     }
 
     @Override

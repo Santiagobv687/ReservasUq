@@ -1,12 +1,12 @@
 package co.edu.uniquindio.reserva.reservauq.controller;
 
+import co.edu.uniquindio.reserva.reservauq.controller.service.IModelFactoryService;
 import co.edu.uniquindio.reserva.reservauq.exceptions.*;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EventoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.ReservaDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.mappers.GestionMapper;
-import co.edu.uniquindio.reserva.reservauq.controller.service.IModelFactoryService;
 import co.edu.uniquindio.reserva.reservauq.model.*;
 import co.edu.uniquindio.reserva.reservauq.utils.BoundedSemaphore;
 import co.edu.uniquindio.reserva.reservauq.utils.GestionUtils;
@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelFactoryController implements IModelFactoryService, Runnable {
+public class ModelFactoryControllerCliente implements IModelFactoryService, Runnable {
     Gestion gestion;
     GestionMapper mapper = GestionMapper.INSTANCE;
     BoundedSemaphore semaphore = new BoundedSemaphore(1);
@@ -29,15 +29,15 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     //------------------------------  Singleton ------------------------------------------------
     // Clase estatica oculta. Tan solo se instanciara el singleton una vez
     private static class SingletonHolder {
-        private final static ModelFactoryController eINSTANCE = new ModelFactoryController();
+        private final static ModelFactoryControllerCliente eINSTANCE = new ModelFactoryControllerCliente();
     }
 
     // Método para obtener la instancia de nuestra clase
-    public static ModelFactoryController getInstance() {
+    public static ModelFactoryControllerCliente getInstance() {
         return SingletonHolder.eINSTANCE;
     }
 
-    public ModelFactoryController() {
+    public ModelFactoryControllerCliente() {
         System.out.println("Invocación clase singleton");
         //cargarDatosBase();
         //salvarDatosPrueba();
