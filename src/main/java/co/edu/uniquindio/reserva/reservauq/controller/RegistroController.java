@@ -8,10 +8,10 @@ import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 
 public class RegistroController implements IRegistroControllerService {
 
-    ModelFactoryControllerServidor modelFactoryController;
+    ModelFactoryController modelFactoryController;
 
     public RegistroController() {
-        modelFactoryController = ModelFactoryControllerServidor.getInstance();
+        modelFactoryController = ModelFactoryController.getInstance();
     }
     @Override
     public void registrarUsuario(UsuarioDto usuarioDto) throws UsuarioExistenteException, CampoVacioException, ContraseniaIncorrectaException {

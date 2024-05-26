@@ -7,14 +7,14 @@ import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import java.util.List;
 
 public class verReservasController {
-    ModelFactoryControllerServidor modelFactoryController;
+    ModelFactoryController modelFactoryController;
 
     public UsuarioDto obtenerUsuarioDto(){
         return modelFactoryController.obtenerUsuarioDto();
     }
 
     public verReservasController(){
-        modelFactoryController= ModelFactoryControllerServidor.getInstance();
+        modelFactoryController=ModelFactoryController.getInstance();
     }
 
     public List<ReservaDto> obtenerReservas() {

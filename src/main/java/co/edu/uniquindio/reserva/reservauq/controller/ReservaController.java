@@ -8,10 +8,10 @@ import java.util.List;
 
 public class ReservaController {
 
-    ModelFactoryControllerServidor modelFactoryController;
+    ModelFactoryController modelFactoryController;
 
     public ReservaController(){
-        modelFactoryController= ModelFactoryControllerServidor.getInstance();
+        modelFactoryController=ModelFactoryController.getInstance();
     }
 
     public List<ReservaDto> obtenerReservas() {
