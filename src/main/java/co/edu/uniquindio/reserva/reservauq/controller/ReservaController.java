@@ -11,7 +11,7 @@ public class ReservaController {
     ModelFactoryController modelFactoryController;
 
     public ReservaController(){
-        modelFactoryController= ModelFactoryController.getInstance();
+        modelFactoryController=ModelFactoryController.getInstance();
     }
 
     public List<ReservaDto> obtenerReservas() {

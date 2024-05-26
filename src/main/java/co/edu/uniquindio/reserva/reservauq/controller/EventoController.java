@@ -10,7 +10,7 @@ public class EventoController {
     ModelFactoryController modelFactoryController;
 
     public EventoController(){
-        modelFactoryController= ModelFactoryController.getInstance();
+        modelFactoryController=ModelFactoryController.getInstance();
     }
 
     public List<EventoDto> obtenerEventos() {

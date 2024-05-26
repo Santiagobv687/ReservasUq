@@ -10,7 +10,7 @@ public class InicioSesionController implements IInicioSesionControllerService {
     ModelFactoryController modelFactoryController;
 
     public InicioSesionController() {
-        modelFactoryController= ModelFactoryController.getInstance();
+        modelFactoryController=ModelFactoryController.getInstance();
     }
 
     @Override
