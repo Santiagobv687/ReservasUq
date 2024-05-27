@@ -97,6 +97,9 @@ public class UsuarioViewController {
             txtID.setText(usuarioSeleccionado.ID());
             txtContrasenia.setText(usuarioSeleccionado.contrasenia());
         }
+        else{
+            limpiarCamposUsuario();
+        }
     }
 
     @FXML
