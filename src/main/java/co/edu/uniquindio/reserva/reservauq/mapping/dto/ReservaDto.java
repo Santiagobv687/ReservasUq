@@ -4,6 +4,7 @@ import co.edu.uniquindio.reserva.reservauq.model.EstadoReserva;
 import co.edu.uniquindio.reserva.reservauq.model.Evento;
 import co.edu.uniquindio.reserva.reservauq.model.Usuario;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 public record ReservaDto(
@@ -11,5 +12,5 @@ public record ReservaDto(
         UsuarioDto usuarioReserva,
         EventoDto eventoReserva,
         LocalDate fechaSolicitud,
-        EstadoReserva estado) {
+        EstadoReserva estado)implements Serializable {
 }
