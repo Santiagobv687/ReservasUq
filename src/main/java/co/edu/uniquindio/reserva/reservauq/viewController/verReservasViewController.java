@@ -5,6 +5,7 @@ import co.edu.uniquindio.reserva.reservauq.mapping.dto.EventoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.ReservaDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.reserva.reservauq.model.EstadoReserva;
+import co.edu.uniquindio.reserva.reservauq.model.Gestion;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,9 @@ public class verReservasViewController {
     ReservaDto reservaSeleccionada;
     ArrayList<UsuarioDto> listaUsuariosDto=new ArrayList<>();
     ArrayList<EventoDto> listaEventosDto=new ArrayList<>();
+
+    @FXML
+    private Button btnActualizarReservas;
 
     @FXML
     private Button btnActualizar;
@@ -163,7 +168,7 @@ public class verReservasViewController {
     }
 
     @FXML
-    void actualizarReserva(ActionEvent event) {
+    void actualizarReserva(ActionEvent event) throws IOException {
         boolean reservaActualizada = false;
 
         // 1. Verificar la reserva seleccionada
@@ -192,7 +197,7 @@ public class verReservasViewController {
     }
 
     @FXML
-    void agregarReserva(ActionEvent event) {
+    void agregarReserva(ActionEvent event) throws IOException {
         ReservaDto reservaDto = construirReservaDto(true);
         if (esValido(reservaDto)) {
             if (verReservasControllerService.agregarReserva(reservaDto)) {
@@ -300,5 +305,41 @@ public class verReservasViewController {
             return false;
         }
     }
+
+    @FXML
+    public void verReservas(ActionEvent actionEvent) {
+        ArrayList<ReservaDto> reservas=verReservasControllerService.actualizarMensajesReservas();
+        for(int i=0;i<reservas.size();i++)
+        {
+            if(reservas.get(i).usuarioReserva().ID().equals(Gestion.usuarioIniciado))
+            {
+                if(seEncuentraYa(reservas.get(i)))
+                {
+                    listaReservasDto.add(reservas.get(i));
+                }
+
+            }
+        }
+    }
+
+    public boolean seEncuentraYa(ReservaDto reservas) {
+        int contador=0;
+        for(int i=0;i<listaReservasDto.size();i++)
+        {
+            if(!reservas.IDReserva().equals(listaReservasDto.get(i).IDReserva()))
+            {
+                contador++;
+            }
+        }
+        if (contador==listaReservasDto.size())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
 }

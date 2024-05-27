@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class ReservaViewController {
-
     ReservaController reservaControllerService;
     ObservableList<ReservaDto> listaReservasDto = FXCollections.observableArrayList();
     ReservaDto reservaSeleccionada;
@@ -33,6 +32,9 @@ public class ReservaViewController {
 
     @FXML
     private Button btnActualizar;
+
+    @FXML
+    private Button btnEnvioReservas;
 
     @FXML
     private Button btnAgregar;
@@ -99,7 +101,7 @@ public class ReservaViewController {
         notifier.addPropertyChangeListener(event -> {
             if ("usuarioAgregado".equals(event.getPropertyName()) || "usuarioEliminado".equals(event.getPropertyName())
                     || "usuarioActualizado".equals(event.getPropertyName()) || "eventoAgregado".equals(event.getPropertyName())
-                || "eventoEliminado".equals(event.getPropertyName()) || "eventoActualizado".equals(event.getPropertyName())) {
+                    || "eventoEliminado".equals(event.getPropertyName()) || "eventoActualizado".equals(event.getPropertyName())) {
                 actualizar();
             }
         });
@@ -177,13 +179,10 @@ public class ReservaViewController {
             comboUsuario.setValue(reservaSeleccionada.usuarioReserva().nombre());
             comboEstado.setValue(reservaSeleccionada.estado().toString());
         }
-        else{
-            limpiarCamposReserva();
-        }
     }
 
     @FXML
-    void actualizarReserva(ActionEvent event) {
+    void actualizarReserva(ActionEvent event) throws IOException {
         boolean reservaActualizada = false;
 
         // 1. Verificar la reserva seleccionada
@@ -212,7 +211,7 @@ public class ReservaViewController {
     }
 
     @FXML
-    void agregarReserva(ActionEvent event) {
+    void agregarReserva(ActionEvent event) throws IOException {
         ReservaDto reservaDto = construirReservaDto(true);
         if (esValido(reservaDto)) {
             if (reservaControllerService.agregarReserva(reservaDto)) {
@@ -368,6 +367,34 @@ public class ReservaViewController {
             return true;
         } else {
             return false;
+        }
+    }
+
+    @FXML
+    public void verReservas(ActionEvent actionEvent) {
+        ArrayList<ReservaDto> reservas=reservaControllerService.actualizarMensajesReservas();
+        int contador=0;
+        for(int i=0;i< reservas.size();i++)
+        {
+            for(int j=0;j<listaReservasDto.size();j++)
+            {
+                if(reservas.get(i).IDReserva().equals(listaReservasDto.get(j).IDReserva()))
+                {
+                    listaReservasDto.set(j,reservas.get(i));
+                    j=listaReservasDto.size();
+                }
+                else
+                {
+                    contador++;
+                }
+            }
+
+            if(contador==listaReservasDto.size())
+            {
+                listaReservasDto.add(reservas.get(i));
+            }
+
+            contador=0;
         }
     }
 
