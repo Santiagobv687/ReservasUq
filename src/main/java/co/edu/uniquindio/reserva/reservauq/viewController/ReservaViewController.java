@@ -374,7 +374,7 @@ public class ReservaViewController {
         {
               for(int j=0;j<listaReservasDto.size();j++)
               {
-                  if(reservas.get(i).IDReserva().equals(listaReservasDto.get(j).IDReserva()))
+                  if(reservas.get(i).equals(listaReservasDto.get(j)))
                   {
                      listaReservasDto.set(j,reservas.get(i));
                   }

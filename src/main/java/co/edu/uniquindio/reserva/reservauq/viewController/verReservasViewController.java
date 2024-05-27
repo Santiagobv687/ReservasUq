@@ -319,7 +319,7 @@ public class verReservasViewController {
         int contador=0;
         for(int i=0;i<listaReservasDto.size();i++)
         {
-            if(!reservas.IDReserva().equals(listaReservasDto.get(i).IDReserva()))
+            if(!reservas.equals(listaReservasDto.get(i)))
             {
                 contador++;
             }
