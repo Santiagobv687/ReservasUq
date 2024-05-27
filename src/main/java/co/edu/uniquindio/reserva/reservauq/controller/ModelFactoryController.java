@@ -57,7 +57,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
-		cargarDatosDesdeArchivos();
+		//cargarDatosDesdeArchivos();
 
         //3. Guardar y Cargar el recurso serializable binario
         //guardarResourceBinario();
@@ -65,8 +65,8 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
 
 
         //4. Guardar y Cargar el recurso serializable XML
-        guardarResourceXML();
-        //cargarResourceXML();
+        //guardarResourceXML();
+        cargarResourceXML();
 
         //Siempre se debe verificar si la raiz del recurso es null
 

@@ -60,3 +60,9 @@ may. 27, 2024 1:00:20 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUt
 INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como usuario: 1111,2024-05-27
 may. 27, 2024 1:04:15 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-27
+may. 27, 2024 2:26:17 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-27
+may. 27, 2024 2:26:27 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como empleado: 1234,2024-05-27
+may. 27, 2024 2:27:17 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como usuario: 1111,2024-05-27
