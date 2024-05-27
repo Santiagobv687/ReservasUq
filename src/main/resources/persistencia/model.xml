@@ -30,7 +30,7 @@
           <object idref="Empleado0"/>
          </void>
          <void property="fecha">
-          <object class="java.time.LocalDate" method="parse">
+          <object class="java.time.LocalDate" id="LocalDate0" method="parse">
            <string>2024-03-14</string>
           </object>
          </void>
@@ -42,7 +42,7 @@
               <string>1</string>
              </void>
              <void property="estado">
-              <object class="java.lang.Enum" id="EstadoReserva0" method="valueOf">
+              <object class="java.lang.Enum" method="valueOf">
                <class>co.edu.uniquindio.reserva.reservauq.model.EstadoReserva</class>
                <string>RECHAZADA</string>
               </object>
@@ -92,7 +92,7 @@
                       <object idref="Empleado1"/>
                      </void>
                      <void property="fecha">
-                      <object class="java.time.LocalDate" id="LocalDate0" method="parse">
+                      <object class="java.time.LocalDate" id="LocalDate1" method="parse">
                        <string>2024-03-30</string>
                       </object>
                      </void>
@@ -104,27 +104,27 @@
                           <string>2</string>
                          </void>
                          <void property="estado">
-                          <object idref="EstadoReserva0"/>
+                          <object class="java.lang.Enum" id="EstadoReserva0" method="valueOf">
+                           <class>co.edu.uniquindio.reserva.reservauq.model.EstadoReserva</class>
+                           <string>PENDIENTE</string>
+                          </object>
                          </void>
                          <void property="evento">
                           <object class="co.edu.uniquindio.reserva.reservauq.model.Evento" id="Evento2">
                            <void property="IDEvento">
-                            <string>2222</string>
+                            <string>111</string>
                            </void>
                            <void property="capacidadMax">
-                            <int>200</int>
+                            <int>30</int>
                            </void>
                            <void property="descripcion">
-                            <string>Graduacion para estudiantes de grado 11 o universitarios.</string>
+                            <string>Celebra el cumpleaños de la forma que desees</string>
                            </void>
                            <void property="fecha">
                             <object idref="LocalDate0"/>
                            </void>
                            <void property="listaReservas">
                             <object class="java.util.ArrayList">
-                             <void method="add">
-                              <object idref="Reserva1"/>
-                             </void>
                              <void method="add">
                               <object idref="Reserva0"/>
                              </void>
@@ -140,8 +140,8 @@
                                 <object idref="Evento2"/>
                                </void>
                                <void property="fechaSolicitud">
-                                <object class="java.time.LocalDate" id="LocalDate1" method="parse">
-                                 <string>2024-05-16</string>
+                                <object class="java.time.LocalDate" id="LocalDate2" method="parse">
+                                 <string>2024-05-30</string>
                                 </object>
                                </void>
                                <void property="usuario">
@@ -175,12 +175,12 @@
                             </object>
                            </void>
                            <void property="nombreEvento">
-                            <string>Graduacion</string>
+                            <string>Cumpleaños</string>
                            </void>
                           </object>
                          </void>
                          <void property="fechaSolicitud">
-                          <object idref="LocalDate1"/>
+                          <object idref="LocalDate2"/>
                          </void>
                          <void property="usuario">
                           <object idref="Usuario0"/>
@@ -211,7 +211,7 @@
                 </object>
                </void>
                <void property="fecha">
-                <object idref="LocalDate0"/>
+                <object idref="LocalDate1"/>
                </void>
                <void property="listaReservas">
                 <object idref="ArrayList1"/>
@@ -222,7 +222,9 @@
               </object>
              </void>
              <void property="fechaSolicitud">
-              <object idref="LocalDate1"/>
+              <object class="java.time.LocalDate" method="parse">
+               <string>2024-05-16</string>
+              </object>
              </void>
              <void property="usuario">
               <object class="co.edu.uniquindio.reserva.reservauq.model.Usuario" id="Usuario1">

@@ -177,6 +177,9 @@ public class ReservaViewController {
             comboUsuario.setValue(reservaSeleccionada.usuarioReserva().nombre());
             comboEstado.setValue(reservaSeleccionada.estado().toString());
         }
+        else{
+            limpiarCamposReserva();
+        }
     }
 
     @FXML
