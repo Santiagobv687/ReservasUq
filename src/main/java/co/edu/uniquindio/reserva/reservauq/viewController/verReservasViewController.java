@@ -306,33 +306,31 @@ public class verReservasViewController {
         {
             if(reservas.get(i).usuarioReserva().ID().equals(Gestion.usuarioIniciado))
             {
-                listaReservasDto.add(reservas.get(i));
+                if(seEncuentraYa(reservas.get(i)))
+                {
+                    listaReservasDto.add(reservas.get(i));
+                }
+
             }
         }
     }
 
-    public void agregarOActualizar(ArrayList<ReservaDto> reservas) {
+    public boolean seEncuentraYa(ReservaDto reservas) {
         int contador=0;
-        for(int i=0;i< reservas.size();i++)
+        for(int i=0;i<listaReservasDto.size();i++)
         {
-            for(int j=0;j<listaReservasDto.size();j++)
+            if(!reservas.equals(listaReservasDto.get(i)))
             {
-                if(reservas.get(i).IDReserva().equals(listaReservasDto.get(j).IDReserva()))
-                {
-                    listaReservasDto.set(j,reservas.get(i));
-                }
-                else
-                {
-                    contador++;
-                }
+                contador++;
             }
-
-            if(contador==listaReservasDto.size())
-            {
-                listaReservasDto.add(reservas.get(i));
-            }
-
-            contador=0;
+        }
+        if (contador==listaReservasDto.size())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
