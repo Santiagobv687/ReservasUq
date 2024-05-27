@@ -316,6 +316,7 @@ public class verReservasViewController {
                 if(seEncuentraYa(reservas.get(i)))
                 {
                     listaReservasDto.add(reservas.get(i));
+                    tablaReservas.refresh();
                 }
 
             }

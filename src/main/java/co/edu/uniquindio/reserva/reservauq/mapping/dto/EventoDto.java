@@ -4,6 +4,7 @@ import co.edu.uniquindio.reserva.reservauq.model.Empleado;
 import co.edu.uniquindio.reserva.reservauq.model.Reserva;
 import co.edu.uniquindio.reserva.reservauq.model.Usuario;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public record EventoDto (
         EmpleadoDto empleado,
         ArrayList<Reserva> listaReservas
 
-){
+) implements Serializable {
 
 
 }

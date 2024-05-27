@@ -136,7 +136,7 @@ public class Gestion implements IGestionService, Serializable {
 		validarCampoVacio(usuario.getID(),"El usuario debe tener una ID");
 		validarCampoVacio(usuario.getCorreo(),"Debe indicar su correo electronico");
 		validarCampoVacio(usuario.getContrasenia(),"Debe indicar su contraseña");
-		validarCaracteresContrasenia(usuario.getContrasenia(),0,false,false,false);
+		//validarCaracteresContrasenia(usuario.getContrasenia(),0,false,false,false);
 		buscarYAgregarUsuario(usuario,0);
 	}
 

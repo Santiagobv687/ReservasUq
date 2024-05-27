@@ -57,7 +57,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
-		//cargarDatosDesdeArchivos();
+		cargarDatosDesdeArchivos();
 
         //3. Guardar y Cargar el recurso serializable binario
         //guardarResourceBinario();
@@ -65,8 +65,8 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
 
 
         //4. Guardar y Cargar el recurso serializable XML
-        //guardarResourceXML();
-        cargarResourceXML();
+        guardarResourceXML();
+        //cargarResourceXML();
 
         //Siempre se debe verificar si la raiz del recurso es null
 
@@ -202,7 +202,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
                 if(!gestion.verificarIdExistente(usuario.getID()))
                     getGestion().agregarUsuario(usuario);
                     registrarAccionesSistema("Se ha agregado al usuario: " + usuarioDto.ID(), 1, "agregarUsuario");
-                    //guardarResourceXML();
+                    guardarResourceXML();
             }
             return true;
         } catch (UsuarioException | IdRepetidaException e) {
@@ -217,7 +217,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         try {
             flagExiste = getGestion().eliminarUsuario(ID);
             registrarAccionesSistema("Se ha eliminado al usuario: " + ID, 1, "eliminarUsuario");
-            //guardarResourceXML();
+            guardarResourceXML();
         } catch (UsuarioException e) {
             registrarAccionesSistema("No se ha eliminado el usuario: " + e.getMessage(), 2, "agregarUsuario");
         }
@@ -236,7 +236,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
 
             getGestion().actualizarUsuario(IDActual, usuario);
             registrarAccionesSistema("Se ha actualizado al usuario: " + usuarioDto.ID(), 1, "actualizarUsuario");
-            //guardarResourceXML();
+            guardarResourceXML();
             return true;
         } catch (UsuarioException | IdRepetidaException e) {
             registrarAccionesSistema("No se ha actualizado al usuario:" + e.getMessage(), 2, "agregarUsuario");
@@ -291,7 +291,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
 
                 // Guardar el evento en la gestión
                 getGestion().agregarEvento(evento);
-                //guardarResourceXML();
+                guardarResourceXML();
                 // Registrar la acción del sistema
                 registrarAccionesSistema("Se ha creado el evento: " + eventoDto.IDEvento(), 1, "agregarEvento");
             }
@@ -337,7 +337,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
                     empleadoNuevo.setListaEventos(listaEventosEmpleadoNuevo);
                 }
                 listaEventosEmpleadoNuevo.add(evento);
-                //guardarResourceXML();
+                guardarResourceXML();
                 // Registrar la acción del sistema
                 registrarAccionesSistema("Se ha actualizado el evento: " + eventoDto.IDEvento(), 1, "actualizarEvento");
 
@@ -367,7 +367,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
             // Eliminar el evento en la gestión
             flagExiste = getGestion().eliminarEvento(ID);
             registrarAccionesSistema("Se ha eliminado el evento: " + ID, 1, "eliminarEvento");
-            //guardarResourceXML();
+            guardarResourceXML();
         } catch (EventoInexistenteException e) {
             registrarAccionesSistema("No se ha eliminado el evento: " + e.getMessage(), 2, "eliminarEvento");
         }
@@ -463,7 +463,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
 
             // Actualizar reserva en la gestión
             getGestion().actualizarReserva(IDActual, reservaNueva);
-            //guardarResourceXML();
+            guardarResourceXML();
             registrarAccionesSistema("Se ha actualizado la reserva: " + reservaDto.IDReserva(), 1, "actualizarReserva");
             return true;
         } catch (ReservaInexistenteException | ReservaException e) {
@@ -494,7 +494,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
 
             // Eliminar la reserva en la gestión
             flagExiste = getGestion().eliminarReserva(ID);
-            //guardarResourceXML();
+            guardarResourceXML();
             registrarAccionesSistema("Se ha eliminado la reserva: " + ID, 1, "eliminarReserva");
         } catch (ReservaInexistenteException e) {
             registrarAccionesSistema("No se ha eliminado la reserva: " + e.getMessage(), 2, "eliminarReserva");
