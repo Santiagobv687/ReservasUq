@@ -177,9 +177,6 @@ public class ReservaViewController {
             comboUsuario.setValue(reservaSeleccionada.usuarioReserva().nombre());
             comboEstado.setValue(reservaSeleccionada.estado().toString());
         }
-        else{
-            limpiarCamposReserva();
-        }
     }
 
     @FXML
@@ -219,10 +216,6 @@ public class ReservaViewController {
                 listaReservasDto.add(reservaDto);
                 mostrarMensaje("Notificación Reserva", "Reserva Creada", "La reserva se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposReserva();
-            }
-            else{
-                tablaReservas.refresh();
-                mostrarMensaje("Notificación Reserva", "Reserva no creada", "No se ha podido crear la reserva. Revise los campos de información.", Alert.AlertType.ERROR);
             }
         }
     }

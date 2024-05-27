@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public interface IGestionService {
 
 	Boolean eliminarEmpleado(String ID)throws EmpleadoException;
-    boolean actualizarEmpleado(String IDActual, Empleado empleado) throws EmpleadoException, IdRepetidaException;
+    boolean actualizarEmpleado(String IDActual, Empleado empleado) throws EmpleadoException;
 	boolean  verificarEmpleadoExistente(String ID) throws EmpleadoException;
 	Empleado obtenerEmpleado(String ID);
 	ArrayList<Empleado> obtenerEmpleados();
@@ -44,7 +44,7 @@ public interface IGestionService {
 
 	Usuario obtenerUsuario(String ID);
 
-	boolean actualizarUsuario(String IDActual, Usuario usuario) throws UsuarioException, IdRepetidaException;
+	boolean actualizarUsuario(String IDActual, Usuario usuario) throws UsuarioException;
 
 }
 

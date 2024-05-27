@@ -369,12 +369,6 @@ public class Gestion implements IGestionService, Serializable {
 		}
 	}
 
-	public boolean verificarIdExistente(String ID) throws IdRepetidaException {
-		if (empleadoExiste(ID) || usuarioExiste(ID)) {
-			throw new IdRepetidaException("La ID " + ID + " ya existe en el sistema.");
-		}
-		return false;
-	}
 
 	public void agregarEvento(Evento nuevoEvento) throws EventoException {
 		listaEventos.add(nuevoEvento);
