@@ -7,13 +7,13 @@
 
 <AnchorPane prefHeight="655.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.reserva.reservauq.viewController.PaginaPrincipalViewController">
    <children>
-      <TabPane layoutX="8.0" layoutY="8.0" prefHeight="642.0" prefWidth="865.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="8.0" layoutY="8.0" prefHeight="642.0" prefWidth="865.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.topAnchor="8.0">
          <tabs>
-            <Tab text="Iniciar Sesión">
+            <Tab style="-fx-background-color: #FFB923;" text="Iniciar Sesión">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="790.0">
+                        <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="579.0" prefWidth="706.0">
                            <items>
                               <fx:include source="InicioSesionView.fxml" />
                            </items>
@@ -22,7 +22,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Registrarse">
+            <Tab style="-fx-background-color: #FFB923;" text="Registrarse">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="613.0" prefWidth="813.0">
                      <children>
