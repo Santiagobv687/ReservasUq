@@ -32,7 +32,6 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     Thread hilo1GuardarXml;
     Thread hilo2GuardarLog;
     Thread hiloServicioConsumer1;
-    Thread hiloServicioConsumer2;
     RabbitFactory rabbitFactory;
     ConnectionFactory connectionFactory;
     final String FILA="fila agregar reserva";
@@ -87,14 +86,6 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         hiloServicioConsumer1 = new Thread(this);
         hiloServicioConsumer1.start();
     }
-
-    public void consumirMensajesServicio2(){
-        hiloServicioConsumer2 = new Thread(this);
-        hiloServicioConsumer2.start();
-    }
-
-
-
 
     public Gestion getGestion() {
         return gestion;
