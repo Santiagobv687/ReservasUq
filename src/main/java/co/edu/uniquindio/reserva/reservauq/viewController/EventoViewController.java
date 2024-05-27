@@ -148,20 +148,12 @@ public class EventoViewController {
 }
 
     private void mostrarInformacionEvento(EventoDto eventoSeleccionado) {
-        if (eventoSeleccionado != null) {
+        if(eventoSeleccionado!=null){
             txtID.setText(eventoSeleccionado.IDEvento());
             txtNombre.setText(eventoSeleccionado.nombreEvento());
             txtDescripcion.setText(eventoSeleccionado.descripcion());
             txtCapacidad.setText(String.valueOf(eventoSeleccionado.capacidadMax()));
             txtFecha.setValue(eventoSeleccionado.fecha());
-
-            if (eventoSeleccionado.empleado() != null) {
-                comboEmpleado.setValue(eventoSeleccionado.empleado().nombre());
-            } else {
-                comboEmpleado.setValue(null);
-            }
-        } else {
-            limpiarCamposEvento();
         }
     }
 
@@ -204,10 +196,6 @@ public class EventoViewController {
                 notifier.notify("eventoAgregado", null, eventoDto); // Notificar que se ha agregado un usuario
                 mostrarMensaje("Notificación Evento", "Evento Creado", "El evento se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposEvento();
-            }
-            else{
-                tablaEventos.refresh();
-                mostrarMensaje("Notificación Evento", "Evento no creado", "No se ha podido crear el Evento. Revise los campos de información.", Alert.AlertType.ERROR);
             }
         }
 
@@ -272,36 +260,24 @@ public class EventoViewController {
     }
 
     private boolean esValido(EventoDto eventoDto) {
-        StringBuilder mensaje = new StringBuilder();
+        String mensaje = "";
+        if(eventoDto.nombreEvento() == null || eventoDto.nombreEvento().equals(""))
+            mensaje += "Debe de completar el campo de Nombre\n" ;
+        if(eventoDto.IDEvento() == null || eventoDto.IDEvento().equals(""))
+            mensaje += "Debe completar el campo de ID\n" ;
+        if(eventoDto.descripcion() == null || eventoDto.descripcion().equals(""))
+            mensaje += "Debe completar el campo de Descripción\n" ;
+        if(eventoDto.fecha() == null)
+            mensaje += "Debe completar el campo de Fecha\n" ;
+        if(eventoDto.capacidadMax()<=0)
+            mensaje += "Debe completar el campo de Fecha\n";
+        //if(eventoDto.nombreEmpleado() == null || eventoDto.nombreEmpleado().equals(""))
+          //  mensaje += "Debe completar el campo de Nombre del Empleado\n" ;
 
-        if (eventoDto.nombreEvento() == null || eventoDto.nombreEvento().trim().isEmpty()) {
-            mensaje.append("Debe completar el campo de Nombre\n");
-        }
-
-        if (eventoDto.IDEvento() == null || eventoDto.IDEvento().trim().isEmpty()) {
-            mensaje.append("Debe completar el campo de ID\n");
-        }
-
-        if (eventoDto.descripcion() == null || eventoDto.descripcion().trim().isEmpty()) {
-            mensaje.append("Debe completar el campo de Descripción\n");
-        }
-
-        if (eventoDto.fecha() == null) {
-            mensaje.append("Debe completar el campo de Fecha\n");
-        }
-
-        if (eventoDto.capacidadMax() <= 0) {
-            mensaje.append("Debe completar el campo de Capacidad con un valor positivo\n");
-        }
-
-        if (eventoDto.empleado() == null) {
-            mensaje.append("Debe seleccionar un empleado\n");
-        }
-
-        if (mensaje.length() == 0) {
+        if(mensaje.equals("")) {
             return true;
         } else {
-            mostrarMensaje("Notificación Evento", "Datos inválidos", mensaje.toString(), Alert.AlertType.WARNING);
+            mostrarMensaje("Notificación Evento", "Datos inválidos", mensaje, Alert.AlertType.WARNING);
             return false;
         }
     }
@@ -326,4 +302,5 @@ public class EventoViewController {
             return false;
         }
     }
+
 }

@@ -107,9 +107,6 @@ public class EmpleadoViewController {
             comboRol.setValue(empleadoSeleccionado.rolEmpleado());
             txtContrasenia.setText(empleadoSeleccionado.contrasenia());
         }
-        else{
-            limpiarCamposEmpleado();
-        }
     }
 
     @FXML
@@ -227,36 +224,22 @@ public class EmpleadoViewController {
     }
 
     private boolean esValido(EmpleadoDto empleadoDto) {
-        StringBuilder mensaje = new StringBuilder();
-
-        if (empleadoDto.nombre() == null || empleadoDto.nombre().trim().isEmpty()) {
-            mensaje.append("Debe completar el campo de Nombre \n");
-        }
-
-        if (empleadoDto.ID() == null || empleadoDto.ID().trim().isEmpty()) {
-            mensaje.append("Debe completar el campo de ID \n");
-        }
-
-        if (empleadoDto.correo() == null || empleadoDto.correo().trim().isEmpty()) {
-            mensaje.append("Debe completar el campo de Correo \n");
-        }
-
-        if (empleadoDto.contrasenia() == null || empleadoDto.contrasenia().trim().isEmpty()) {
-            mensaje.append("Debe completar el campo de Contraseña \n");
-        }
-
-        if (empleadoDto.rolEmpleado() == null) {
-            mensaje.append("Debe seleccionar un Rol \n");
-        }
-
-        if (mensaje.length() == 0) {
+        String mensaje = "";
+        if(empleadoDto.nombre() == null || empleadoDto.nombre().equals(""))
+            mensaje += "Debe de completar el campo de Nombre \n" ;
+        if(empleadoDto.ID() == null || empleadoDto.ID().equals(""))
+            mensaje += "Debe completar el campo de ID\n" ;
+        if(empleadoDto.correo() == null || empleadoDto.correo().equals(""))
+            mensaje += "Debe completar el campo de correo \n" ;
+        if(empleadoDto.contrasenia() == null || empleadoDto.contrasenia().equals(""))
+            mensaje += "Debe completar el campo de contraseña \n" ;
+        if(mensaje.equals("")){
             return true;
-        } else {
-            mostrarMensaje("Notificación Empleado", "Datos inválidos", mensaje.toString(), Alert.AlertType.WARNING);
+        }else{
+            mostrarMensaje("Notificación cliente","Datos invalidos",mensaje, Alert.AlertType.WARNING);
             return false;
         }
     }
-
 
     private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
         Alert aler = new Alert(alertType);

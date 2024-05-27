@@ -284,7 +284,7 @@ public class Persistencia {
 
         try {
             ArchivoUtil.salvarRecursoSerializadoXML(RUTA_ARCHIVO_MODELO_GESTION_XML, gestion);
-            //ArchivoUtil.crearCopiaXML(RUTA_ARCHIVO_MODELO_GESTION_XML, RUTA_ARCHIVO_COPIA);
+            ArchivoUtil.crearCopiaXML(RUTA_ARCHIVO_MODELO_GESTION_XML, RUTA_ARCHIVO_COPIA);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
