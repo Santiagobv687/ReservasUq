@@ -572,6 +572,11 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         }
         if(hiloActual == hiloServicioConsumer1){
             consumirMensajes(FILA);
+            liberar();
+        }
+        if(hiloActual == hiloCargarXml){
+            Persistencia.cargarRecursoGestionXML();
+            liberar();
         }
 
     }
