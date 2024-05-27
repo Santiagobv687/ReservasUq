@@ -7,10 +7,10 @@ public class RabbitFactory {
     private ConnectionFactory connectionFactory;
     public RabbitFactory() {
         this.connectionFactory = new ConnectionFactory();
-        this.connectionFactory.setHost("localhost");
+        this.connectionFactory.setHost("localHost");
         this.connectionFactory.setPort(5672);
-        this.connectionFactory.setUsername("Nicolas");
-        this.connectionFactory.setPassword("ElBacano");
+        this.connectionFactory.setUsername("guest");
+        this.connectionFactory.setPassword("guest");
     }
 
     public ConnectionFactory getConnectionFactory() {
