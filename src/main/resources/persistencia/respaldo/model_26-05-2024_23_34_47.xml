@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.9" class="java.beans.XMLDecoder">
+ <object class="co.edu.uniquindio.reserva.reservauq.model.Gestion" id="Gestion0">
+  <void property="listaEmpleados">
+   <void method="add">
+    <object class="co.edu.uniquindio.reserva.reservauq.model.Empleado" id="Empleado0">
+     <void property="ID">
+      <string>1234</string>
+     </void>
+     <void property="contrasenia">
+      <string>dante</string>
+     </void>
+     <void property="correo">
+      <string>santiagobv687@gmail.com</string>
+     </void>
+     <void property="listaEventos">
+      <object class="java.util.ArrayList" id="ArrayList0">
+       <void method="add">
+        <object class="co.edu.uniquindio.reserva.reservauq.model.Evento" id="Evento0">
+         <void property="IDEvento">
+          <string>111</string>
+         </void>
+         <void property="capacidadMax">
+          <int>30</int>
+         </void>
+         <void property="descripcion">
+          <string>Celebra el cumpleaños de la forma que desees</string>
+         </void>
+         <void property="empleadoEncargado">
+          <object idref="Empleado0"/>
+         </void>
+         <void property="fecha">
+          <object class="java.time.LocalDate" method="parse">
+           <string>2024-03-14</string>
+          </object>
+         </void>
+         <void property="listaReservas">
+          <object class="java.util.ArrayList" id="ArrayList1">
+           <void method="add">
+            <object class="co.edu.uniquindio.reserva.reservauq.model.Reserva" id="Reserva0">
+             <void property="IDReserva">
+              <string>1</string>
+             </void>
+             <void property="estado">
+              <object class="java.lang.Enum" method="valueOf">
+               <class>co.edu.uniquindio.reserva.reservauq.model.EstadoReserva</class>
+               <string>PENDIENTE</string>
+              </object>
+             </void>
+             <void property="evento">
+              <object idref="Evento0"/>
+             </void>
+             <void property="fechaSolicitud">
+              <object class="java.time.LocalDate" method="parse">
+               <string>2024-03-14</string>
+              </object>
+             </void>
+             <void property="usuario">
+              <object class="co.edu.uniquindio.reserva.reservauq.model.Usuario" id="Usuario0">
+               <void property="ID">
+                <string>68766</string>
+               </void>
+               <void property="contrasenia">
+                <string>escarlata</string>
+               </void>
+               <void property="correo">
+                <string>julian@gmail.com</string>
+               </void>
+               <void property="listaReservas">
+                <object class="java.util.ArrayList" id="ArrayList2">
+                 <void method="add">
+                  <object idref="Reserva0"/>
+                 </void>
+                 <void method="add">
+                  <object class="co.edu.uniquindio.reserva.reservauq.model.Reserva" id="Reserva1">
+                   <void property="IDReserva">
+                    <string>1</string>
+                   </void>
+                   <void property="estado">
+                    <object class="java.lang.Enum" method="valueOf">
+                     <class>co.edu.uniquindio.reserva.reservauq.model.EstadoReserva</class>
+                     <string>RECHAZADA</string>
+                    </object>
+                   </void>
+                   <void property="evento">
+                    <object class="co.edu.uniquindio.reserva.reservauq.model.Evento" id="Evento1">
+                     <void property="IDEvento">
+                      <string>2222</string>
+                     </void>
+                     <void property="capacidadMax">
+                      <int>200</int>
+                     </void>
+                     <void property="descripcion">
+                      <string>Celebra el cumpleaños de la forma que desees</string>
+                     </void>
+                     <void property="empleadoEncargado">
+                      <object class="co.edu.uniquindio.reserva.reservauq.model.Empleado" id="Empleado1">
+                       <void property="ID">
+                        <string>789</string>
+                       </void>
+                       <void property="contrasenia">
+                        <string>pedrox</string>
+                       </void>
+                       <void property="correo">
+                        <string>pedroSanchez@hotmail.com</string>
+                       </void>
+                       <void property="listaEventos">
+                        <object idref="ArrayList0"/>
+                       </void>
+                       <void property="nombre">
+                        <string>Pedro</string>
+                       </void>
+                       <void property="rolEmpleado">
+                        <object class="java.lang.Enum" id="RolEmpleado0" method="valueOf">
+                         <class>co.edu.uniquindio.reserva.reservauq.model.RolEmpleado</class>
+                         <string>EMPLEADO</string>
+                        </object>
+                       </void>
+                      </object>
+                     </void>
+                     <void property="fecha">
+                      <object class="java.time.LocalDate" method="parse">
+                       <string>2024-03-14</string>
+                      </object>
+                     </void>
+                     <void property="listaReservas">
+                      <object idref="ArrayList1"/>
+                     </void>
+                     <void property="nombreEvento">
+                      <string>Graduacion</string>
+                     </void>
+                    </object>
+                   </void>
+                   <void property="fechaSolicitud">
+                    <object class="java.time.LocalDate" method="parse">
+                     <string>2024-05-16</string>
+                    </object>
+                   </void>
+                   <void property="usuario">
+                    <object class="co.edu.uniquindio.reserva.reservauq.model.Usuario" id="Usuario1">
+                     <void property="ID">
+                      <string>1111</string>
+                     </void>
+                     <void property="contrasenia">
+                      <string>tribal</string>
+                     </void>
+                     <void property="correo">
+                      <string>roman123@gmail.com</string>
+                     </void>
+                     <void property="listaReservas">
+                      <object idref="ArrayList2"/>
+                     </void>
+                     <void property="nombre">
+                      <string>Roman</string>
+                     </void>
+                    </object>
+                   </void>
+                  </object>
+                 </void>
+                </object>
+               </void>
+               <void property="nombre">
+                <string>Julian</string>
+               </void>
+              </object>
+             </void>
+            </object>
+           </void>
+           <void method="add">
+            <object idref="Reserva1"/>
+           </void>
+          </object>
+         </void>
+         <void property="nombreEvento">
+          <string>Cumpleaños</string>
+         </void>
+        </object>
+       </void>
+       <void method="add">
+        <object idref="Evento1"/>
+       </void>
+      </object>
+     </void>
+     <void property="nombre">
+      <string>Santiago</string>
+     </void>
+     <void property="rolEmpleado">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>co.edu.uniquindio.reserva.reservauq.model.RolEmpleado</class>
+       <string>ADMINISTRADOR</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.reserva.reservauq.model.Empleado">
+     <void property="ID">
+      <string>4567</string>
+     </void>
+     <void property="contrasenia">
+      <string>aeiou</string>
+     </void>
+     <void property="correo">
+      <string>ana777@gmail.com</string>
+     </void>
+     <void property="listaEventos">
+      <object idref="ArrayList0"/>
+     </void>
+     <void property="nombre">
+      <string>Ana</string>
+     </void>
+     <void property="rolEmpleado">
+      <object idref="RolEmpleado0"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object idref="Empleado1"/>
+   </void>
+  </void>
+  <void property="listaEventos">
+   <void method="add">
+    <object idref="Evento0"/>
+   </void>
+   <void method="add">
+    <object idref="Evento1"/>
+   </void>
+  </void>
+  <void property="listaReservas">
+   <void method="add">
+    <object idref="Reserva0"/>
+   </void>
+   <void method="add">
+    <object idref="Reserva1"/>
+   </void>
+  </void>
+  <void property="listaUsuarios">
+   <void method="add">
+    <object idref="Usuario0"/>
+   </void>
+   <void method="add">
+    <object idref="Usuario1"/>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.reserva.reservauq.model.Usuario">
+     <void property="ID">
+      <string>5454</string>
+     </void>
+     <void property="contrasenia">
+      <string>holabuenas</string>
+     </void>
+     <void property="correo">
+      <string>cody43@gmail.com</string>
+     </void>
+     <void property="listaReservas">
+      <object idref="ArrayList2"/>
+     </void>
+     <void property="nombre">
+      <string>Cody</string>
+     </void>
+    </object>
+   </void>
+  </void>
+ </object>
+</java>

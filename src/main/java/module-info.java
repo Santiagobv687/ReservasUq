@@ -5,7 +5,6 @@ module co.edu.uniquindio.banco.bancouq {
     requires org.mapstruct;
     requires java.desktop;
     requires java.logging;
-    requires com.rabbitmq.client;
 
     opens co.edu.uniquindio.reserva.reservauq to javafx.fxml;
     exports co.edu.uniquindio.reserva.reservauq;
