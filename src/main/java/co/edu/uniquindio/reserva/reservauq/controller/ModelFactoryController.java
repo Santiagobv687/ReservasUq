@@ -1,5 +1,6 @@
 package co.edu.uniquindio.reserva.reservauq.controller;
 
+import co.edu.uniquindio.reserva.reservauq.config.RabbitFactory;
 import co.edu.uniquindio.reserva.reservauq.exceptions.*;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.reserva.reservauq.mapping.dto.EventoDto;
@@ -11,10 +12,16 @@ import co.edu.uniquindio.reserva.reservauq.model.*;
 import co.edu.uniquindio.reserva.reservauq.utils.BoundedSemaphore;
 import co.edu.uniquindio.reserva.reservauq.utils.GestionUtils;
 import co.edu.uniquindio.reserva.reservauq.utils.Persistencia;
-
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.DeliverCallback;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 public class ModelFactoryController implements IModelFactoryService, Runnable {
     Gestion gestion;
@@ -26,6 +33,12 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     Thread hilo1GuardarXml;
     Thread hilo2GuardarLog;
     Thread hiloCargarXml;
+    Thread hiloServicioConsumer1;
+    RabbitFactory rabbitFactory;
+    ConnectionFactory connectionFactory;
+    final String FILA="fila agregar reserva";
+    ReservaDto reserva;
+    ArrayList<ReservaDto> reservas=new ArrayList<>();
 
     //------------------------------  Singleton ------------------------------------------------
     // Clase estatica oculta. Tan solo se instanciara el singleton una vez
@@ -61,9 +74,20 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
             //cargarDatosBase();
             // guardarResourceXML();
         }
+        initRabbitConnection();
         registrarAccionesSistema("Inicio de la Aplicacion", 1, "inicioAplicacion");
     }
 
+    private void initRabbitConnection() {
+        rabbitFactory = new RabbitFactory();
+        connectionFactory = rabbitFactory.getConnectionFactory();
+        System.out.println("conexion establecidad");
+    }
+
+    public void consumirMensajesServicio1(){
+        hiloServicioConsumer1 = new Thread(this);
+        hiloServicioConsumer1.start();
+    }
 
 
     public Gestion getGestion() {
@@ -550,6 +574,10 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
             gestion = Persistencia.cargarRecursoGestionXML();
             liberar();
         }
+        if(hiloActual == hiloServicioConsumer1){
+            consumirMensajes(FILA);
+            liberar();
+        }
     }
 
     private void ocupar() {
@@ -566,5 +594,68 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void consumirMensajes(String queue) {
+        try {
+            Connection connection = connectionFactory.newConnection();
+            Channel channel = connection.createChannel();
+            channel.queueDeclare(queue, false, false, false, null);
+
+            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                try
+                {
+                    Object objetoDeserializado=deserializarObjeto(delivery.getBody());
+                    reserva=(ReservaDto) objetoDeserializado;
+                    System.out.println("Acaba de consumir el objeto tal "+reserva.IDReserva());
+                    reservas.add(reserva);
+                }
+                catch (ClassNotFoundException e)
+                {
+                    throw new RuntimeException(e);
+                }
+            };
+            while (true)
+            {
+                channel.basicConsume(queue, true, deliverCallback, consumerTag -> { });
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void producirObjeto(String queue, Object objeto) throws IOException {
+        byte objetoSerializado[]=serializarObjeto(objeto);
+        try (Connection connection = connectionFactory.newConnection();
+             Channel channel = connection.createChannel()) {
+            channel.queueDeclare(queue, false, false, false, null);
+            channel.basicPublish("", queue, null, objetoSerializado);
+        }
+        catch (TimeoutException e)
+        {
+            e.printStackTrace();
+        }
+        catch (NullPointerException ex )
+        {
+            ex.printStackTrace();
+            System.out.println("No se encuentra nada en la cola del rabbit");
+        }
+    }
+
+    public byte[] serializarObjeto(Object objeto) throws IOException {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(objeto);
+        return bos.toByteArray();
+    }
+
+    public Object deserializarObjeto(byte[] objetoSerializado) throws IOException, ClassNotFoundException {
+        ByteArrayInputStream bis = new ByteArrayInputStream(objetoSerializado);
+        ObjectInputStream ois = new ObjectInputStream(bis);
+        Object objeto=new Object();
+        objeto=ois.readObject();
+        return objeto;
     }
 }
