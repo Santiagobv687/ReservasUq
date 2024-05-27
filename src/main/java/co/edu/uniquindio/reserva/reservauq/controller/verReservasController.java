@@ -51,14 +51,6 @@ public class verReservasController {
 
     public ArrayList<ReservaDto> actualizarMensajesReservas() {
         modelFactoryController.consumirMensajesServicio1();
-        try
-        {
-            modelFactoryController.hiloServicioConsumer1.join();
-        }
-        catch (InterruptedException e)
-        {
-            throw new RuntimeException(e);
-        }
         return modelFactoryController.reservas;
     }
 
