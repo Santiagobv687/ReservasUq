@@ -36,7 +36,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     ConnectionFactory connectionFactory;
     final String FILA="fila agregar reserva";
     ReservaDto reserva;
-    ArrayList<ReservaDto> reservas;
+    ArrayList<ReservaDto> reservas=new ArrayList<>();
 
     //------------------------------  Singleton ------------------------------------------------
     // Clase estatica oculta. Tan solo se instanciara el singleton una vez
@@ -576,11 +576,11 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
             channel.queueDeclare(queue, false, false, false, null);
 
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-                byte[] objetoSerializado=delivery.getBody();
                 try
                 {
-                    Object objetoDeserializado=deserializarObjeto(objetoSerializado);
+                    Object objetoDeserializado=deserializarObjeto(delivery.getBody());
                     reserva=(ReservaDto) objetoDeserializado;
+                    System.out.println("Acaba de consumir el objeto tal "+reserva.IDReserva());
                     reservas.add(reserva);
                 }
                 catch (ClassNotFoundException e)

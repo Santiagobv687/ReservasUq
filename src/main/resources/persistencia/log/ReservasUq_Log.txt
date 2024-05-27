@@ -278,3 +278,61 @@ may. 26, 2024 3:10:08 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUt
 INFORMACIÓN: actualizarReserva,Se ha actualizado la reserva: 1,2024-05-26
 may. 26, 2024 5:29:54 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
 INFO: inicioAplicacion,Inicio de la Aplicacion,2024-05-26
+may. 26, 2024 7:34:22 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-26
+may. 26, 2024 7:34:35 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como empleado: 1234,2024-05-26
+may. 26, 2024 7:34:48 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: agregarReserva,Se ha creado la reserva: 45,2024-05-26
+may. 26, 2024 7:35:06 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como usuario: 68766,2024-05-26
+may. 26, 2024 7:37:47 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-26
+may. 26, 2024 7:37:52 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como empleado: 1234,2024-05-26
+may. 26, 2024 7:38:04 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: agregarReserva,Se ha creado la reserva: 45,2024-05-26
+may. 26, 2024 7:38:38 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como usuario: 68766,2024-05-26
+may. 26, 2024 7:41:50 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-26
+may. 26, 2024 7:41:56 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como usuario: 68766,2024-05-26
+may. 26, 2024 7:42:04 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: agregarReserva,Se ha creado la reserva: 13131,2024-05-26
+may. 26, 2024 7:42:16 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como empleado: 1234,2024-05-26
+may. 26, 2024 7:51:31 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-26
+may. 26, 2024 7:51:36 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como empleado: 1234,2024-05-26
+may. 26, 2024 7:51:47 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: agregarReserva,Se ha creado la reserva: 45,2024-05-26
+may. 26, 2024 7:51:56 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como usuario: 68766,2024-05-26
+may. 26, 2024 7:53:14 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-26
+may. 26, 2024 7:53:26 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como empleado: 1234,2024-05-26
+may. 26, 2024 7:53:40 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: agregarReserva,Se ha creado la reserva: 131,2024-05-26
+may. 26, 2024 7:54:01 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como usuario: 68766,2024-05-26
+may. 26, 2024 7:54:44 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-26
+may. 26, 2024 7:55:08 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-26
+may. 26, 2024 7:55:21 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como empleado: 1234,2024-05-26
+may. 26, 2024 7:55:32 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: agregarReserva,Se ha creado la reserva: 45,2024-05-26
+may. 26, 2024 7:55:42 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como usuario: 68766,2024-05-26
+may. 26, 2024 7:58:07 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioAplicacion,Inicio de la Aplicacion,2024-05-26
+may. 26, 2024 7:58:11 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como empleado: 1234,2024-05-26
+may. 26, 2024 7:58:24 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: agregarReserva,Se ha creado la reserva: 45,2024-05-26
+may. 26, 2024 7:58:35 P. M. co.edu.uniquindio.reserva.reservauq.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: IniciarSesion,Se ha iniciado sesion como usuario: 68766,2024-05-26
