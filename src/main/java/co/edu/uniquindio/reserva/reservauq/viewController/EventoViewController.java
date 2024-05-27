@@ -197,6 +197,10 @@ public class EventoViewController {
                 mostrarMensaje("Notificación Evento", "Evento Creado", "El evento se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposEvento();
             }
+            else{
+                tablaEventos.refresh();
+                mostrarMensaje("Notificación Evento", "Evento no creado", "No se ha podido crear el Evento. Revise los campos de información.", Alert.AlertType.ERROR);
+            }
         }
 
     }
@@ -270,9 +274,7 @@ public class EventoViewController {
         if(eventoDto.fecha() == null)
             mensaje += "Debe completar el campo de Fecha\n" ;
         if(eventoDto.capacidadMax()<=0)
-            mensaje += "Debe completar el campo de Fecha\n";
-        //if(eventoDto.nombreEmpleado() == null || eventoDto.nombreEmpleado().equals(""))
-          //  mensaje += "Debe completar el campo de Nombre del Empleado\n" ;
+            mensaje += "Debe completar el campo de Capacidad\n";
 
         if(mensaje.equals("")) {
             return true;

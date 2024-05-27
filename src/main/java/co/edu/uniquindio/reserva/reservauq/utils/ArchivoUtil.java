@@ -1,6 +1,5 @@
 package co.edu.uniquindio.reserva.reservauq.utils;
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
+import java.beans.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -16,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -207,6 +207,14 @@ public  class ArchivoUtil {
         XMLEncoder codificadorXML;
 
         codificadorXML = new XMLEncoder(new FileOutputStream(rutaArchivo));
+        codificadorXML.setPersistenceDelegate(LocalDate.class,
+                new PersistenceDelegate() {
+                    @Override
+                    protected Expression instantiate(Object oldInstance, Encoder out) {
+                        LocalDate date = (LocalDate) oldInstance;
+                        return new Expression(oldInstance, oldInstance.getClass(), "parse", new Object[]{date.toString()});
+                    }
+                });
         codificadorXML.writeObject(objeto);
         codificadorXML.close();
 

@@ -217,6 +217,10 @@ public class ReservaViewController {
                 mostrarMensaje("Notificación Reserva", "Reserva Creada", "La reserva se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposReserva();
             }
+            else{
+                tablaReservas.refresh();
+                mostrarMensaje("Notificación Reserva", "Reserva no creada", "No se ha podido crear la reserva. Revise los campos de información.", Alert.AlertType.ERROR);
+            }
         }
     }
 
