@@ -2,6 +2,7 @@ package co.edu.uniquindio.reserva.reservauq.mapping.dto;
 
 import co.edu.uniquindio.reserva.reservauq.model.Reserva;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public record UsuarioDto(
@@ -10,6 +11,6 @@ public record UsuarioDto(
         String correo,
         String contrasenia,
         ArrayList<Reserva> listaReservas
-) {
+) implements Serializable {
 
 }
