@@ -21,6 +21,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 public class ModelFactoryController implements IModelFactoryService, Runnable {
     Gestion gestion;
@@ -606,9 +607,14 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
             channel.queueDeclare(queue, false, false, false, null);
             channel.basicPublish("", queue, null, objetoSerializado);
         }
-        catch (Exception e)
+        catch (TimeoutException e)
         {
             e.printStackTrace();
+        }
+        catch (NullPointerException ex )
+        {
+            ex.printStackTrace();
+            System.out.println("No se encuentra nada en la cola del rabbit");
         }
     }
 

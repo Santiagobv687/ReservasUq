@@ -35,7 +35,7 @@ public class verReservasController {
         boolean sePuedeAgregar=modelFactoryController.agregarReserva(reservaDto);
         if(sePuedeAgregar)
         {
-            modelFactoryController.producirObjeto(modelFactoryController.FILA, reservaDto);
+            producirMensaje(reservaDto);
         }
         return sePuedeAgregar;
     }
@@ -44,7 +44,7 @@ public class verReservasController {
         boolean sePuedeActualizar=modelFactoryController.actualizarReserva(idActual, reservaDto);
         if(sePuedeActualizar)
         {
-            modelFactoryController.producirObjeto(modelFactoryController.FILA, reservaDto);
+            producirMensaje(reservaDto);
             System.out.println("Ayuda porfavor");
         }
         return sePuedeActualizar;
@@ -57,5 +57,9 @@ public class verReservasController {
 
     public boolean eliminarReserva(String IDReserva) {
         return modelFactoryController.eliminarReserva(IDReserva);
+    }
+
+    public void producirMensaje(ReservaDto reservaDto) throws IOException {
+        modelFactoryController.producirObjeto(modelFactoryController.FILA, reservaDto);
     }
 }
